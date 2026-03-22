@@ -7,3 +7,18 @@ body {
     max-width: 70vw;
     justify-self: center;
 }
+
+.start-learning
+{
+    background-color: #d9d9d9;
+    color: #f62c2c;
+    width: 25vw;
+    height: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.action-header
+{
+    font-size: 50px;
+}
