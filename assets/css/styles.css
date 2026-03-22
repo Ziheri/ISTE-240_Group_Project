@@ -8,34 +8,32 @@
 
 body {
     background: black;
-    font-family: "Handjet", Arial, Helvetica, sans-serif
+    font-family: "Handjet", Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 20px;
 }
 
 .grid_container{
     display: grid;
     grid-template-areas: 
-    'title title title'
-    'navbar navbar navbar-2';
-    gap: 10px;
+    'title'
+    'nav-main';
+    gap: 20px;
+    justify-items: center;
 }
 
 #title {
     grid-area: title;
-    display: grid;
-    max-width: 70vw;
-    justify-self: center;
+    max-width: 100%;
+    height: auto;
 }
 
 nav {
+    grid-area: nav-main;
     display: grid;
     grid-template-columns: auto auto;
     align-items: center;
-    gap: 1rem;
-}
-
-.navbar{
-    grid-area: navbar;
-    width: fit-content;
+    gap: 1.5rem;
 }
 
 .navbar, .navbar-2{
@@ -46,8 +44,8 @@ nav {
     padding: 1rem 2rem;
     border-radius: 2rem;
     font-size: 2rem;
-    color: #ED1C24;
     background: lightgray;
+    margin: 0;
 }
 
 .navbar li{
@@ -60,21 +58,10 @@ nav {
     color: gray;
     position: absolute;
     right: 0;
-    top: 50%;
-    transform: translateY(-50%);
 }
 
 .navbar li:last-child::after{
     content: none;
-}
-
-.navbar li a{
-    display: inline-block;
-    padding-right: 0.5rem;
-}
-
-.navbar-2 {
-    grid-area: navbar-2;
 }
 
 a {
