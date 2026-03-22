@@ -21,6 +21,10 @@ body {
     display: none;
 }
 
+#mobile_nav {
+    display: none;
+}
+
 nav {
     display: grid;
     grid-template-columns: auto auto;
@@ -110,6 +114,14 @@ h1 {
         display: flex;
         justify-self: center;
         max-width: 60vw;
+    }
+
+    #mobile_nav {
+        display: block;
+        position: absolute;
+        max-width: 5rem;
+        margin-top: 0.8rem;
+        margin-left: 0.8rem;
     }
 
     nav {
