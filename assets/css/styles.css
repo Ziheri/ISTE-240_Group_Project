@@ -8,58 +8,60 @@
 
 body {
     background: black;
-    font-family: "Handjet", Arial, Helvetica, sans-serif
+    font-family: "Handjet", Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+.grid_container{
+    display: grid;
+    grid-template-areas: 
+    'title'
+    'nav-main';
+    gap: 20px;
+    justify-items: center;
 }
 
 #title {
-    display: grid;
-    max-width: 70vw;
-    justify-self: center;
+    grid-area: title;
+    max-width: 100%;
+    height: auto;
 }
 
 nav {
+    grid-area: nav-main;
     display: grid;
-    justify-content: space-between;
+    grid-template-columns: auto auto;
     align-items: center;
+    gap: 1.5rem;
 }
 
-.navbar-1{
+.navbar, .navbar-2{
     list-style: none;
     display: grid;
     grid-auto-flow: column;
     gap: 1.5rem;
-    padding: 2rem 4rem;
+    padding: 1rem 2rem;
     border-radius: 2rem;
     font-size: 2rem;
-    color: #ED1C24;
     background: lightgray;
+    margin: 0;
 }
 
-.navbar-1 li{
+.navbar li{
     position: relative;
     padding-right: 1.5rem;
 }
 
-.navbar-1 li::after{
+.navbar li::after{
     content: "|";
     color: gray;
     position: absolute;
     right: 0;
-    top: 50%;
-    transform: translateY(-50%);
 }
 
-.navbar-1 li:last-child::after{
+.navbar li:last-child::after{
     content: none;
-}
-
-.navbar-1 li a{
-    display: inline-block;
-    padding-right: 0.5rem;
-}
-
-.navbar-2 {
-    list-style: none;
 }
 
 a {
