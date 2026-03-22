@@ -1,0 +1,57 @@
+@font-face {
+    font-family: "Handjet";
+    src: url('Handjet.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+    font-display: swap;
+}
+
+body {
+    background: black;
+    font-family: "Handjet", Arial, Helvetica, sans-serif
+}
+
+#title {
+    display: grid;
+    max-width: 70vw;
+    justify-self: center;
+}
+
+nav {
+    display: grid;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-1{
+    list-style: none;
+    display: grid;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar-1 li{
+    position: relative;
+    padding-right: 12px;
+    margin-right: 8px;
+}
+
+.navbar-1 li::after{
+    content: "  |";
+    color: gray;
+    position: relative;
+    right: 0;
+}
+
+.navbar-1 li:last-child::after{
+    content: none;
+}
+
+.navbar-2 {
+    list-style: none;
+}
+
+a {
+    color: red;
+    text-decoration: none;
+}

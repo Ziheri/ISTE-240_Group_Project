@@ -1,9 +1,0 @@
-body {
-    background: black;
-}
-
-#title {
-    display: flex;
-    max-width: 70vw;
-    justify-self: center;
-}
