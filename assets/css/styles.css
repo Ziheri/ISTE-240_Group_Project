@@ -66,3 +66,23 @@ a {
     color: red;
     text-decoration: none;
 }
+
+.start-learning {
+    background-color: #d9d9d9;
+    color: #f62c2c;
+    width: 25vw;
+    height: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20%;
+}
+
+.action-header {
+    color: #006700;
+    font-size: 50px;
+}
+
+.learn-buttons {
+    /* font-style: ; */
+}
