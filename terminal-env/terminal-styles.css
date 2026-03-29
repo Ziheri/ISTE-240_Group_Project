@@ -54,7 +54,8 @@ body {
 }
 
 /* Terminal Div */
-.terminal-div {
+.terminal-div 
+{
     height: 400px;
     width: 600px;
     min-width: 350px;
@@ -119,7 +120,8 @@ body {
     background-color: gray;
 }
 
-.terminal-chat {
+.terminal-chat 
+{
     padding-left: 2.5%;
     padding-right: 2.5%;
     padding-top: 10px;
@@ -132,6 +134,7 @@ body {
         margin-top: 10px;
         margin-bottom: 10px;
     }
+    background-color: black;
 }
 
 .comments {
@@ -152,6 +155,7 @@ body {
     font-family: monospace;
     caret-color: white;
     color: white;
+    background-color: black;
     font-size: large;
     touch-action: none;
 }
@@ -171,7 +175,10 @@ body {
 .green {
     color: greenyellow;
 }
-
+.yellow
+{
+    color: yellow;
+}
 span {
     white-space: nowrap;
 }
