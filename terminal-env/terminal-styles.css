@@ -186,32 +186,3 @@ span {
         background-color: rgba(120, 190, 255, 0.3);
     }
 }
-
-.cute {
-    background-image: linear-gradient(to right, rgb(239, 208, 255), white);
-
-    .termlogo {
-        color: palevioletred;
-    }
-
-    .termlogo svg path {
-        fill: palevioletred;
-    }
-
-    .terminal-header {
-        background-color: pink;
-    }
-
-    .terminal-minimized {
-        background-color: pink;
-    }
-
-    .terminal-chat,
-    .terminal-chat input,
-    .user-command {
-        color: palevioletred;
-        background-color: white;
-        scrollbar-color: pink white;
-        caret-color: palevioletred;
-    }
-}
