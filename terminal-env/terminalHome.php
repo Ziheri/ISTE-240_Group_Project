@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Da Terminal :I</title>
     <link rel='stylesheet' type='text/css' media='screen' href='terminal-styles.css'>
 </head>
+
 <body>
     <div class="terminal-div">
         <div class="terminal-header">
             <div class="title">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M8 9l3 3l-3 3" />
-                    <path d="M13 15l3 0" />
-                    <path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
-                </svg>
+                <?php
+                include("terminalImg.php");
+                ?>
                 Terminal
             </div>
         </div>
@@ -24,10 +23,11 @@
             <div class="comments"></div>
             <div class="comment-div">
                 <!-- make the font colors pop -->
-                <label class="green"><span class="yellow">beekurt</span>@user:~<span class="directory red"></span>$</label><input
-                    class="user-command">
+                <label class="green"><span class="yellow">beekurt</span>@user:~<span
+                        class="directory red"></span>$</label><input class="user-command">
             </div>
         </div>
     </div>
 </body>
+
 </html>
