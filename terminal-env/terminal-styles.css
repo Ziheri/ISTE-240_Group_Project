@@ -134,23 +134,6 @@ body {
     }
 }
 
-li {
-    list-style-type: square;
-}
-
-.ls-cont {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-
-    li {
-        list-style-type: none;
-    }
-}
-
-.user-comment {
-    margin-top: 20px;
-}
-
 .comments {
     display: flex;
     flex-direction: column;
@@ -195,28 +178,6 @@ span {
 
 .user-command:focus {
     outline: none;
-}
-
-.terminal-minimized {
-    height: 35px;
-    width: 145px;
-    background-color: var(--gray);
-    background-image: linear-gradient(to right, var(--gray), #565656);
-    border-radius: 15px 15px 0 0;
-    margin-left: 20px;
-    color: white;
-    display: flex;
-    text-align: center;
-    font-weight: bold;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    cursor: pointer;
-    visibility: hidden;
-}
-
-.terminal-minimized:hover {
-    background-image: linear-gradient(to left, var(--gray), #565656);
 }
 
 /* themes */
