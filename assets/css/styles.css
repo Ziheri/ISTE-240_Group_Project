@@ -142,6 +142,7 @@ h1 {
     padding-bottom: 1rem;
     padding-right: 1rem;
     border: solid, 1px, red;
+    border-radius: 20px;
     background: lightgray;
 }
 
@@ -151,6 +152,20 @@ h1 {
 
 .sidebar_inbetween {
     justify-self: center;
+}
+
+.sidebar_sub {
+    
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.test {
+    color: white;
+    margin-left: 50%;
+    margin-bottom: 100%;
 }
 /**End Sidebar CSS*/
 
