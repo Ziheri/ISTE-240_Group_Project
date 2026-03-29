@@ -123,6 +123,32 @@ h1 {
     color: #FFF200;
 }
 
+/**Start Siderbar CSS*/
+.sidebar {
+    position: fixed;
+    color: #ED1C24;
+    font-size: 1.5rem;
+    max-width: 11.1rem;
+    list-style-type: none;
+    margin-left: 3rem;
+    margin-top: 25%;
+    padding-left: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-right: 1rem;
+    border: solid, 1px, red;
+    background: lightgray;
+}
+
+.sidebar_text {
+    justify-self: center;
+}
+
+.sidebar_inbetween {
+    justify-self: center;
+}
+/**End Sidebar CSS*/
+
 @media (max-width: 600px) {
     #title_pc {
         display: none;
