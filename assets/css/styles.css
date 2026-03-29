@@ -104,7 +104,14 @@ h1 {
     margin-left: 3rem;
     color: #009444;
     font-size: 4rem;
-    font-family: 'Times New Roman', Times, serif;
+}
+
+h2, h3 {
+    color: #009444;
+}
+
+p{
+    color: #FFF
 }
 
 .tracks {
