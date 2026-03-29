@@ -133,10 +133,10 @@ h1 {
     position: fixed;
     color: #ED1C24;
     font-size: 1.5rem;
-    max-width: 11.1rem;
+    max-width: 12rem;
     list-style-type: none;
     margin-left: 3rem;
-    margin-top: 25%;
+    margin-top: 20rem;
     padding-left: 1rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -154,8 +154,12 @@ h1 {
     justify-self: center;
 }
 
-.sidebar_sub {
-    
+.sidebar_sub1 {
+    display: none;
+}
+
+#require:hover .sidebar_sub1 {
+    display: block;
 }
 
 html {
