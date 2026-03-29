@@ -21,9 +21,9 @@
         <div class="terminal-chat">
             <div class="comments"></div>
             <div class="comment-div">
-                <!-- make the font colors pop -->
                 <label class="green"><span class="yellow">beekurt</span>@user:~<span
                         class="directory red"></span>$</label><input class="user-command">
+                <!-- the source of where in info came from: https://github.com/beekurt98/terminal-portfolio.git -->
             </div>
         </div>
     </div>
