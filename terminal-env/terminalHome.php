@@ -19,7 +19,6 @@
             </div>
         </div>
         <div class="terminal-chat">
-            <br>
             <div class="comments"></div>
             <div class="comment-div">
                 <!-- make the font colors pop -->
