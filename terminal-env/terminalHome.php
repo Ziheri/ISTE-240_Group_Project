@@ -29,9 +29,6 @@
                 <!-- the source of where in info came from: https://github.com/beekurt98/terminal-portfolio.git -->
             </div>
 
-            <!-- beekurt = yellow
-            @user:~$ = green -->
-
         </div>
     </div>
 </body>
