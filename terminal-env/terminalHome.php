@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Da Terminal :I</title>
     <link rel='stylesheet' type='text/css' media='screen' href='terminal-styles.css'>
+    <script type="module" src='terminal-mechanics.js' defer></script>
 </head>
 
 <body>
