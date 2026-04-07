@@ -20,7 +20,10 @@
             </div>
         </div>
         <div class="terminal-chat">
-            <div class="comments"></div>
+            <div class="comments">
+                make this appear as user and old command for this section after someone eventers something
+                something...
+            </div>
             <div class="comment-div">
                 <label class="green"><span class="yellow">beekurt</span>@user:~<span
                         class="directory red"></span>$</label><input class="user-command">

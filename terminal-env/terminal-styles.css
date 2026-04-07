@@ -96,6 +96,7 @@ body {
 .comments {
     display: flex;
     flex-direction: column;
+    color: red;
 }
 
 .comment-div {
