@@ -76,7 +76,6 @@ let rootCmds = {
     "get medium": "https://github.com/beekurt98",
     "get github": "https://medium.com/@beekurt",
     "cd themes": "Here are some themes you can change into: ",
-    "echo ": "echo commmand hit",
 };
 let mainCmds = ["clear", "ls", "cd ..", "help", "echo "]; // 
 let allCmds = [...mainCmds, ...Object.keys(rootCmds), ...themes];
@@ -101,15 +100,11 @@ function addComment() {
     let userCommand = document.querySelector(".user-command").value.trim();
     let directory = document.querySelector(".directory");
     if (userCommand === "") {
-        commentsDiv.innerHTML += `<div>Please enter a command.</div>`;
+        commentsDiv.innerHTML += `<label class="green"><span class="yellow">beekurt</span>@user:~$ <span class="white">${userCommand}</span> </label>`;
         return;
     }
     pastCommands.push(userCommand);
-    // the line 106 is what you have to fix (change the color)
-    /**
-    <label class="green"><span class="yellow">beekurt</span>@user:~<span
-                        class="directory red"></span>$</label>
-    */
+
     newComment.innerHTML = `<label class="green"><span class="yellow">beekurt</span>@user:~$ <span class="white">${userCommand}</span> </label>`;
     commentsDiv.appendChild(newComment);
 
