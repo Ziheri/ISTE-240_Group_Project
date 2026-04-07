@@ -58,10 +58,6 @@ document.addEventListener("keydown", (e) =>
     // commandOption.keys().has(e.key)
     if (e.key in commandOption)
     {
-        /**
-        TypeError: commandOption.keys is not a function. (In 'commandOption.keys()', 'commandOption.keys' is undefined)
-        TypeError: commandOption.has is not a function. (In 'commandOption.has(e.key)', 'commandOption.has' is undefined)
-        */
         commandOption[e.key]();
     }
 })
@@ -122,9 +118,6 @@ let rootCmds =
     "help": helpFeauture,
     "cd ..": goingBackDir,
     "ls": listingDirs,
-    /**
-        commandOption[e.key] us not a cuntion 
-    */
 };
 let mainCmds = ["clear", "ls", "cd ..", "help", "echo "]; // 
 let allCmds = [...mainCmds, ...Object.keys(rootCmds), ...themes];
