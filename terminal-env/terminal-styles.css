@@ -96,7 +96,7 @@ body {
 .comments {
     display: flex;
     flex-direction: column;
-    /* color: red; */
+    color: white;
 }
 
 .comment-div {
@@ -130,11 +130,11 @@ body {
 }
 
 .green {
-    color: greenyellow;
+    color: #adff2f;
 }
 .yellow
 {
-    color: yellow;
+    color: #ffff00;
 }
 .white
 {

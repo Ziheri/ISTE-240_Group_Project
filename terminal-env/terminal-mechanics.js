@@ -9,6 +9,8 @@ document.addEventListener("keydown", (e) => {
     if (e.key == "Enter") {
         timesPressedUp = 0;
         addComment();
+        document.getElementById('comment-div').style.color = 'pink';
+        // userCommand.
         // Makes the input field always appear on screen. Important
         document.querySelector(".comment-div").scrollIntoView();
     } else if (e.key == "ArrowUp") {
@@ -74,8 +76,9 @@ let rootCmds = {
     "get medium": "https://github.com/beekurt98",
     "get github": "https://medium.com/@beekurt",
     "cd themes": "Here are some themes you can change into: ",
+    "echo ": "echo commmand hit",
 };
-let mainCmds = ["clear", "ls", "cd ..", "help"]; // 
+let mainCmds = ["clear", "ls", "cd ..", "help", "echo "]; // 
 let allCmds = [...mainCmds, ...Object.keys(rootCmds), ...themes];
 let currentlyIn = "root";
 let commandDict = {
@@ -115,11 +118,14 @@ function addComment() {
             commentsDiv.innerHTML = "";
         } else if (userCommand == "help") {
             let currentDirArray = currentlyIn === "root" ? [...Object.keys(rootCmds), ...mainCmds] : [...themes, ...mainCmds];
-            // commentsDiv.innerHTML = "";
+            /**
+            newComment.innerHTML = `<label class="green"><span class="yellow">beekurt</span>@user:~$ <span class="white">${userCommand}</span> </label>`;
+            */
             commentsDiv.innerHTML += `<ul> ${currentDirArray.map((command) => {
                 return `<li class="ls-item"> ${command}</li>`;
             }).join("")} </ul>`;
-        } else if (userCommand == "ls") {
+        }
+        else if (userCommand == "ls") {
             if (currentlyIn === "themes") {
                 commentsDiv.innerHTML += `<div class="ls-cont"> ${[...themes, "root"].map((theme) => {
                     return `<div class="ls-item">${theme}</div>`;
@@ -167,8 +173,20 @@ function addComment() {
             handleInvalidCommand(userCommand);
         }
     }
-    else {
-        handleInvalidCommand(userCommand);
+    else
+    {
+        if (allCmds.map(cmd => `${cmd.includes(userCommand.substring(0, 4))}`).includes("true"))
+        {
+            // console.log("this hit!");
+            // commentsDiv.innerHTML += `<div class="ls-cont"> ${[...mainCmds, "root"].map((mainCmd) => {
+            //     return `<div class="ls-item">+++ ${mainCmd}</div>`;
+            // }).join("")} </div>`;
+            commentsDiv.innerHTML += `<div class="white"> ${userCommand.substring(4, userCommand.length)} </div>`;
+        }
+        else
+        {
+            handleInvalidCommand(userCommand);
+        }
     }
     userCommandDiv.value = "";
 }
@@ -181,5 +199,5 @@ function changeTheme(theme) {
 }
 
 function handleInvalidCommand(cmmd) {
-    commentsDiv.innerHTML += `<div>The term <span class="green">'${cmmd}'</span> is not recognized as the name of a command. Please type <span class="red">help</span> to see a list of possible commands.</div>`;
+    commentsDiv.innerHTML += `zsh: command not found: ${cmmd}`;
 }
