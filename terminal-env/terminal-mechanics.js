@@ -1,88 +1,82 @@
-// todo: change colors (blue etc), add semicolons, change the minimized div's colors, media query?
-
 // VARIABLES
 let pastCommands = [];
 let timesPressedUp = 0;
 
-// Event listeners
-document.addEventListener("keydown", (e) => {
-    if (e.key == "Enter") {
-        timesPressedUp = 0;
-        addComment();
-        document.getElementById('comment-div').style.color = 'pink';
-        // userCommand.
-        // Makes the input field always appear on screen. Important
-        document.querySelector(".comment-div").scrollIntoView();
-    } else if (e.key == "ArrowUp") {
-        if (pastCommands.length > timesPressedUp) (timesPressedUp++);
+//helper functions....
+function enterFunction()
+{
+    timesPressedUp = 0;
+    addComment();
+    document.getElementById('comment-div').style.color = 'pink';
+    // userCommand
+    // Makes the input field always appear on screen. Important
+    document.querySelector(".comment-div").scrollIntoView();
+    console.log("pressed enter");
+}
+
+function arrowUpFunction()
+{
+    if (pastCommands.length > timesPressedUp) (timesPressedUp++);
         let lastCommand = pastCommands[pastCommands.length - timesPressedUp];
         document.querySelector(".user-command").value = lastCommand;
+    if (document.querySelector(".user-command").value == "undefined") {
+        document.querySelector(".user-command").value = "";
+    }
+    console.log("pressed arrow up");
+}
+
+function arrowDownFunction()
+{
+    if (timesPressedUp == 0) {
+        document.querySelector(".user-command").value = "";
         if (document.querySelector(".user-command").value == "undefined") {
             document.querySelector(".user-command").value = "";
         }
-    } else if (e.key == "ArrowDown") {
-        if (timesPressedUp == 0) {
-            document.querySelector(".user-command").value = "";
-            if (document.querySelector(".user-command").value == "undefined") {
-                document.querySelector(".user-command").value = "";
-            }
-        } else if (0 < timesPressedUp) {
-            timesPressedUp--;
-            let lastCommand = pastCommands[pastCommands.length - timesPressedUp];
-            document.querySelector(".user-command").value = lastCommand;
-            if (document.querySelector(".user-command").value == "undefined") {
-                document.querySelector(".user-command").value = "";
-            }
-        }
-    } else if (e.key == "Tab") {
-        e.preventDefault();
-        let ongoingInput = document.querySelector(".user-command").value;
-        let dict = typeof commandDict[currentlyIn] == "object" ? Object.keys(commandDict[currentlyIn]) : commandDict[currentlyIn];
-        ongoingInput === "" ? document.querySelector(".user-command").value = "" : dict.map((cmd) => {
-            if (cmd.startsWith(ongoingInput)) document.querySelector(".user-command").value = cmd;
-        })
     }
+    console.log("pressed down");
+}
+
+function tabFunction()
+{
+    e.preventDefault();
+    let ongoingInput = document.querySelector(".user-command").value;
+    let dict = typeof commandDict[currentlyIn] == "object" ? Object.keys(commandDict[currentlyIn]) : commandDict[currentlyIn];
+    ongoingInput === "" ? document.querySelector(".user-command").value = "" : dict.map((cmd) => {
+        if (cmd.startsWith(ongoingInput)) document.querySelector(".user-command").value = cmd;
+    })
+    console.log("pressed tab");
+}
+
+let commandOption =
+{
+    "Enter": enterFunction,
+    "ArrowUp": arrowUpFunction,
+    "ArrowDown": arrowDownFunction,
+    "Tab": tabFunction,
+};
+
+// Event listeners
+document.addEventListener("keydown", (e) =>
+{
+    commandOption[e.key]();
 })
 
 export let commentsDiv = document.querySelector(".comments");
 
 let themes = ["hacker", "default", "light", "cute"];
-let rootCmds = {
-    "about": `<div>Hey, I'm Berna Kurt! I'm a junior web developer who wants to build good, responsive and secure websites!</div>`,
-    "education": ["Computer Engineering - Adnan Menderes University (Incomplete)", "Korean Language and Literature - Ankara University (GPA: 3.96)", "Exchange Student with Focus on KFL - Hanguk University of Foreign Studies"],
-    "skills": `<div><p>Languages: Turkish (native), English (fluent), Korean (fluent)</p>
-        <p>Programming languages: Python, JavaScript</p>
-        <p>Frameworks & Libraries: Selenium, BeautifulSoup4, Pandas, Node.JS, React.JS, Next.JS, Framer Motion</p>
-        <p>Developer Tools: Git/Github, Postman</p>
-        <p>OS: Windows, Kali Linux</p></div>`,
-    "interests": `<div>I like coding, linguistics, geology & fantasy novels. </div>`,
-    "information": `<div>This project was inspired by Guillaume Reygner's portfolio (https://guillaumereygner.fr/).
-            <br/><br/>
-            I used vanilla JavaScript, HTML and CSS while creating this project.<br/>
-            The Terminal file and Terminal window are both draggable. The terminal window can be resized.<br/>
-            The Terminal window can be minimized and closed. When minimized, the contents will remain but if X is pressed, the contents will reset.<br/>
-            The up/down arrows work & the previous commands entered this session can be accessed. Pressing Tab will complete the input.<br/>
-            Working on Turkish translation.<br/><br/>
-
-            Type "credits" to get all credits.</div>`,
-    "credits": `<div>Inspiration: https://guillaumereygner.fr/ (by Guillaume Reygner)<br/>
-                                    ASCII art: https://ascii.co.uk/art/bee (by sjw)<br/>
-                                    Favicon: https://www.flaticon.com/free-icons/terminal (by Royyan Wijaya) <br/>
-                                    Hacker (Kali Linux) Wallpaper: https://github.com/dorianpro/kali-linux-wallpapers/tree/master 
-                                </div>`,
-    "certificates": ["Basics of Web Development & Coding Specialization - University of Michigan", "Introduction to Cybersecurity - BTK Academy", "Introduction to Information Security - BTK Academy", "Cyber Incident Response - BTK Academy", "Introduction to Firewalls - BTK Academy", "Frontend Development Specialization - Acunmedya Academy (loading...)"],
-    "experience": ["english/turkish translator at a medical clinic", "various korean translator jobs", "intern at an information security company", "freelance ai trainer at outlier"],
-    "get linkedin": "https://www.linkedin.com/in/beekurt/",
+let rootCmds =
+{
     "get medium": "https://github.com/beekurt98",
     "get github": "https://medium.com/@beekurt",
     "cd themes": "Here are some themes you can change into: ",
+    "whoami": "beekurt",
 };
 let mainCmds = ["clear", "ls", "cd ..", "help", "echo "]; // 
 let allCmds = [...mainCmds, ...Object.keys(rootCmds), ...themes];
 let currentlyIn = "root";
 let commandDict = {
     "root": rootCmds,
-    "themes": themes,
+    "themes": themes, // where I got to put into the directory
 };
 
 
@@ -91,7 +85,8 @@ userCommandDiv.addEventListener("focus", (e) => {
   e.preventDefault();
 })
 
-function addComment() {
+function addComment()
+{
     let newComment = document.createElement("div");
     newComment.classList.add(".user-comment");
 
