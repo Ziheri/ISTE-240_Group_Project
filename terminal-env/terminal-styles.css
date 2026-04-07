@@ -96,7 +96,7 @@ body {
 .comments {
     display: flex;
     flex-direction: column;
-    color: red;
+    /* color: red; */
 }
 
 .comment-div {
@@ -135,6 +135,10 @@ body {
 .yellow
 {
     color: yellow;
+}
+.white
+{
+    color: white;
 }
 span {
     white-space: nowrap;

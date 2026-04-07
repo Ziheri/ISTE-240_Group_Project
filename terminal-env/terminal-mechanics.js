@@ -102,7 +102,12 @@ function addComment() {
         return;
     }
     pastCommands.push(userCommand);
-    newComment.innerText = `> ${userCommand}`;
+    // the line 106 is what you have to fix (change the color)
+    /**
+    <label class="green"><span class="yellow">beekurt</span>@user:~<span
+                        class="directory red"></span>$</label>
+    */
+    newComment.innerHTML = `<label class="green"><span class="yellow">beekurt</span>@user:~$ <span class="white">${userCommand}</span> </label>`;
     commentsDiv.appendChild(newComment);
 
     if (allCmds.includes(userCommand)) {
@@ -110,8 +115,9 @@ function addComment() {
             commentsDiv.innerHTML = "";
         } else if (userCommand == "help") {
             let currentDirArray = currentlyIn === "root" ? [...Object.keys(rootCmds), ...mainCmds] : [...themes, ...mainCmds];
+            // commentsDiv.innerHTML = "";
             commentsDiv.innerHTML += `<ul> ${currentDirArray.map((command) => {
-                return `<li class="ls-item">${command}</li>`;
+                return `<li class="ls-item"> ${command}</li>`;
             }).join("")} </ul>`;
         } else if (userCommand == "ls") {
             if (currentlyIn === "themes") {
