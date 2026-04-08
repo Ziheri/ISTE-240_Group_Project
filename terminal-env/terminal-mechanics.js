@@ -67,6 +67,11 @@ function clearingFunction()
     commentsDiv.innerHTML = "";
 }
 
+function whoamiFunction()
+{
+    commentsDiv.innerHTML += "<div class='white'>unix</div>";
+}
+
 function helpFeauture()
 {
     let currentDirArray = currentlyIn === "root" ? [...Object.keys(rootCmds), ...mainCmds] : [...themes, ...mainCmds];
@@ -113,7 +118,7 @@ export let commentsDiv = document.querySelector(".comments");
 let themes = ["hacker", "default", "light", "cute"];
 let rootCmds =
 {
-    "whoami": "unix",
+    "whoami": whoamiFunction,
     "clear": clearingFunction,
     "help": helpFeauture,
     "cd ..": goingBackDir,
