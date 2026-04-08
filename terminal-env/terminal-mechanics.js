@@ -113,7 +113,7 @@ export let commentsDiv = document.querySelector(".comments");
 let themes = ["hacker", "default", "light", "cute"];
 let rootCmds =
 {
-    "whoami": "beekurt",
+    "whoami": "unix",
     "clear": clearingFunction,
     "help": helpFeauture,
     "cd ..": goingBackDir,
@@ -145,11 +145,11 @@ function addComment()
 
     if (userCommand === "")
     {
-        commentsDiv.innerHTML += `<label class="green"><span class="yellow">beekurt</span>@user:~$ <span class="white">${userCommand}</span> </label>`;
+        commentsDiv.innerHTML += `<label class="green"><span class="yellow">unix</span>@user:~$ <span class="white">${userCommand}</span> </label>`;
     }
     pastCommands.push(userCommand);
 
-    newComment.innerHTML = `<label class="green"><span class="yellow">beekurt</span>@user:~$ <span class="white">${userCommand}</span> </label>`;
+    newComment.innerHTML = `<label class="green"><span class="yellow">unix</span>@user:~$ <span class="white">${userCommand}</span> </label>`;
     commentsDiv.appendChild(newComment);
     if (allCmds.includes(userCommand))
     {

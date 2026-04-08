@@ -24,7 +24,7 @@
                 <!-- make this appear as user and old command for this section after someone eventers something -->
             </div>
             <div class="comment-div">
-                <label class="green"><span class="yellow">beekurt</span>@user:~<span
+                <label class="green"><span class="yellow">unix</span>@user:~<span
                         class="directory red"></span>$</label><input class="user-command">
                 <!-- the source of where in info came from: https://github.com/beekurt98/terminal-portfolio.git -->
             </div>
