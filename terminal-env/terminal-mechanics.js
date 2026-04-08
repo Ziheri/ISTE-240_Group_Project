@@ -118,8 +118,19 @@ function clearingFunction() {
 }
 
 function whoamiFunction() {
-  // return instead of setting it
-  return "<div class='white'>unix</div>";
+  commentsDiv.innerHTML += "<div class='white'>unix</div>";
+}
+
+function helpFeauture() {
+  let currentDirArray =
+    currentlyIn === "root"
+      ? [...Object.keys(rootCmds), ...mainCmds]
+      : [...themes, ...mainCmds];
+  commentsDiv.innerHTML += `<ul> ${currentDirArray
+    .map((command) => {
+      return `<li class="ls-item"> ${command}</li>`;
+    })
+    .join("")} </ul>`;
 }
 
 function helpFeauture() {
