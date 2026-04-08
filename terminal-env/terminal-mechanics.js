@@ -41,6 +41,9 @@ function tabFunction()
     ongoingInput === "" ? document.querySelector(".user-command").value = "" : dict.map((cmd) => {
         if (cmd.startsWith(ongoingInput)) document.querySelector(".user-command").value = cmd;
     })
+
+    //TODO if you press tab you can see the file options avaibilible!!
+
     console.log("pressed tab");
 }
 
@@ -74,7 +77,7 @@ function whoamiFunction()
 
 function helpFeauture()
 {
-    let currentDirArray = currentlyIn === "root" ? [...Object.keys(rootCmds), ...mainCmds] : [...themes, ...mainCmds];
+    let currentDirArray = currentlyIn === "root" ? [...Object.keys(rootCmds), ...mainCmds] : [...primeDir, ...mainCmds];
         commentsDiv.innerHTML += `<ul> ${currentDirArray.map((command) => {
             return `<li class="ls-item"> ${command}</li>`;
         }).join("")} </ul>`;
@@ -99,23 +102,28 @@ function goingBackDir()
 
 function listingDirs()
 {
-    if (currentlyIn === "themes") // make it get into different directories to show..
+    if (currentlyIn === "primeDir") // make it get into different directories to show..
     {
-        commentsDiv.innerHTML += `<div class="ls-cont"> ${[...themes, "root"].map((theme) => {
+        commentsDiv.innerHTML += `<div class="ls-cont"> ${[...primeDir, "root"].map((theme) => {
             `<div class="ls-item">${theme}</div>`;
         }).join("")} </div>`;
     }
     else
     {
-        commentsDiv.innerHTML += `<div class="ls-cont"> ${Object.keys(rootCmds).map((command) => {
-            return `<div class="ls-item">${command}</div>`;
+        commentsDiv.innerHTML += `<div class="ls-cont"> ${primeDir.map((command) => {
+            return `${command}<br>`;
         }).join("")} </div>`;
     }
 }
 
+function defaultDirsAccess()
+{
+    //
+}
+
 export let commentsDiv = document.querySelector(".comments");
 
-let themes = ["hacker", "default", "light", "cute"];
+let primeDir = ["bin", "opt", "boot", "dev", "sbin", "etc", "src", "home", "tmp", "lib", "usr", "media", "var", "mnt"];
 let rootCmds =
 {
     "whoami": whoamiFunction,
@@ -123,13 +131,14 @@ let rootCmds =
     "help": helpFeauture,
     "cd ..": goingBackDir,
     "ls": listingDirs,
+    "cd ": defaultDirsAccess, //TODO you have to acccess various files through this using a tree...
 };
 let mainCmds = ["clear", "ls", "cd ..", "help", "echo "]; // 
-let allCmds = [...mainCmds, ...Object.keys(rootCmds), ...themes];
+let allCmds = [...mainCmds, ...Object.keys(rootCmds), ...primeDir];
 let currentlyIn = "root";
 let commandDict = {
     "root": rootCmds,
-    "themes": themes, // where I got to put into the directory
+    "primeDir": primeDir, // where I got to put into the directory
 };
 
 
