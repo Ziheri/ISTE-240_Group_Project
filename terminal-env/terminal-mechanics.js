@@ -156,7 +156,7 @@ function addComment()
     let userCommandDiv = document.querySelector(".user-command");
     let userCommand = document.querySelector(".user-command").value.trim();
     // let directory = document.querySelector(".directory");
-
+    console.log("adding comment!");
     if (userCommand === "")
     {
         commentsDiv.innerHTML += `<label class="green"><span class="yellow">unix</span>@user:~$ <span class="white">${userCommand}</span> </label>`;
@@ -168,17 +168,20 @@ function addComment()
     if (allCmds.includes(userCommand))
     {
         rootCmds[userCommand]();
+        console.log("found in the command map!");
     }
     else
     {
-        if (allCmds.map(cmd => `${cmd.includes(userCommand.substring(0, 4))}`).includes("true"))
-        {
-            commentsDiv.innerHTML += `<div class="white"> ${userCommand.substring(4, userCommand.length)} </div>`;
-        }
-        else
-        {
+        // if (allCmds.map(cmd => `${cmd.includes(`cd `)}`).includes("true"))
+        // {
+        //     commentsDiv.innerHTML += `<div class="white"> ${userCommand.substring(4, userCommand.length)} </div>`;
+        //     console.log("something is here I don't know what!" + userCommand.substring(4, userCommand.length));
+        // }
+        // else
+        // {
             handleInvalidCommand(userCommand);
-        }
+            console.log("what is this!!");
+        // }
     }
     userCommandDiv.value = "";
 }
