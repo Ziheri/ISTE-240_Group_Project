@@ -118,7 +118,7 @@ function listingDirs()
 
 function defaultDirsAccess()
 {
-    //
+    // just use hashmap..... nested hashmap...
 }
 
 export let commentsDiv = document.querySelector(".comments");
