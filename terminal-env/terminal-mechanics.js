@@ -180,71 +180,12 @@ function defaultDirsAccess() {
       directory.innerHTML += `/${dirKey}`;
       // get the directory
     }
-<<<<<<< HEAD
   } else {
     console.log("tftgfgvhk");
     handleInvalidCommand(dirKey);
   }
   // f
   // just use hashmap..... nested hashmap...
-=======
-})
-
-function clearingFunction()
-{
-    commentsDiv.innerHTML = "";
-}
-
-function whoamiFunction()
-{
-    commentsDiv.innerHTML += "<div class='white'>unix</div>";
-}
-
-function helpFeauture()
-{
-    let currentDirArray = currentlyIn === "root" ? [...Object.keys(rootCmds), ...mainCmds] : [...primeDir, ...mainCmds];
-        commentsDiv.innerHTML += `<ul> ${currentDirArray.map((command) => {
-            return `<li class="ls-item"> ${command}</li>`;
-        }).join("")} </ul>`;
-}
-
-function goingBackDir()
-{
-    let directory = document.querySelector(".directory");
-    if (currentlyIn == "root")
-    {
-        commentsDiv.innerHTML += "";
-        userCommandDiv.value = "";
-    }
-    currentlyIn = "root";
-    let directories = directory.innerText.split("/");
-    directories.pop();
-    directory.innerHTML = "";
-    directory.innerHTML = directories.map((x) => {
-        if (x !== "") return `/${x}`;
-    }).join('');
-}
-
-function listingDirs()
-{
-    if (currentlyIn === "primeDir") // make it get into different directories to show..
-    {
-        commentsDiv.innerHTML += `<div class="ls-cont"> ${[...primeDir, "root"].map((theme) => {
-            `<div class="ls-item">${theme}</div>`;
-        }).join("")} </div>`;
-    }
-    else
-    {
-        commentsDiv.innerHTML += `<div class="ls-cont"> ${primeDir.map((command) => {
-            return `${command}<br>`;
-        }).join("")} </div>`;
-    }
-}
-
-function defaultDirsAccess()
-{
-    //
->>>>>>> parent of e94aa16 (fixed up the mechanics)
 }
 
 export let commentsDiv = document.querySelector(".comments");
