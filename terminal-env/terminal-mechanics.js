@@ -81,11 +81,31 @@ function tabFunction() {
   console.log("pressed tab");
 }
 
+<<<<<<< HEAD
 let commandOption = {
   Enter: enterFunction,
   ArrowUp: arrowUpFunction,
   ArrowDown: arrowDownFunction,
   Tab: tabFunction,
+=======
+function tabFunction()
+{
+    e.preventDefault();
+    let ongoingInput = document.querySelector(".user-command").value;
+    let dict = typeof commandDict[currentlyIn] == "object" ? Object.keys(commandDict[currentlyIn]) : commandDict[currentlyIn];
+    ongoingInput === "" ? document.querySelector(".user-command").value = "" : dict.map((cmd) => {
+        if (cmd.startsWith(ongoingInput)) document.querySelector(".user-command").value = cmd;
+    })
+    console.log("pressed tab");
+}
+
+let commandOption =
+{
+    "Enter": enterFunction,
+    "ArrowUp": arrowUpFunction,
+    "ArrowDown": arrowDownFunction,
+    "Tab": tabFunction,
+>>>>>>> parent of 459d164 (adding the things)
 };
 
 // Event listeners
@@ -180,16 +200,71 @@ function defaultDirsAccess() {
       directory.innerHTML += `/${dirKey}`;
       // get the directory
     }
+<<<<<<< HEAD
   } else {
     console.log("tftgfgvhk");
     handleInvalidCommand(dirKey);
   }
   // f
   // just use hashmap..... nested hashmap...
+=======
+})
+
+function clearingFunction()
+{
+    commentsDiv.innerHTML = "";
+}
+
+function whoamiFunction()
+{
+    commentsDiv.innerHTML += "<div class='white'>unix</div>";
+}
+
+function helpFeauture()
+{
+    let currentDirArray = currentlyIn === "root" ? [...Object.keys(rootCmds), ...mainCmds] : [...themes, ...mainCmds];
+        commentsDiv.innerHTML += `<ul> ${currentDirArray.map((command) => {
+            return `<li class="ls-item"> ${command}</li>`;
+        }).join("")} </ul>`;
+}
+
+function goingBackDir()
+{
+    let directory = document.querySelector(".directory");
+    if (currentlyIn == "root")
+    {
+        commentsDiv.innerHTML += "";
+        userCommandDiv.value = "";
+    }
+    currentlyIn = "root";
+    let directories = directory.innerText.split("/");
+    directories.pop();
+    directory.innerHTML = "";
+    directory.innerHTML = directories.map((x) => {
+        if (x !== "") return `/${x}`;
+    }).join('');
+}
+
+function listingDirs()
+{
+    if (currentlyIn === "themes") // make it get into different directories to show..
+    {
+        commentsDiv.innerHTML += `<div class="ls-cont"> ${[...themes, "root"].map((theme) => {
+            `<div class="ls-item">${theme}</div>`;
+        }).join("")} </div>`;
+    }
+    else
+    {
+        commentsDiv.innerHTML += `<div class="ls-cont"> ${Object.keys(rootCmds).map((command) => {
+            return `<div class="ls-item">${command}</div>`;
+        }).join("")} </div>`;
+    }
+>>>>>>> parent of 459d164 (adding the things)
 }
 
 export let commentsDiv = document.querySelector(".comments");
 
+<<<<<<< HEAD
 let rootCmds = {
   whoami: whoamiFunction,
   clear: clearingFunction,
@@ -203,6 +278,23 @@ let currentlyIn = "root";
 let commandDict = {
   root: rootCmds,
   primeDir: primeDir, // where I got to put into the directory
+=======
+let themes = ["hacker", "default", "light", "cute"];
+let rootCmds =
+{
+    "whoami": whoamiFunction,
+    "clear": clearingFunction,
+    "help": helpFeauture,
+    "cd ..": goingBackDir,
+    "ls": listingDirs,
+};
+let mainCmds = ["clear", "ls", "cd ..", "help", "echo "]; // 
+let allCmds = [...mainCmds, ...Object.keys(rootCmds), ...themes];
+let currentlyIn = "root";
+let commandDict = {
+    "root": rootCmds,
+    "themes": themes, // where I got to put into the directory
+>>>>>>> parent of 459d164 (adding the things)
 };
 
 let userCommandDiv = document.querySelector(".user-command");
