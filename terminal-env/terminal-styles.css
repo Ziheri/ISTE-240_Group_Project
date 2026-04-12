@@ -18,53 +18,17 @@ body {
     align-items: flex-end;
     overflow: hidden;
     z-index: -1;
-    transition: 5s ease;
-}
-
-/* terminal logo */
-.termlogo {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 85px;
-    height: 90px;
-    border-radius: 5px;
-    cursor: pointer;
-    border: solid 1.5px rgba(0, 0, 233, 0);
-    position: absolute;
-    left: 20px;
-    top: 20px;
-}
-
-.termlogo:hover {
-    background-color: rgba(0, 0, 233, 0.1);
-    border: solid 1.5px rgba(0, 0, 0, 0);
-}
-
-.termlogo-clicked {
-    background-color: rgba(0, 0, 233, 0.1);
-    border: solid 1.5px rgba(0, 0, 233, 0.1);
-}
-
-.termlogo img {
-    height: 50px;
-    width: 50px;
+    background-color: transparent;
 }
 
 /* Terminal Div */
 .terminal-div {
-    height: 400px;
-    width: 600px;
+    height: 100%;
+    width: 100%;
     min-width: 350px;
     min-height: 200px;
-    left: 35%;
-    top: 15%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     background-color: var(--gray);
     background-image: linear-gradient(to right, var(--gray), #565656);
     position: absolute;
@@ -111,49 +75,26 @@ body {
     stroke: white;
 }
 
-.x:hover {
-    background-color: red;
-}
-
-.s:hover {
-    background-color: gray;
-}
-
 .terminal-chat {
     padding-left: 2.5%;
     padding-right: 2.5%;
     padding-top: 10px;
     height: 100%;
     width: 100%;
-    overflow-y: scroll;
     scrollbar-width: thin;
 
     div {
         margin-top: 10px;
         margin-bottom: 10px;
     }
-}
 
-li {
-    list-style-type: square;
-}
-
-.ls-cont {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-
-    li {
-        list-style-type: none;
-    }
-}
-
-.user-comment {
-    margin-top: 20px;
+    background-color: black;
 }
 
 .comments {
     display: flex;
     flex-direction: column;
+    color: white;
 }
 
 .comment-div {
@@ -169,53 +110,41 @@ li {
     font-family: monospace;
     caret-color: white;
     color: white;
+    background-color: black;
     font-size: large;
     touch-action: none;
 }
 
 .red {
-    color: red;
+    color: palevioletred;
 }
 
 .purple {
-    color: rgb(135, 42, 182);
+    color: rgba(219, 120, 255, 0.3);
 }
 
 .blue {
-    color: rgb(84, 170, 255);
+    color: lightblue;
 }
 
 .green {
-    color: greenyellow;
+    color: #adff2f;
 }
+
+.yellow {
+    color: #ffff00;
+}
+
+.white {
+    color: white;
+}
+
 span {
     white-space: nowrap;
 }
 
 .user-command:focus {
     outline: none;
-}
-
-.terminal-minimized {
-    height: 35px;
-    width: 145px;
-    background-color: var(--gray);
-    background-image: linear-gradient(to right, var(--gray), #565656);
-    border-radius: 15px 15px 0 0;
-    margin-left: 20px;
-    color: white;
-    display: flex;
-    text-align: center;
-    font-weight: bold;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    cursor: pointer;
-    visibility: hidden;
-}
-
-.terminal-minimized:hover {
-    background-image: linear-gradient(to left, var(--gray), #565656);
 }
 
 /* themes */
@@ -231,43 +160,6 @@ span {
 
     .terminal-chat {
         scrollbar-color: var(--gray) black;
-    }
-}
-
-.hacker {
-    background-image: url("../images/kali-linux-wallpaper.png");
-
-    .terminal-chat,
-    .user-command {
-        background-color: black;
-        color: white;
-    }
-
-    background-size: cover;
-
-    .termlogo {
-        color: white;
-    }
-
-    .termlogo svg path {
-        fill: gray;
-    }
-
-    .terminal-chat,
-    .terminal-chat input {
-        color: rgb(33, 247, 33);
-    }
-
-    .terminal-chat {
-        scrollbar-color: var(--gray) black;
-    }
-
-    .blue {
-        color: green;
-    }
-
-    .termlogo:hover {
-        background-color: rgba(255, 255, 255, 0.2);
     }
 }
 
@@ -290,64 +182,11 @@ span {
     .terminal-chat input {
         color: navy;
         background-color: white;
-        scrollbar-color: lightblue white;
+        /* scrollbar-color: lightblue white; */
         caret-color: navy;
     }
 
     .termlogo:hover {
         background-color: rgba(120, 190, 255, 0.3);
-    }
-}
-
-.cute {
-    background-image: linear-gradient(to right, rgb(239, 208, 255), white);
-
-    .termlogo {
-        color: palevioletred;
-    }
-
-    .termlogo svg path {
-        fill: palevioletred;
-    }
-
-    .terminal-header {
-        background-color: pink;
-    }
-
-    .terminal-minimized {
-        background-color: pink;
-    }
-
-    .terminal-chat,
-    .terminal-chat input,
-    .user-command {
-        color: palevioletred;
-        background-color: white;
-        scrollbar-color: pink white;
-        caret-color: palevioletred;
-    }
-
-    .termlogo:hover {
-        background-color: rgba(219, 120, 255, 0.3);
-    }
-}
-
-@media screen and (max-width: 480px) {
-    * {
-        font-size: 20px;
-    }
-
-    .terminal-div {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100vw;
-        height: 100vh;
-    }
-
-    body {
-        height: 100vh;
-        width: 100vw;
-        background-color: blue;
     }
 }

@@ -21,16 +21,14 @@
         </div>
         <div class="terminal-chat">
             <div class="comments">
-                make this appear as user and old command for this section after someone eventers something
-                something...
+                <!-- make this appear as user and old command for this section after someone eventers something -->
             </div>
             <div class="comment-div">
                 <label class="green"><span class="yellow">unix</span>@user:~<span
                         class="directory red"></span>$</label><input class="user-command">
                 <!-- the source of where in info came from: https://github.com/beekurt98/terminal-portfolio.git -->
             </div>
-            <<<<<<< HEAD=======>>>>>>> parent of 48004ad (adding the mechanic that shows the usernaem and the old
-                command)
+
         </div>
     </div>
 </body>
