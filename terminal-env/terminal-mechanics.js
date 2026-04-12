@@ -94,6 +94,9 @@ function tabFunction() {
         if (cmd.startsWith(ongoingInput))
           document.querySelector(".user-command").value = cmd;
       });
+
+  //TODO if you press tab you can see the file options avaibilible!!
+
   console.log("pressed tab");
 }
 
@@ -125,7 +128,7 @@ function helpFeauture() {
   let currentDirArray =
     currentlyIn === "root"
       ? [...Object.keys(rootCmds), ...mainCmds]
-      : [...themes, ...mainCmds];
+      : [...primeDir, ...mainCmds];
   commentsDiv.innerHTML += `<ul> ${currentDirArray
     .map((command) => {
       return `<li class="ls-item"> ${command}</li>`;
@@ -269,6 +272,10 @@ function listingDirs() {
       })
       .join("")} </div>`;
   }
+}
+
+function defaultDirsAccess() {
+  //
 }
 
 export let commentsDiv = document.querySelector(".comments");
