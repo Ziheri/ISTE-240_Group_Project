@@ -1,0 +1,264 @@
+@font-face {
+    font-family: "Handjet";
+    src: url('Handjet.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+    font-display: swap;
+}
+
+body {
+    background: black;
+    font-family: "Handjet", Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+.grid_container{
+    display: grid;
+    grid-template-areas: 
+    'title'
+    'nav-main';
+    gap: 20px;
+    justify-items: center;
+}
+
+#title_pc {
+    grid-area: title;
+    max-width: 100%;
+    height: auto;
+}
+
+#title_mobile {
+    display: none;
+}
+
+#mobile_nav {
+    display: none;
+}
+
+nav {
+    grid-area: nav-main;
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.navbar, .navbar-2{
+    list-style: none;
+    display: grid;
+    grid-auto-flow: column;
+    gap: 1.5rem;
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+    font-size: 5rem;
+    background: lightgray;
+    margin: 0;
+}
+
+.navbar li{
+    position: relative;
+    padding-right: 1.5rem;
+}
+
+.navbar li::after{
+    content: "|";
+    color: gray;
+    position: absolute;
+    right: 0;
+}
+
+.navbar li:last-child::after{
+    content: none;
+}
+
+a {
+    color: red;
+    text-decoration: none;
+}
+
+.navbar li a:hover, .navbar-2 li a:hover {
+    color: #FFF200;
+}
+
+
+.start-learning {
+    background-color: #d9d9d9;
+    color: #f62c2c;
+    width: 25vw;
+    height: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20%;
+}
+
+.action-header {
+    color: #006700;
+    font-size: 50px;
+}
+
+
+h1 {
+    margin-top: 32rem;
+    margin-left: 3rem;
+    color: #009444;
+    font-size: 4rem;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.tracks {
+    padding: 2rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    border-radius: 2rem;
+    font-size: 2rem;
+    justify-self: center;
+    color: #ED1C24;
+    background: lightgray;
+}
+
+#tracks_grid {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-around;
+}
+
+.tracks:hover {
+    color: #FFF200;
+}
+
+/**Start Siderbar CSS*/
+.sidebar {
+    position: fixed;
+    color: #ED1C24;
+    font-size: 1.5rem;
+    max-width: 12rem;
+    list-style-type: none;
+    margin-left: 3rem;
+    margin-top: 20rem;
+    padding-left: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-right: 1rem;
+    border: solid, 1px, red;
+    border-radius: 20px;
+    background: lightgray;
+}
+
+.sidebar_text {
+    justify-self: center;
+}
+
+.sidebar_inbetween {
+    justify-self: center;
+}
+
+.sidebar_sub1 {
+    display: none;
+}
+
+#require:hover .sidebar_sub1 {
+    display: block;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.test {
+    color: white;
+    margin-left: 50%;
+    margin-bottom: 100%;
+}
+/**End Sidebar CSS*/
+
+/**Start Login/Signup Page CSS*/
+#login_overgrid {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-around;
+}
+
+.login_grid {
+    display: grid;
+    grid-template-columns: auto;
+    justify-content: space-around;
+    padding: 5rem;
+}
+
+#login_seperate {
+    border-right: 2px solid gray;
+}
+
+.login_header {
+    font-family: "Handjet", Arial, Helvetica, sans-serif;
+    margin: 0px;
+    justify-self: center;
+}
+
+.login_form {
+    color: white;
+    font-size: large;
+    background-color: black;
+    border-radius: 25px;
+    padding: 1rem;
+    margin: 2rem;
+}
+
+.login_button {
+    color: #ED1C24;
+    font-size: xx-large;
+    font-family: "Handjet", Arial, Helvetica, sans-serif;
+    background-color: lightgray;
+    border-radius: 25px;
+    padding: 1rem;
+    width: 10rem;
+    justify-self: center;
+}
+
+.login_button:hover, .login_form:hover {
+    color: #FFF200;
+    border-color: #FFF200;
+}
+/**End Login/Signup Page CSS*/
+
+@media (max-width: 600px) {
+    #title_pc {
+        display: none;
+    }
+
+    #title_mobile {
+        display: flex;
+        justify-self: center;
+        max-width: 60vw;
+    }
+
+    #mobile_nav {
+        display: block;
+        position: absolute;
+        max-width: 5rem;
+        margin-top: 0.8rem;
+        margin-left: 0.8rem;
+    }
+
+    nav {
+        display: none;
+    }
+
+    #tracks_grid {
+        grid-template-columns: auto;
+    }
+
+    h1 {
+        display: flex;
+        justify-self: center;
+        margin-left: 0px;
+        font-size: 3rem;
+    }
+
+    .tracks {
+        font-size: 1.3rem;
+        padding:2rem;
+    }
+}
