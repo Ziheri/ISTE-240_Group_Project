@@ -173,6 +173,56 @@ html {
 }
 /**End Sidebar CSS*/
 
+/**Start Login/Signup Page CSS*/
+#login_overgrid {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-around;
+}
+
+.login_grid {
+    display: grid;
+    grid-template-columns: auto;
+    justify-content: space-around;
+    padding: 5rem;
+}
+
+#login_seperate {
+    border-right: 2px solid gray;
+}
+
+.login_header {
+    font-family: "Handjet", Arial, Helvetica, sans-serif;
+    margin: 0px;
+    justify-self: center;
+}
+
+.login_form {
+    color: white;
+    font-size: large;
+    background-color: black;
+    border-radius: 25px;
+    padding: 1rem;
+    margin: 2rem;
+}
+
+.login_button {
+    color: #ED1C24;
+    font-size: xx-large;
+    font-family: "Handjet", Arial, Helvetica, sans-serif;
+    background-color: lightgray;
+    border-radius: 25px;
+    padding: 1rem;
+    width: 10rem;
+    justify-self: center;
+}
+
+.login_button:hover, .login_form:hover {
+    color: #FFF200;
+    border-color: #FFF200;
+}
+/**End Login/Signup Page CSS*/
+
 @media (max-width: 600px) {
     #title_pc {
         display: none;
