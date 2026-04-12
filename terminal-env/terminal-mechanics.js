@@ -255,6 +255,7 @@ function goingBackDir() {
     .join("");
 }
 
+<<<<<<< HEAD
 function listingDirs() {
   if (
     currentlyIn === "themes"
@@ -276,6 +277,11 @@ function listingDirs() {
 
 function defaultDirsAccess() {
   //
+=======
+function defaultDirsAccess()
+{
+    // just use hashmap..... nested hashmap...
+>>>>>>> e94aa16 (fixed up the mechanics)
 }
 
 export let commentsDiv = document.querySelector(".comments");
