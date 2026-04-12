@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial Home</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+<section class="grid_container">
+    <img id="mobile_nav" src="style_content/Nav Bars.png" alt="Mobile Navigation Button">
+    <a href="index.html">
+        <img id="title_pc" src="style_content/(Updated-Long) Group-Project_Logo.png" alt="Into to UNIX title card">
+        <img id="title_mobile" src="style_content/(Updated) Group-Project_Logo.png" alt="Into to UNIX title card">
+    </a>
+    <nav>
+        <ul class="navbar">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">History</a></li>
+            <li><a href="#">Tutorial</a></li>
+            <li><a href="#">Quiz</a></li>
+        </ul>
+        <ul class="navbar-2">
+            <li><a href="#">Login</a></li>
+        </ul>
+    </nav>
+    <h1>Tutorial</h1>
+    <section id="tutorial_content">
+        <h2>Requirements & Setup</h2>
+            <h3>Requirements:</h3>
+                <p>You need a computer with an operating system</p>
+                <ul>
+                    <li>Window</li>
+                    <li>MacOS</li>
+                    <li>Linux</li>
+                </ul>
+            <h3>Setup:</h3>
+                <p>For windows</p>
+                    <p>Windows Subsystem for Linux (WSL) to make a unix like environment</p>
+                    <p>For the full unix environment you would need a vm (virtual machine)</p>
+                <p>For MacOS</p>
+                    <p>Using terminal to install the code line tools xcode-select --install and /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com)" **this is installing homebrew**</p>
+                    <p>UTM (VM to run a separate unix operating system..)</p>
+                <p>For Linux</p>
+                    <p>Install the NixOS and get the GNOME or Plasma ISO</p>
+                    <p>Install nix package manager (on existing linux)</p>
+        <h2>File System Hierarchy</h2>
+            <p>Contains both standard files and directories in a tree-like structure starting from the root directory (the current drive you are on)</p>
+            <p>You are able to access it either through GNOME System monitor or the CLI (command line interface)</p>
+        <h2>Security & Permissions</h2>
+            <p>The file system has to read, write and execute to different users with different privileges.</p>
+            <p>Talk about chmod</p>
+            <p>Administration privileges (sudo permissions)</p>
+        <h2>Shell & Sub Support</h2>
+            <p>Shell scripting allow the user to interact with the kernel of the OS and talk about shell and kernel models.</p>
+        <h2>Scripting</h2>
+            <p>How to program in the terminal and use vi or vim or neovim</p>
+    </section>
+</body>
+</html>
