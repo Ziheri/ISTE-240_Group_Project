@@ -29,10 +29,8 @@
                         class="directory red"></span>$</label><input class="user-command">
                 <!-- the source of where in info came from: https://github.com/beekurt98/terminal-portfolio.git -->
             </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> parent of 48004ad (adding the mechanic that shows the usernaem and the old command)
+            <<<<<<< HEAD=======>>>>>>> parent of 48004ad (adding the mechanic that shows the usernaem and the old
+                command)
         </div>
     </div>
 </body>
