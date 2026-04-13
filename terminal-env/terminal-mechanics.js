@@ -1,6 +1,7 @@
 // VARIABLES
 let pastCommands = [];
 let timesPressedUp = 0;
+let desiredUserCommand;
 
 //helper functions....
 function enterFunction() {
@@ -82,6 +83,7 @@ function goingBackDir() {
   if (currentlyIn == "root") {
     commentsDiv.innerHTML += "";
     userCommandDiv.value = "";
+    pastCommands.pop();
   }
   currentlyIn = "root";
   let directories = directory.innerText.split("/");
@@ -92,36 +94,113 @@ function goingBackDir() {
       if (x !== "") return `/${x}`;
     })
     .join("");
+
+  pastCommands.pop();
 }
 
 function listingDirs() {
+  //TODO work on ls
+  if (currentlyIn == "root") {
+    commentsDiv.innerHTML += `<div class="ls-cont"> ${themes
+      .map((theme) => {
+        return `<div class="ls-item">${theme}</div>`;
+      })
+      .join("")} </div>`;
+  }
   if (
     currentlyIn === "themes"
-  ) // make it get into different directories to show..
+  ) // make it get into different directories to show.. currentlyIn == "root"
   {
     commentsDiv.innerHTML += `<div class="ls-cont"> ${[...themes, "root"]
       .map((theme) => {
         `<div class="ls-item">${theme}</div>`;
       })
       .join("")} </div>`;
-  } else {
-    commentsDiv.innerHTML += `<div class="ls-cont"> ${Object.keys(rootCmds)
-      .map((command) => {
-        return `<div class="ls-item">${command}</div>`;
-      })
-      .join("")} </div>`;
   }
+  // else
+  // {
+  //   commentsDiv.innerHTML += `<div class="ls-cont"> ${themes
+  //     .map((theme) => {
+  //       return `<div class="ls-item">${theme}</div>`;
+  //     })
+  //     .join("")} </div>`;
+  //   // commentsDiv.innerHTML += `<div class="ls-cont"> ${Object.keys(rootCmds)
+  //   //   .map((command) => {
+  //   //     return `<div class="ls-item">${command}</div>`;
+  //   //   })
+  //   //   .join("")} </div>`;
+  // }
+}
+
+function whoAmIFunct() {
+  commentsDiv.innerHTML += "<div class='white'>unix</div>";
+}
+
+function changeDir() {
+  // 3 = /
+  let directory = document.querySelector(".directory");
+  let pathFound = desiredUserCommand.substring(
+    3,
+    desiredUserCommand.length - 1,
+  );
+  currentlyIn = pathFound;
+  if (pastCommands.includes(`${currentlyIn}/`) == false) {
+    console.log("what am i looking at: " + currentlyIn);
+    directory.innerHTML += `${currentlyIn}/`;
+    pastCommands.push(`${currentlyIn}/`);
+  }
+  userCommandDiv.value = "";
+  console.log("change directory");
+  // currentlyIn = `${userCommand.substring(3, userCommand.length)}`;
+  // directory.innerHTML += `/${userCommand.substring(3, userCommand.length)}`;
+}
+
+function pwdFunct() {
+  /**
+  pastCommands.add(`${currentlyIn.substring(3, )}`)
+  */
+  // pastCommands = remove(pastCommands, "cd");
+  console.log("why is this: " + pastCommands.pop());
+  commentsDiv.innerHTML += `<div class='white'>${pastCommands[pastCommands.length - 1]}</div>`;
+}
+
+function homeFunct() {
+  let directory = document.querySelector(".directory");
+  document.getElementsByClassName("directory red").innerHTML += "";
+}
+
+function echoFunct() {
+  commentsDiv.innerHTML += "<div class='white'>echo is working</div>";
 }
 
 export let commentsDiv = document.querySelector(".comments");
 
-let themes = ["hacker", "default", "light", "cute"];
+let themes = [
+  "bin/",
+  "opt/",
+  "boot/",
+  "dev/",
+  "sbin/",
+  "etc/",
+  "srv/",
+  "home/",
+  "tmp/",
+  "lib/",
+  "usr/",
+  "media/",
+  "var/",
+  "mnt/",
+];
 let rootCmds = {
-  whoami: "unix",
+  whoami: whoAmIFunct,
   clear: clearingFunction,
   help: helpFeauture,
   "cd ..": goingBackDir,
   ls: listingDirs,
+  "cd ": changeDir,
+  pwd: pwdFunct,
+  "cd ~": homeFunct,
+  "echo ": echoFunct,
 };
 let mainCmds = ["clear", "ls", "cd ..", "help", "echo "]; //
 let allCmds = [...mainCmds, ...Object.keys(rootCmds), ...themes];
@@ -155,13 +234,16 @@ function addComment() {
   if (allCmds.includes(userCommand)) {
     rootCmds[userCommand]();
   } else {
-    if (
-      allCmds
-        .map((cmd) => `${cmd.includes(userCommand.substring(0, 4))}`)
-        .includes("true")
-    ) {
+    if (themes.includes(userCommand.substring(4, userCommand.length))) {
+      console.log("please hit here");
       commentsDiv.innerHTML += `<div class="white"> ${userCommand.substring(4, userCommand.length)} </div>`;
+    }
+    if (themes.includes(userCommand.substring(3, userCommand.length))) {
+      console.log("What is this: " + userCommand.substring(0, 2));
+      desiredUserCommand = userCommand;
+      rootCmds["cd "]();
     } else {
+      console.log("please don't hit here");
       handleInvalidCommand(userCommand);
     }
   }
