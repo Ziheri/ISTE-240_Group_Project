@@ -84,16 +84,19 @@ function goingBackDir() {
     commentsDiv.innerHTML += "";
     userCommandDiv.value = "";
     pastCommands.pop();
+  } else {
+    let directories = directory.innerText.split("/");
+    directories.pop();
+    directory.innerHTML = "";
+    console.log("what it had before: " + directory.innerHTML);
+    directory.innerHTML = directories
+      .map((x) => {
+        if (x !== "") return `/${x}`;
+      })
+      .join("");
+    console.log("what it had after: " + directory.innerHTML);
   }
-  currentlyIn = "root";
-  let directories = directory.innerText.split("/");
-  directories.pop();
-  directory.innerHTML = "";
-  directory.innerHTML = directories
-    .map((x) => {
-      if (x !== "") return `/${x}`;
-    })
-    .join("");
+  // currentlyIn = "root";
 
   pastCommands.pop();
 }
@@ -160,8 +163,12 @@ function pwdFunct() {
   pastCommands.add(`${currentlyIn.substring(3, )}`)
   */
   // pastCommands = remove(pastCommands, "cd");
+  if (pastCommands[pastCommands.length - 1] === undefined) {
+    commentsDiv.innerHTML += `<div class='white'>/</div>`;
+  } else {
+    commentsDiv.innerHTML += `<div class='white'>${pastCommands[pastCommands.length - 1]}</div>`;
+  }
   console.log("why is this: " + pastCommands.pop());
-  commentsDiv.innerHTML += `<div class='white'>${pastCommands[pastCommands.length - 1]}</div>`;
 }
 
 function homeFunct() {
@@ -170,7 +177,8 @@ function homeFunct() {
 }
 
 function echoFunct() {
-  commentsDiv.innerHTML += "<div class='white'>echo is working</div>";
+  let echoMsg = desiredUserCommand.substring(4, desiredUserCommand.length);
+  commentsDiv.innerHTML += `<div class='white'>${echoMsg}</div>`;
 }
 
 export let commentsDiv = document.querySelector(".comments");
@@ -196,11 +204,12 @@ let rootCmds = {
   clear: clearingFunction,
   help: helpFeauture,
   "cd ..": goingBackDir,
+  "cd ../": goingBackDir,
   ls: listingDirs,
   "cd ": changeDir,
   pwd: pwdFunct,
   "cd ~": homeFunct,
-  "echo ": echoFunct,
+  echo: echoFunct,
 };
 let mainCmds = ["clear", "ls", "cd ..", "help", "echo "]; //
 let allCmds = [...mainCmds, ...Object.keys(rootCmds), ...themes];
@@ -234,16 +243,25 @@ function addComment() {
   if (allCmds.includes(userCommand)) {
     rootCmds[userCommand]();
   } else {
+    console.log("what is is this user commnad: " + userCommand.substring(0, 4));
     if (themes.includes(userCommand.substring(4, userCommand.length))) {
       console.log("please hit here");
       commentsDiv.innerHTML += `<div class="white"> ${userCommand.substring(4, userCommand.length)} </div>`;
-    }
-    if (themes.includes(userCommand.substring(3, userCommand.length))) {
+    } else if (themes.includes(userCommand.substring(3, userCommand.length))) {
       console.log("What is this: " + userCommand.substring(0, 2));
       desiredUserCommand = userCommand;
       rootCmds["cd "]();
+    } else if (userCommand.substring(0, 4) === "echo") {
+      // this is good!!
+      desiredUserCommand = userCommand;
+      console.log("this condition hit for echo!");
+      rootCmds[userCommand.substring(0, 4)]();
+    } else if (userCommand === "") {
+      commentsDiv.innerHTML += `<label class="green"><span class="yellow">unix</span>@user:~$ <span class="white">${userCommand}</span> </label>`;
     } else {
-      console.log("please don't hit here");
+      console.log(
+        "please don't hit here: " + "`" + userCommand.substring(0, 4) + "`",
+      );
       handleInvalidCommand(userCommand);
     }
   }
