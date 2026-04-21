@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login or Sign Up</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
     <section class="grid_container">
-    <img id="mobile_nav" src="../../style_content/Nav Bars.png" alt="Mobile Navigation Button">
+    <img id="mobile_nav" src="../style_content/Nav Bars.png" alt="Mobile Navigation Button">
     <a href="index.html">
-        <img id="title_pc" src="../../style_content/(Updated V6) Long Title.png" alt="Into to UNIX title card">
-        <img id="title_mobile" src="../../style_content/(Updated) Group-Project_Logo.png" alt="Into to UNIX title card">
+        <img id="title_pc" src="../style_content/(Updated V6) Long Title.png" alt="Into to UNIX title card">
+        <img id="title_mobile" src="../style_content/(Updated) Group-Project_Logo.png" alt="Into to UNIX title card">
     </a>
     <nav>
         <ul class="navbar">
