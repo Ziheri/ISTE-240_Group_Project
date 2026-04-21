@@ -230,6 +230,66 @@ html {
 }
 /**End Login/Signup Page CSS*/
 
+/**Start Scoreboard Page CSS*/
+#scoreboard_heading {
+    margin-top: 2rem;
+    margin-left: 0;
+    color: #009444;
+    font-size: 4rem;
+    text-align: center;
+}
+
+#scoreboard_container {
+    max-width: 700px;
+    margin: 2rem auto 4rem auto;
+    padding: 0 1rem;
+}
+
+#scoreboard_table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 2rem;
+    background: lightgray;
+    border-radius: 1.5rem;
+    overflow: hidden;
+}
+
+#scoreboard_table thead {
+    background: #ED1C24;
+    color: #fff;
+}
+
+#scoreboard_table th {
+    padding: 1rem 2rem;
+    text-align: left;
+}
+
+#scoreboard_table td {
+    padding: 0.75rem 2rem;
+    color: #000;
+    border-top: 1px solid #aaa;
+}
+
+#scoreboard_table tbody tr:hover {
+    background: #d4d4d4;
+    color: #FFF200;
+}
+
+.rank_col {
+    color: #ED1C24;
+    font-weight: bold;
+    width: 3rem;
+    text-align: center;
+}
+
+#no_scores {
+    color: #fff;
+    font-size: 1.5rem;
+    text-align: center;
+    margin-top: 2rem;
+}
+/**End Scoreboard Page CSS*/
+
 @media (max-width: 600px) {
     #title_pc {
         display: none;
