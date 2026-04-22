@@ -210,6 +210,18 @@ let rootCmds = {
   pwd: pwdFunct,
   "cd ~": homeFunct,
   echo: echoFunct,
+  "mkdir ": 0,
+  "rmdir ": 0,
+  "rm ": 0,
+  "touch ": 0,
+  "ls -a ": 0,
+  "cp ": 0,
+  "mv ": 0,
+  history: 0,
+  "cat ": 0,
+  "grep ": 0,
+  " | ": 0,
+  "man ": 0,
 };
 let mainCmds = ["clear", "ls", "cd ..", "help", "echo "]; //
 let allCmds = [...mainCmds, ...Object.keys(rootCmds), ...themes];
