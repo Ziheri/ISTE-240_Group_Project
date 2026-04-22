@@ -1,5 +1,6 @@
 <?php
     include '../../dbcon.php';
+    include "../assets/files/nav.php";
 
     $result = $mysqli->query("SELECT user, score FROM `240UnixGroupProject` ORDER BY score DESC");
 ?>
