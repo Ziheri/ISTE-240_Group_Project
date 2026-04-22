@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Intro To UNIX</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
     <!-- Header Section -->
@@ -26,10 +26,20 @@
         </ul>
     </nav>
     <!-- Header Section ^ -->
-    <h1>Learning Tracks</h1>
-    <section id="tracks_grid">
-        <a href="#"><h2 class="tracks">Track 1 - Unix Foundations</h2></a>
-        <a href="#"><h2 class="tracks">Track 2 - Shell Scripting</h2></a>
-    </section>
+    <h1>Grading Page</h1>
+    <p>How we fulfilled the requirements</p>
+
+    <h2>Category 1</h2>
+    <p>lorem ipsum</p>
+
+    <h2>Category 2</h2>
+    <p>lorem ipsum</p>
+
+    <h2>Category 3</h2>
+    <p>lorem ipsum</p>
+
+    <h2>Category 4</h2>
+    <p>lorem ipsum</p>
+
 </body>
 </html>
