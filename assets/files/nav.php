@@ -16,11 +16,11 @@
     </a>
     <nav>
         <ul class="navbar">
-            <li><a href="pages/index.php">Home</a></li>
-            <li><a href="pages/history.php">History</a></li>
-            <li><a href="pages/tutorial.php">Tutorial</a></li>
-            <li><a href="pages/quiz.php">Quiz</a></li>
-            <li><a href="pages/grading.php">Grading</a></li>
+            <li><a href="../../pages/index.php">Home</a></li>
+            <li><a href="../../pages/history.php">History</a></li>
+            <li><a href="../../pages/tutorial.php">Tutorial</a></li>
+            <li><a href="../../pages/quiz.php">Quiz</a></li>
+            <li><a href="../../pages/grading.php">Grading</a></li>
         </ul>
         <ul class="navbar-2">
             <li><a href="assets/files/login.php">Login</a></li>
