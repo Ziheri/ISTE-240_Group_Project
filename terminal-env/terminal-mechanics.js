@@ -135,7 +135,7 @@ function mvFunction() {
 }
 
 function historyFunction() {
-  userCommandDiv.innerHTML += `the history of commands`;
+  userCommandDiv.innerHTML += `${pastCommands.join("\n")}`;
 }
 
 function catFunction() {
@@ -236,11 +236,13 @@ function addComment() {
   console.log("What is in here: " + allCmds);
   if (allCmds.includes(userCommand)) {
     rootCmds[userCommand]();
+    pastCommands.push(userCommand);
   } else {
     let commandComponent = userCommand.split(" ");
     if (allCmds.includes(commandComponent[0])) {
       desiredUserCommand = commandComponent.slice(1, commandComponent.length);
       rootCmds[commandComponent[0]]();
+      pastCommands.push(commandComponent[0]);
     } else {
       handleInvalidCommand(userCommand);
     }
