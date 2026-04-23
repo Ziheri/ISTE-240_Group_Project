@@ -181,6 +181,62 @@ function echoFunct() {
   commentsDiv.innerHTML += `<div class='white'>${echoMsg}</div>`;
 }
 
+function mkDirFunct() {
+  commentsDiv.innerHTML += `this makes a directory`;
+}
+
+function rmDirFunct() {
+  commentsDiv.innerHTML += `this removes a directory`;
+}
+
+function rmFunction() {
+  commentsDiv.innerHTML += `remove the file`;
+}
+
+function touchFunction() {
+  userCommandDiv.innerHTML += `touch/make an empty`;
+}
+
+function lsAFunction() {
+  userCommandDiv.innerHTML += `show all direcotries in the current layer`;
+}
+
+function cpFunction() {
+  userCommandDiv.innerHTML += `copy a file and directories`;
+}
+
+function mvFunction() {
+  userCommandDiv.innerHTML += `move a file and directories`;
+}
+
+function historyFunction() {
+  userCommandDiv.innerHTML += `the history of commands`;
+}
+
+function catFunction() {
+  userCommandDiv.innerHTML += `content of the file`;
+}
+
+function grepFunction() {
+  userCommandDiv.innerHTML += `using grep`;
+}
+
+function pipeFunction() {
+  userCommandDiv.innerHTML += `using pipe `;
+}
+
+function manFunction() {
+  userCommandDiv.innerHTML += `man `;
+}
+
+function cdSlashFunction() {
+  userCommandDiv.innerHTML += `cd / stufff`;
+}
+
+function viFunction() {
+  userCommandDiv.innerHTML += `vi a file`;
+}
+
 export let commentsDiv = document.querySelector(".comments");
 
 let themes = [
@@ -210,18 +266,24 @@ let rootCmds = {
   pwd: pwdFunct,
   "cd ~": homeFunct,
   echo: echoFunct,
-  "mkdir ": 0,
-  "rmdir ": 0,
-  "rm ": 0,
-  "touch ": 0,
-  "ls -a ": 0,
-  "cp ": 0,
-  "mv ": 0,
-  history: 0,
-  "cat ": 0,
-  "grep ": 0,
-  " | ": 0,
-  "man ": 0,
+  "mkdir ": mkDirFunct,
+  "rmdir ": rmDirFunct,
+  "rm ": rmFunction,
+  "touch ": touchFunction,
+  "ls -a ": lsAFunction,
+  "cp ": cpFunction,
+  "mv ": mvFunction,
+  history: historyFunction,
+  "cat ": catFunction,
+  "grep ": grepFunction,
+  " | ": pipeFunction,
+  "man ": manFunction,
+  "cd /": cdSlashFunction,
+  "vi ": viFunction,
+  /*
+    different foms of comemon ones
+    asdfasdfasdf
+  */
 };
 let mainCmds = ["clear", "ls", "cd ..", "help", "echo "]; //
 let allCmds = [...mainCmds, ...Object.keys(rootCmds), ...themes];
