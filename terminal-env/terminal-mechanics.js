@@ -93,7 +93,8 @@ function homeFunct() {
 }
 
 function echoFunct() {
-  let echoMsg = desiredUserCommand.substring(4, desiredUserCommand.length);
+  console.log("what is the list message: " + desiredUserCommand);
+  let echoMsg = desiredUserCommand.join(" ");
   commentsDiv.innerHTML += `<div class='white'>${echoMsg}</div>`;
 }
 
@@ -182,20 +183,20 @@ let rootCmds = {
   pwd: pwdFunct,
   "cd ~": homeFunct,
   echo: echoFunct,
-  "mkdir ": mkDirFunct,
-  "rmdir ": rmDirFunct,
-  "rm ": rmFunction,
-  "touch ": touchFunction,
-  "ls -a ": lsAFunction,
-  "cp ": cpFunction,
-  "mv ": mvFunction,
+  mkdir: mkDirFunct,
+  rmdir: rmDirFunct,
+  rm: rmFunction,
+  touch: touchFunction,
+  "ls -a": lsAFunction,
+  cp: cpFunction,
+  mv: mvFunction,
   history: historyFunction,
-  "cat ": catFunction,
-  "grep ": grepFunction,
-  " | ": pipeFunction,
-  "man ": manFunction,
+  cat: catFunction,
+  grep: grepFunction,
+  "|": pipeFunction,
+  man: manFunction,
   "cd /": cdSlashFunction,
-  "vi ": viFunction,
+  vi: viFunction,
   /*
     different foms of comemon ones
     asdfasdfasdf
@@ -233,7 +234,13 @@ function addComment() {
   if (allCmds.includes(userCommand)) {
     rootCmds[userCommand]();
   } else {
-    handleInvalidCommand(userCommand);
+    let commandComponent = userCommand.split(" ");
+    if (allCmds.includes(commandComponent[0])) {
+      desiredUserCommand = commandComponent.slice(1, commandComponent.length);
+      rootCmds[commandComponent[0]]();
+    } else {
+      handleInvalidCommand(userCommand);
+    }
   }
   userCommandDiv.value = "";
 }
