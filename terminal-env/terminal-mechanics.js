@@ -66,73 +66,13 @@ function clearingFunction() {
   commentsDiv.innerHTML = "";
 }
 
-function helpFeauture() {
-  let currentDirArray =
-    currentlyIn === "root"
-      ? [...Object.keys(rootCmds), ...mainCmds]
-      : [...themes, ...mainCmds];
-  commentsDiv.innerHTML += `<ul> ${currentDirArray
-    .map((command) => {
-      return `<li class="ls-item"> ${command}</li>`;
-    })
-    .join("")} </ul>`;
-}
-
 function goingBackDir() {
-  let directory = document.querySelector(".directory");
-  if (currentlyIn == "root") {
-    commentsDiv.innerHTML += "";
-    userCommandDiv.value = "";
-    pastCommands.pop();
-  } else {
-    let directories = directory.innerText.split("/");
-    directories.pop();
-    directory.innerHTML = "";
-    console.log("what it had before: " + directory.innerHTML);
-    directory.innerHTML = directories
-      .map((x) => {
-        if (x !== "") return `/${x}`;
-      })
-      .join("");
-    console.log("what it had after: " + directory.innerHTML);
-  }
-  // currentlyIn = "root";
-
-  pastCommands.pop();
+  commentsDiv.innerHTML +=
+    "<div class='white'>this is going back a directory</div>";
 }
 
 function listingDirs() {
-  //TODO work on ls
-  if (currentlyIn == "root") {
-    commentsDiv.innerHTML += `<div class="ls-cont"> ${themes
-      .map((theme) => {
-        return `<div class="ls-item">${theme}</div>`;
-      })
-      .join("")} </div>`;
-  }
-  if (
-    currentlyIn === "themes"
-  ) // make it get into different directories to show.. currentlyIn == "root"
-  {
-    commentsDiv.innerHTML += `<div class="ls-cont"> ${[...themes, "root"]
-      .map((theme) => {
-        `<div class="ls-item">${theme}</div>`;
-      })
-      .join("")} </div>`;
-  }
-  // else
-  // {
-  //   commentsDiv.innerHTML += `<div class="ls-cont"> ${themes
-  //     .map((theme) => {
-  //       return `<div class="ls-item">${theme}</div>`;
-  //     })
-  //     .join("")} </div>`;
-  //   // commentsDiv.innerHTML += `<div class="ls-cont"> ${Object.keys(rootCmds)
-  //   //   .map((command) => {
-  //   //     return `<div class="ls-item">${command}</div>`;
-  //   //   })
-  //   //   .join("")} </div>`;
-  // }
+  commentsDiv.innerHTML += "<div class='white'>listing the directory</div>";
 }
 
 function whoAmIFunct() {
@@ -140,40 +80,16 @@ function whoAmIFunct() {
 }
 
 function changeDir() {
-  // 3 = /
-  let directory = document.querySelector(".directory");
-  let pathFound = desiredUserCommand.substring(
-    3,
-    desiredUserCommand.length - 1,
-  );
-  currentlyIn = pathFound;
-  if (pastCommands.includes(`${currentlyIn}/`) == false) {
-    console.log("what am i looking at: " + currentlyIn);
-    directory.innerHTML += `${currentlyIn}/`;
-    pastCommands.push(`${currentlyIn}/`);
-  }
-  userCommandDiv.value = "";
-  console.log("change directory");
-  // currentlyIn = `${userCommand.substring(3, userCommand.length)}`;
-  // directory.innerHTML += `/${userCommand.substring(3, userCommand.length)}`;
+  commentsDiv.innerHTML += "<div class='white'>change the directory</div>";
 }
 
 function pwdFunct() {
-  /**
-  pastCommands.add(`${currentlyIn.substring(3, )}`)
-  */
-  // pastCommands = remove(pastCommands, "cd");
-  if (pastCommands[pastCommands.length - 1] === undefined) {
-    commentsDiv.innerHTML += `<div class='white'>/</div>`;
-  } else {
-    commentsDiv.innerHTML += `<div class='white'>${pastCommands[pastCommands.length - 1]}</div>`;
-  }
-  console.log("why is this: " + pastCommands.pop());
+  commentsDiv.innerHTML += "<div class='white'>get the current direcory</div>";
 }
 
 function homeFunct() {
-  let directory = document.querySelector(".directory");
-  document.getElementsByClassName("directory red").innerHTML += "";
+  commentsDiv.innerHTML +=
+    "<div class='white'>going back to the root directory</div>";
 }
 
 function echoFunct() {
@@ -182,11 +98,12 @@ function echoFunct() {
 }
 
 function mkDirFunct() {
-  commentsDiv.innerHTML += `this makes a directory`;
+  commentsDiv.innerHTML += "<div class='white'>make a new directory</div>";
 }
 
 function rmDirFunct() {
-  commentsDiv.innerHTML += `this removes a directory`;
+  commentsDiv.innerHTML +=
+    "<div class='white'>get rid of a new directory</div>";
 }
 
 function rmFunction() {
@@ -258,7 +175,6 @@ let themes = [
 let rootCmds = {
   whoami: whoAmIFunct,
   clear: clearingFunction,
-  help: helpFeauture,
   "cd ..": goingBackDir,
   "cd ../": goingBackDir,
   ls: listingDirs,
@@ -285,12 +201,10 @@ let rootCmds = {
     asdfasdfasdf
   */
 };
-let mainCmds = ["clear", "ls", "cd ..", "help", "echo "]; //
-let allCmds = [...mainCmds, ...Object.keys(rootCmds), ...themes];
+let allCmds = [...Object.keys(rootCmds)];
 let currentlyIn = "root";
 let commandDict = {
   root: rootCmds,
-  themes: themes, // where I got to put into the directory
 };
 
 let userCommandDiv = document.querySelector(".user-command");
@@ -314,42 +228,14 @@ function addComment() {
 
   newComment.innerHTML = `<label class="green"><span class="yellow">unix</span>@user:~$ <span class="white">${userCommand}</span> </label>`;
   commentsDiv.appendChild(newComment);
+  // Output 232: whoami,clear,cd ..,cd ../,ls,cd ,pwd,cd ~,echo,mkdir ,rmdir ,rm ,touch ,ls -a ,cp ,mv ,history,cat ,grep , | ,man ,cd /,vi
+  console.log("What is in here: " + allCmds);
   if (allCmds.includes(userCommand)) {
     rootCmds[userCommand]();
   } else {
-    console.log("what is is this user commnad: " + userCommand.substring(0, 4));
-    if (themes.includes(userCommand.substring(4, userCommand.length))) {
-      console.log("please hit here");
-      commentsDiv.innerHTML += `<div class="white"> ${userCommand.substring(4, userCommand.length)} </div>`;
-    } else if (themes.includes(userCommand.substring(3, userCommand.length))) {
-      console.log("What is this: " + userCommand.substring(0, 2));
-      desiredUserCommand = userCommand;
-      rootCmds["cd "]();
-    } else if (userCommand.substring(0, 4) === "echo") {
-      // this is good!!
-      desiredUserCommand = userCommand;
-      console.log("this condition hit for echo!");
-      rootCmds[userCommand.substring(0, 4)]();
-    } else if (userCommand === "") {
-      commentsDiv.innerHTML += `<label class="green"><span class="yellow">unix</span>@user:~$ <span class="white">${userCommand}</span> </label>`;
-    } else {
-      console.log(
-        "please don't hit here: " + "`" + userCommand.substring(0, 4) + "`",
-      );
-      handleInvalidCommand(userCommand);
-    }
+    handleInvalidCommand(userCommand);
   }
   userCommandDiv.value = "";
-}
-function changeTheme(theme) {
-  // used to change directories
-  let domBody = document.querySelector("body");
-  let pastTheme = domBody.className;
-  theme == "light"
-    ? (commentsDiv.innerHTML += `<div>"${theme}" theme selected. Protect your eyes!</div>`)
-    : (commentsDiv.innerHTML += `<div>"${theme}" theme selected.</div>`);
-  domBody.classList.remove(pastTheme);
-  domBody.classList.add(theme);
 }
 
 function handleInvalidCommand(cmmd) {
