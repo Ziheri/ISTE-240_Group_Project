@@ -80,6 +80,11 @@ function whoAmIFunct() {
 }
 
 function changeDir() {
+  // cd
+  // "cd ..": goingBackDir,
+  //"cd ../": goingBackDir,
+  // "cd ~": homeFunct,
+  //"cd /": cdSlashFunction,
   commentsDiv.innerHTML += "<div class='white'>change the directory</div>";
 }
 
@@ -116,6 +121,8 @@ function touchFunction() {
 }
 
 function lsAFunction() {
+  // ls
+  // ls -a
   userCommandDiv.innerHTML += `show all direcotries in the current layer`;
 }
 
@@ -176,18 +183,15 @@ let themes = [
 let rootCmds = {
   whoami: whoAmIFunct,
   clear: clearingFunction,
-  "cd ..": goingBackDir,
-  "cd ../": goingBackDir,
   ls: listingDirs,
-  "cd ": changeDir,
+  cd: changeDir,
   pwd: pwdFunct,
-  "cd ~": homeFunct,
   echo: echoFunct,
   mkdir: mkDirFunct,
   rmdir: rmDirFunct,
   rm: rmFunction,
   touch: touchFunction,
-  "ls -a": lsAFunction,
+  ls: lsAFunction,
   cp: cpFunction,
   mv: mvFunction,
   history: historyFunction,
@@ -195,7 +199,6 @@ let rootCmds = {
   grep: grepFunction,
   "|": pipeFunction,
   man: manFunction,
-  "cd /": cdSlashFunction,
   vi: viFunction,
   /*
     different foms of comemon ones
