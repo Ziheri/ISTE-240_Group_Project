@@ -135,7 +135,11 @@ function mvFunction() {
 }
 
 function historyFunction() {
-  userCommandDiv.innerHTML += `${pastCommands.join("\n")}`;
+  userCommandDiv.innerHTML += `<div class='white'>${pastCommands[0]}</div>`;
+  pastCommands.forEach((command) => {
+    console.log(command);
+    commentsDiv.innerHTML += `<div class='white'>${command}</div>`;
+  });
 }
 
 function catFunction() {
