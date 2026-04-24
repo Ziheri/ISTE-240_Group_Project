@@ -3,7 +3,7 @@ import { generalCommnads } from "./allManInfo.js";
 let pastCommands = [];
 let timesPressedUp = 0;
 let desiredUserCommand;
-let currentFilePath = "/Users/unix";
+let currentFilePath = "/usr/unix";
 
 //helper functions....
 function enterFunction() {
@@ -74,7 +74,46 @@ function goingBackDir() {
 }
 
 function listingDirs() {
-  commentsDiv.innerHTML += "<div class='white'>listing the directory</div>";
+  // ls
+  // ls -a
+  // currentFilePath
+  let fileDirection = currentFilePath.split("/");
+  console.log("this is the current listing: " + fileDirection);
+  if (fileDirection.length == 1) {
+    console.log("just one file");
+    for (let i = 1; i < fileDirection.length; i += 1) {
+      commentsDiv.innerHTML += `<div class='white'>${fileDirection[i]}</div>`;
+    }
+  } else {
+    /**
+    jennylauren@Mac / % cd usr
+    jennylauren@Mac /usr % ls
+    bin		libexec		sbin		standalone	X11R6
+    lib		local		share		X11
+    jennylauren@Mac /usr % cd br
+    cd: no such file or directory: br
+    */
+    console.log("more than one file");
+    let findingDir = false;
+    let currentFile = 1;
+    let level = generalFileSystem;
+    while (findingDir === false) {
+      let direction = fileDirection[currentFile];
+      if (Object.keys(level).includes(direction)) {
+        let temp = level;
+        level = temp[direction];
+        currentFile += 1;
+        //
+      }
+      if (currentFile > fileDirection.length) {
+        Object.keys(level).forEach((key) => {
+          console.log("the file it ended up: " + level);
+          commentsDiv.innerHTML += `<div class='white'>${key}</div>`;
+        });
+        findingDir = true;
+      }
+    }
+  }
 }
 
 function whoAmIFunct() {
@@ -126,12 +165,6 @@ function touchFunction() {
   commentsDiv.innerHTML += `touch/make an empty`;
 }
 
-function lsAFunction() {
-  // ls
-  // ls -a
-  commentsDiv.innerHTML += `show all direcotries in the current layer`;
-}
-
 function cpFunction() {
   commentsDiv.innerHTML += `copy a file and directories`;
 }
@@ -177,34 +210,35 @@ function viFunction() {
 export let commentsDiv = document.querySelector(".comments");
 
 let generalFileSystem = {
-  "bin/": {}, // stores key: {}
-  "opt/": {},
-  "boot/": {},
-  "dev/": {},
-  "sbin/": {},
-  "etc/": {},
-  "srv/": {},
-  "home/": {},
-  "tmp/": {},
-  "lib/": {},
+  bin: {}, // stores key: {}
+  opt: {},
+  boot: {},
+  dev: {},
+  sbin: {},
+  etc: {},
+  srv: {},
+  home: {},
+  tmp: {},
+  lib: {},
 
-  "usr/": {
-    "bin/": {},
-    "include/": {},
-    "lib/": {},
-    "sbin/": {},
+  usr: {
+    bin: {},
+    include: {},
+    lib: {},
+    sbin: {},
+    unix: {},
   }, //
 
-  "media/": {},
+  media: {},
 
-  "var/": {
+  var: {
     cache: {},
     log: {},
     spool: {},
     tmp: {},
   }, //
 
-  "mnt/": {},
+  mnt: {},
 };
 let rootCmds = {
   whoami: whoAmIFunct,
@@ -217,7 +251,6 @@ let rootCmds = {
   rmdir: rmDirFunct,
   rm: rmFunction,
   touch: touchFunction,
-  ls: lsAFunction,
   cp: cpFunction,
   mv: mvFunction,
   history: historyFunction,
