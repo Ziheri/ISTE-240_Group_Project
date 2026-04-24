@@ -135,9 +135,8 @@ function mvFunction() {
 }
 
 function historyFunction() {
-  userCommandDiv.innerHTML += `<div class='white'>${pastCommands[0]}</div>`;
+  console.log("history: " + pastCommands);
   pastCommands.forEach((command) => {
-    console.log(command);
     commentsDiv.innerHTML += `<div class='white'>${command}</div>`;
   });
 }
@@ -232,25 +231,22 @@ function addComment() {
   if (userCommand === "") {
     commentsDiv.innerHTML += `<label class="green"><span class="yellow">unix</span>@user:~$ <span class="white">${userCommand}</span> </label>`;
   }
-  pastCommands.push(userCommand);
-
   newComment.innerHTML = `<label class="green"><span class="yellow">unix</span>@user:~$ <span class="white">${userCommand}</span> </label>`;
   commentsDiv.appendChild(newComment);
   // Output 232: whoami,clear,cd ..,cd ../,ls,cd ,pwd,cd ~,echo,mkdir ,rmdir ,rm ,touch ,ls -a ,cp ,mv ,history,cat ,grep , | ,man ,cd /,vi
   console.log("What is in here: " + allCmds);
   if (allCmds.includes(userCommand)) {
     rootCmds[userCommand]();
-    pastCommands.push(userCommand);
   } else {
     let commandComponent = userCommand.split(" ");
     if (allCmds.includes(commandComponent[0])) {
       desiredUserCommand = commandComponent.slice(1, commandComponent.length);
       rootCmds[commandComponent[0]]();
-      pastCommands.push(commandComponent[0]);
     } else {
       handleInvalidCommand(userCommand);
     }
   }
+  pastCommands.push(userCommand);
   userCommandDiv.value = "";
 }
 
