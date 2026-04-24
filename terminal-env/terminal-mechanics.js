@@ -79,33 +79,37 @@ function listingDirs() {
   // currentFilePath
   let fileDirection = currentFilePath.split("/");
   console.log("this is the current listing: " + fileDirection);
+  // if (fileDirection.length == 1) {
+  //   console.log("just one file");
+  //   for (let i = 1; i < fileDirection.length; i += 1) {
+  //     commentsDiv.innerHTML += `<div class='white'>${fileDirection[i]}</div>`;
+  //   }
+  // } else {
+  //   /**
+  //   jennylauren@Mac / % cd usr
+  //   jennylauren@Mac /usr % ls
+  //   bin		libexec		sbin		standalone	X11R6
+  //   lib		local		share		X11
+  //   jennylauren@Mac /usr % cd br
+  //   cd: no such file or directory: br
+  //   */
+  console.log("more than one file");
+  let findingDir = false;
+  let currentFile = 1;
+  let level = generalFileSystem;
   if (fileDirection.length == 1) {
-    console.log("just one file");
-    for (let i = 1; i < fileDirection.length; i += 1) {
-      commentsDiv.innerHTML += `<div class='white'>${fileDirection[i]}</div>`;
-    }
+    Object.keys(generalFileSystem).forEach((key) => {
+      commentsDiv.innerHTML += `<div class='white'>${key}</div>`;
+    });
   } else {
-    /**
-    jennylauren@Mac / % cd usr
-    jennylauren@Mac /usr % ls
-    bin		libexec		sbin		standalone	X11R6
-    lib		local		share		X11
-    jennylauren@Mac /usr % cd br
-    cd: no such file or directory: br
-    */
-    console.log("more than one file");
-    let findingDir = false;
-    let currentFile = 1;
-    let level = generalFileSystem;
     while (findingDir === false) {
       let direction = fileDirection[currentFile];
       if (Object.keys(level).includes(direction)) {
         let temp = level;
         level = temp[direction];
         currentFile += 1;
-        //
       }
-      if (currentFile > fileDirection.length) {
+      if (currentFile > fileDirection.length - 1) {
         Object.keys(level).forEach((key) => {
           console.log("the file it ended up: " + level);
           commentsDiv.innerHTML += `<div class='white'>${key}</div>`;
