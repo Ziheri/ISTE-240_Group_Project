@@ -3,6 +3,7 @@ import { generalCommnads } from "./allManInfo.js";
 let pastCommands = [];
 let timesPressedUp = 0;
 let desiredUserCommand;
+let currentFilePath = "/Users/unix";
 
 //helper functions....
 function enterFunction() {
@@ -90,7 +91,11 @@ function changeDir() {
 }
 
 function pwdFunct() {
-  commentsDiv.innerHTML += "<div class='white'>get the current direcory</div>";
+  // unix@user:~$
+  commentsDiv.innerHTML += `<div class='white'>${currentFilePath}</div>`;
+
+  // unix@user:/$
+  // commentsDiv.innerHTML += `<div class='white'>/</div>`;
 }
 
 function homeFunct() {
@@ -171,22 +176,36 @@ function viFunction() {
 
 export let commentsDiv = document.querySelector(".comments");
 
-let themes = [
-  "bin/",
-  "opt/",
-  "boot/",
-  "dev/",
-  "sbin/",
-  "etc/",
-  "srv/",
-  "home/",
-  "tmp/",
-  "lib/",
-  "usr/",
-  "media/",
-  "var/",
-  "mnt/",
-];
+let generalFileSystem = {
+  "bin/": {}, // stores key: {}
+  "opt/": {},
+  "boot/": {},
+  "dev/": {},
+  "sbin/": {},
+  "etc/": {},
+  "srv/": {},
+  "home/": {},
+  "tmp/": {},
+  "lib/": {},
+
+  "usr/": {
+    "bin/": {},
+    "include/": {},
+    "lib/": {},
+    "sbin/": {},
+  }, //
+
+  "media/": {},
+
+  "var/": {
+    cache: {},
+    log: {},
+    spool: {},
+    tmp: {},
+  }, //
+
+  "mnt/": {},
+};
 let rootCmds = {
   whoami: whoAmIFunct,
   clear: clearingFunction,
