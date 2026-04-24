@@ -1,5 +1,5 @@
 <?php
-    include '../../dbcon.php';
+    include '../dbCon.php';
     // $query = "SELECT * FROM 240UnixGroupProject (user, pass)";
 
     //echo $_POST["usernames"];

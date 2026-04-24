@@ -103,6 +103,6 @@
         <p id="quiz_result"></p>
     </div>
 
-    <script src="assets/js/quiz.js"></script>
+    <script src="../assets/js/quiz.js"></script>
 </body>
 </html>
