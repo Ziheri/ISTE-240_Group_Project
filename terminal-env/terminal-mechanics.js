@@ -1,3 +1,4 @@
+import { generalCommnads } from "./allManInfo.js";
 // VARIABLES
 let pastCommands = [];
 let timesPressedUp = 0;
@@ -117,21 +118,21 @@ function rmFunction() {
 }
 
 function touchFunction() {
-  userCommandDiv.innerHTML += `touch/make an empty`;
+  commentsDiv.innerHTML += `touch/make an empty`;
 }
 
 function lsAFunction() {
   // ls
   // ls -a
-  userCommandDiv.innerHTML += `show all direcotries in the current layer`;
+  commentsDiv.innerHTML += `show all direcotries in the current layer`;
 }
 
 function cpFunction() {
-  userCommandDiv.innerHTML += `copy a file and directories`;
+  commentsDiv.innerHTML += `copy a file and directories`;
 }
 
 function mvFunction() {
-  userCommandDiv.innerHTML += `move a file and directories`;
+  commentsDiv.innerHTML += `move a file and directories`;
 }
 
 function historyFunction() {
@@ -142,27 +143,30 @@ function historyFunction() {
 }
 
 function catFunction() {
-  userCommandDiv.innerHTML += `content of the file`;
+  commentsDiv.innerHTML += `content of the file`;
 }
 
 function grepFunction() {
-  userCommandDiv.innerHTML += `using grep`;
+  commentsDiv.innerHTML += `using grep`;
 }
 
 function pipeFunction() {
-  userCommandDiv.innerHTML += `using pipe `;
+  commentsDiv.innerHTML += `using pipe `;
 }
 
 function manFunction() {
-  userCommandDiv.innerHTML += `man `;
+  console.log("man hit");
+  let currentCommand = desiredUserCommand[0];
+  console.log("man hit: " + currentCommand);
+  commentsDiv.innerHTML += `<div class='white'>${generalCommnads[currentCommand]}</div>`;
 }
 
 function cdSlashFunction() {
-  userCommandDiv.innerHTML += `cd / stufff`;
+  commentsDiv.innerHTML += `cd / stufff`;
 }
 
 function viFunction() {
-  userCommandDiv.innerHTML += `vi a file`;
+  commentsDiv.innerHTML += `vi a file`;
 }
 
 export let commentsDiv = document.querySelector(".comments");
