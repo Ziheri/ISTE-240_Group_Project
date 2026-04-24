@@ -1,4 +1,4 @@
-<? 
+<?php
     include "../assets/files/nav.php";
 ?>
     <ul class="sidebar">
