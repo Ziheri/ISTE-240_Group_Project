@@ -76,13 +76,13 @@ export let generalCommnads = {
             <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(“POSIX.1”) as amended by Cor. 1-2002.  Applications aiming for</p>
             <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;maximum portability are strongly encouraged to use printf(1) to</p>
             <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;suppress the newline character.</p>`, //
-  mkdir: `NAME
+  mkdir: `<h3>NAME</h3>
      mkdir – make directories
 
-SYNOPSIS
+<h3>SYNOPSIS</h3>
      mkdir [-pv] [-m mode] directory_name ...
 
-DESCRIPTION
+<h3>DESCRIPTION</h3>
      The mkdir utility creates the directories named as operands, in the order specified, using
      mode “rwxrwxrwx” (0777) as modified by the current umask(2).
 
@@ -104,10 +104,10 @@ DESCRIPTION
 
      The user must have write permission in the parent directory.
 
-EXIT STATUS
+<h3>EXIT STATUS</h3>
      The mkdir utility exits 0 on success, and >0 if an error occurs.
 
-EXAMPLES
+<h3>EXAMPLES</h3>
      Create a directory named foobar:
 
            $ mkdir foobar
@@ -121,24 +121,24 @@ EXAMPLES
 
            $ mkdir -p cow/horse/monkey
 
-COMPATIBILITY
+<h3>COMPATIBILITY</h3>
      The -v option is non-standard and its use in scripts is not recommended.
 
-SEE ALSO
+<h3>SEE ALSO</h3>
      rmdir(1)
 
-STANDARDS
+<h3>STANDARDS</h3>
      The mkdir utility is expected to be IEEE Std 1003.2 (“POSIX.2”) compatible.
 
-HISTORY
+<h3>HISTORY</h3>
      A mkdir command appeared in Version 1 AT&T UNIX.`,
-  rmdir: `NAME
+  rmdir: `<h3>NAME</h3>
      rmdir – remove directories
 
-SYNOPSIS
+<h3>SYNOPSIS</h3>
      rmdir [-pv] directory ...
 
-DESCRIPTION
+<h3>DESCRIPTION</h3>
      The rmdir utility removes the directory entry specified by each directory argument, provided
      it is empty.
 
@@ -154,7 +154,7 @@ DESCRIPTION
 
      -v      Be verbose, listing each directory as it is removed.
 
-EXIT STATUS
+<h3>EXIT STATUS</h3>
      The rmdir utility exits with one of the following values:
 
      0       Each directory entry specified by a directory operand referred to an empty directory
@@ -162,7 +162,7 @@ EXIT STATUS
 
      >0      An error occurred.
 
-EXAMPLES
+<h3>EXAMPLES</h3>
      Remove the directory foobar, if it is empty:
 
            $ rmdir foobar
@@ -172,22 +172,22 @@ EXAMPLES
 
            $ rmdir -p cow/horse/monkey
 
-SEE ALSO
+<h3>SEE ALSO</h3>
      rm(1)
 
-STANDARDS
+<h3>STANDARDS</h3>
      The rmdir utility is expected to be IEEE Std 1003.2 (“POSIX.2”) compatible.
 
-HISTORY
+<h3>HISTORY</h3>
      A rmdir command appeared in Version 1 AT&T UNIX.`,
-  rm: `NAME
+  rm: `<h3>NAME</h3>
      rm, unlink – remove directory entries
 
-SYNOPSIS
+<h3>SYNOPSIS</h3>
      rm [-f | -i] [-dIRrvWx] file ...
      unlink [--] file
 
-DESCRIPTION
+<h3>DESCRIPTION</h3>
      The rm utility attempts to remove the non-directory type files specified on the command line.
      If the permissions of the file do not permit writing, and the standard input device is a
      terminal, the user is prompted (on the standard error output) for confirmation.
@@ -235,12 +235,12 @@ DESCRIPTION
      be supplied.  No options may be supplied in this simple mode of operation, which performs an
      unlink(2) operation on the passed argument.  However, the usual option-end delimiter, --, may
      optionally precede the argument.
-     EXIT STATUS
+     <h3>EXIT STATUS</h3>
      The rm utility exits 0 if all of the named files or file hierarchies were removed, or if the
      -f option was specified and all of the existing files or file hierarchies were removed.  If
      an error occurs, rm exits with a value >0.
 
-NOTES
+<h3>NOTES</h3>
      The rm command uses getopt(3) to parse its arguments, which allows it to accept the ‘--’
      option which will cause it to stop processing flag options at that point.  This will allow
      the removal of file names that begin with a dash (‘-’).  For example:
@@ -253,7 +253,7 @@ NOTES
            rm /home/user/-filename
            rm ./-filename
 
-EXAMPLES
+<h3>EXAMPLES</h3>
      Recursively remove all files contained within the foobar directory hierarchy:
 
            $ rm -rf foobar
@@ -264,7 +264,7 @@ EXAMPLES
            $ rm ./-f
            $ unlink -f
 
-COMPATIBILITY
+<h3>COMPATIBILITY</h3>
      The rm utility differs from historical implementations in that the -f option only masks
      attempts to remove non-existent files instead of masking a large variety of errors.  The -v
      option is non-standard and its use in scripts is not recommended.
@@ -274,29 +274,29 @@ COMPATIBILITY
 
      The -P option does not have any effect as of FreeBSD 13 and may be removed in the future.
 
-SEE ALSO
+<h3>SEE ALSO</h3>
      chflags(1), rmdir(1), undelete(2), unlink(2), fts(3), getopt(3), symlink(7)
 
-STANDARDS
+<h3>STANDARDS</h3>
      The rm command conforms to.
 
      The simplified unlink command conforms to Version 2 of the Single UNIX Specification
      (“SUSv2”).
 
-HISTORY
+<h3>HISTORY</h3>
      A rm command appeared in Version 1 AT&T UNIX.
 
-BUGS
+<h3>BUGS</h3>
      The -P option assumes that the underlying file system is a fixed-block file system.  In
      addition, only regular files are overwritten, other types of files are not.`,
-  touch: `NAME
+  touch: `<h3>NAME</h3>
      touch – change file access and modification times
 
-SYNOPSIS
+<h3>SYNOPSIS</h3>
      touch [-A [-][[hh]mm]SS] [-achm] [-r file] [-t [[CC]YY]MMDDhhmm[.SS]]
            [-d YYYY-MM-DDThh:mm:SS[.frac][tz]] file ...
 
-DESCRIPTION
+<h3>DESCRIPTION</h3>
      The touch utility sets the modification and access times of files.  If any file does not
      exist, it is created with default permissions.
 
@@ -370,10 +370,10 @@ DESCRIPTION
              If the “CC” and “YY” letter pairs are not specified, the values default to the
              current year.  If the “SS” letter pair is not specified, the value defaults to 0.
 
-EXIT STATUS
+<h3>EXIT STATUS</h3>
      The touch utility exits 0 on success, and >0 if an error occurs.
 
-COMPATIBILITY
+<h3>COMPATIBILITY</h3>
      The obsolescent form of touch, where a time format is specified as the first argument, is
      supported.  When no -r or -t option is specified, there are at least two arguments, and the
      first argument is a string of digits either eight or ten characters in length, the first
@@ -383,22 +383,22 @@ COMPATIBILITY
      -t option.  If the “YY” letter pair is in the range 39 to 99, the year is set to 1939 to
      1999, otherwise, the year is set in the 21st century.
 
-SEE ALSO
+<h3>SEE ALSO</h3>
      utimensat(2)
 
-STANDARDS
+<h3>STANDARDS</h3>
      The touch utility is expected to be a superset of the IEEE Std 1003.2 (“POSIX.2”)
      specification.
 
-HISTORY
+<h3>HISTORY</h3>
      A touch utility appeared in Version 7 AT&T UNIX.`,
-  ls: `NAME
+  ls: `<h3>NAME</h3>
      ls – list directory contents
 
-SYNOPSIS
+<h3>SYNOPSIS</h3>
      ls [-@ABCFGHILOPRSTUWabcdefghiklmnopqrstuvwxy1%,] [--color=when] [-D format] [file ...]
 
-DESCRIPTION
+<h3>DESCRIPTION</h3>
      For each operand that names a file of a type other than directory, ls displays its name as
      well as any requested, associated information.  For each operand that names a file of type
      directory, ls displays the names of files contained within that directory, as well as any
@@ -688,7 +688,7 @@ DESCRIPTION
      does not.  The ls utility does not show the actual ACL unless the -e option is used in
      conjunction with the -l option.
 
-ENVIRONMENT
+<h3>ENVIRONMENT</h3>
      The following environment variables affect the execution of ls:
 
      BLOCKSIZE           If this is set, its value, rounded up to 512 or down to a multiple of
@@ -783,10 +783,10 @@ ENVIRONMENT
      TZ                  The timezone to use when displaying dates.  See environ(7) for more
                          information.
 
-EXIT STATUS
+<h3>EXIT STATUS</h3>
      The ls utility exits 0 on success, and >0 if an error occurs.
 
-EXAMPLES
+<h3>EXAMPLES</h3>
      List the contents of the current working directory in long format:
 
            $ ls -l
@@ -802,11 +802,11 @@ EXAMPLES
 
            $ ls -lt /var/log
            
-COMPATIBILITY
+<h3>COMPATIBILITY</h3>
      The group field is now automatically included in the long listing for files in order to be
      compatible with the IEEE Std 1003.2 (“POSIX.2”) specification.
 
-LEGACY DESCRIPTION
+<h3>LEGACY DESCRIPTION</h3>
      In legacy mode, the -f option does not turn on the -a option and the -g, -n, and -o options
      do not turn on the -l option.
 
@@ -819,21 +819,21 @@ LEGACY DESCRIPTION
 
      For more information about legacy mode, see compat(5).
 
-SEE ALSO
+<h3>SEE ALSO</h3>
      chflags(1), chmod(1), sort(1), xterm(1), localeconv(3), strftime(3), strmode(3), compat(5),
      termcap(5), sticky(7), symlink(7)
 
-STANDARDS
+<h3>STANDARDS</h3>
      With the exception of options -g, -n and -o, the ls utility conforms to IEEE Std 1003.1-2001
      (“POSIX.1”) and IEEE Std 1003.1-2008 (“POSIX.1”).  The options -B, -D, -G, -I, -T, -U, -W,
      -Z, -b, -h, -w, -y and -, are non-standard extensions.
 
      The ACL support is compatible with IEEE Std 1003.2c (“POSIX.2c”) Draft 17 (withdrawn).
 
-HISTORY
+<h3>HISTORY</h3>
      An ls command appeared in Version 1 AT&T UNIX.
 
-BUGS
+<h3>BUGS</h3>
      To maintain backward compatibility, the relationships between the many options are quite
      complex.
 
@@ -843,16 +843,16 @@ BUGS
 
      IEEE Std 1003.2 (“POSIX.2”) mandates opposite sort orders for files with the same timestamp
      when sorting with the -t option.`,
-  cp: `NAME
+  cp: `<h3>NAME</h3>
      cp – copy files
 
-SYNOPSIS
+<h3>SYNOPSIS</h3>
      cp [-R [-H | -L | -P]] [-f | -i | -n] [-aclNpSsvXx] source_file target_file
      cp [-R [-H | -L | -P]] [-f | -i | -n] [-aclNpSsvXx] source_file ... target_directory
      cp [-f | -i | -n] [-aclNPpSsvXx] source_file target_file
      cp [-f | -i | -n] [-aclNPpSsvXx] source_file ... target_directory
 
-DESCRIPTION
+<h3>DESCRIPTION</h3>
      In the first synopsis form, the cp utility copies the contents of the source_file to the
      target_file.  In the second synopsis form, the contents of each named source_file is copied
      to the destination target_directory.  The names of the files themselves are not changed.  If
@@ -1017,14 +1017,14 @@ DESCRIPTION
      target_file in place.  cp specifically avoids cleaning up the output file in error cases to
      avoid further data loss in cases where the source may not be recoverable.  Alternatives, like
      install(1), may be preferred if stronger guarantees about the target_file are required.`,
-  mv: `NAME
+  mv: `<h3>NAME</h3>
      mv – move files
 
-SYNOPSIS
+<h3>SYNOPSIS</h3>
      mv [-f | -i | -n] [-hv] source target
      mv [-f | -i | -n] [-v] source ... directory
 
-DESCRIPTION
+<h3>DESCRIPTION</h3>
      In its first form, the mv utility renames the file named by the source operand to the
      destination path named by the target operand.  This form is assumed when the last operand
      does not name an already existing directory.
@@ -1066,7 +1066,7 @@ DESCRIPTION
            cp -pRP source_file destination && \
            rm -rf source_file
 
-EXIT STATUS
+<h3>EXIT STATUS</h3>
      The mv utility exits 0 on success, and >0 if an error occurs.
 
      The command "mv dir/afile dir" will abort with an error message.
@@ -1077,27 +1077,27 @@ LEGACY DIAGNOSTICS
 
      For more information about legacy mode, see compat(5).
 
-EXAMPLES
+<h3>EXAMPLES</h3>
      Rename file foo to bar, overwriting bar if it already exists:
 
            $ mv -f foo bar
 
-COMPATIBILITY
+<h3>COMPATIBILITY</h3>
      The -h, -n, and -v options are non-standard and their use in scripts is not recommended.
 
      The mv utility now supports HFS+ Finder and Extended Attributes and resource forks.  The mv
      utility will no longer strip resource forks off of HFS files.  For an alternative method,
      refer to cp(1).
 
-SEE ALSO
+<h3>SEE ALSO</h3>
      cp(1), rm(1), symlink(7)
 
-STANDARDS
+<h3>STANDARDS</h3>
      The mv utility is expected to be IEEE Std 1003.2 (“POSIX.2”) compatible.
 
-HISTORY
+<h3>HISTORY</h3>
      A mv command appeared in Version 1 AT&T UNIX.`,
-  history: `NAME
+  history: `<h3>NAME</h3>
      builtin, !, %, ., :, @, [, {, }, alias, alloc, bg, bind, bindkey, break, breaksw, builtins,
      case, cd, chdir, command, complete, continue, default, dirs, do, done, echo, echotc, elif,
      else, end, endif, endsw, esac, eval, exec, exit, export, false, fc, fg, filetest, fi, for,
@@ -1108,10 +1108,10 @@ HISTORY
      umask, unalias, uncomplete, unhash, unlimit, unset, unsetenv, until, wait, where, which,
      while – shell built-in commands
 
-SYNOPSIS
+<h3>SYNOPSIS</h3>
      See the built-in command description in the appropriate shell manual page.
 
-DESCRIPTION
+<h3>DESCRIPTION</h3>
      Shell builtin commands are commands that can be executed within the running shell's process.
      Note that, in the case of csh(1) builtin commands, the command is executed in a subshell if
      it occurs as any component of a pipeline except the last.
@@ -1244,22 +1244,22 @@ DESCRIPTION
            where             No              Yes          No
            which             Yes             Yes          No
            while             No              Yes          Yes
-SEE ALSO
+<h3>SEE ALSO</h3>
      csh(1), dash(1), echo(1), false(1), info(1), kill(1), login(1), nice(1), nohup(1),
      printenv(1), printf(1), pwd(1), sh(1), test(1), time(1), true(1), which(1), zsh(1)
 
-HISTORY
+<h3>HISTORY</h3>
      The builtin manual page first appeared in FreeBSD 3.4.
 
-AUTHORS
+<h3>AUTHORS</h3>
      This manual page was written by Sheldon Hearn <sheldonh@FreeBSD.org>.`,
-  cat: `NAME
+  cat: `<h3>NAME</h3>
      cat – concatenate and print files
 
-SYNOPSIS
+<h3>SYNOPSIS</h3>
      cat [-belnstuv] [file ...]
 
-DESCRIPTION
+<h3>DESCRIPTION</h3>
      The cat utility reads files sequentially, writing them to the standard output.  The file
      operands are processed in command-line order.  If file is a single dash (‘-’) or absent, cat
      reads from the standard input.  If file is a UNIX domain socket, cat connects to it and then
@@ -1291,10 +1291,10 @@ DESCRIPTION
              characters (with the high bit set) are printed as ‘M-’ (for meta) followed by the
              character for the low 7 bits.
 
-EXIT STATUS
+<h3>EXIT STATUS</h3>
      The cat utility exits 0 on success, and >0 if an error occurs.
 
-EXAMPLES
+<h3>EXAMPLES</h3>
      The command:
 
            cat file1
@@ -1320,37 +1320,37 @@ EXAMPLES
      since the entire contents of the file would have already been read and printed by cat when it
      encountered the first ‘-’ operand.
 
-SEE ALSO
+<h3>SEE ALSO</h3>
      head(1), more(1), pr(1), sh(1), tail(1), vis(1), zcat(1), fcntl(2), setbuf(3)
 
      Rob Pike, “UNIX Style, or cat -v Considered Harmful”, USENIX Summer Conference Proceedings,
      1983.
 
-STANDARDS
+<h3>STANDARDS</h3>
      The cat utility is compliant with the IEEE Std 1003.2-1992 (“POSIX.2”) specification.
 
      The flags [-belnstv] are extensions to the specification.
 
-HISTORY
+<h3>HISTORY</h3>
      A cat utility appeared in Version 1 AT&T UNIX.  Dennis Ritchie designed and wrote the first
      man page.  It appears to have been for cat.
 
-BUGS
+<h3>BUGS</h3>
      Because of the shell language mechanism used to perform output redirection, the command “cat
      file1 file2 > file1” will cause the original data in file1 to be destroyed!
 
      The cat utility does not recognize multibyte characters when the -t or -v option is in
      effect.`,
-  grep: `NAME
+  grep: `<h3>NAME</h3>
      grep, egrep, fgrep, rgrep, bzgrep, bzegrep, bzfgrep, zgrep, zegrep, zfgrep – file pattern
      searcher
 
-SYNOPSIS
+<h3>SYNOPSIS</h3>
      grep [-abcdDEFGHhIiJLlMmnOopqRSsUVvwXxZz] [-A num] [-B num] [-C num] [-e pattern] [-f file]
           [--binary-files=value] [--color[=when]] [--colour[=when]] [--context=num] [--label]
           [--line-buffered] [--null] [pattern] [file ...]
 
-DESCRIPTION
+<h3>DESCRIPTION</h3>
      The grep utility searches any given input files, selecting lines that match one or more
      patterns.  By default, a pattern matches an input line if the regular expression (RE) in the
      pattern matches the input line without its trailing newline.  An empty expression matches
@@ -1569,19 +1569,19 @@ DESCRIPTION
      used in place of a file name, anywhere that a file name is accepted, to read from standard
      input.  This includes both -f and file arguments.
 
-ENVIRONMENT
+<h3>ENVIRONMENT</h3>
      GREP_OPTIONS  May be used to specify default options that will be placed at the beginning of
                    the argument list.  Backslash-escaping is not supported, unlike the behavior in
                    GNU grep.
 
-EXIT STATUS
+<h3>EXIT STATUS</h3>
      The grep utility exits with one of the following values:
 
      0     One or more lines were selected.
      1     No lines were selected.
      >1    An error occurred.
 
-EXAMPLES
+<h3>EXAMPLES</h3>
      -   Find all occurrences of the pattern ‘patricia’ in a file:
 
                $ grep 'patricia' myfile
@@ -1644,10 +1644,10 @@ EXAMPLES
 
                $ grep -q foo myfile && echo File matches
 
-SEE ALSO
+<h3>SEE ALSO</h3>
      bzip2(1), compress(1), ed(1), ex(1), gzip(1), sed(1), xz(1), zgrep(1), re_format(7)
 
-STANDARDS
+<h3>STANDARDS</h3>
      The grep utility is compliant with the IEEE Std 1003.1-2008 (“POSIX.1”) specification.
 
      The flags [-AaBbCDdGHhILmopRSUVw] are extensions to that specification, and the behaviour of
@@ -1658,17 +1658,17 @@ STANDARDS
      Historic versions of the grep utility also supported the flags [-ruy].  This implementation
      supports those options; however, their use is strongly discouraged.
 
-HISTORY
+<h3>HISTORY</h3>
      The grep command first appeared in Version 6 AT&T UNIX.
 
-BUGS
+<h3>BUGS</h3>
      The grep utility does not normalize Unicode input, so a pattern containing composed
      characters will not match decomposed input, and vice versa.
 `,
-  man: `NAME
+  man: `<h3>NAME</h3>
      man, apropos, whatis – display online manual documentation pages
 
-SYNOPSIS
+<h3>SYNOPSIS</h3>
      man [-adho] [-t | -w] [-M manpath] [-P pager] [-S mansect] [-m arch[:machine]] [-p [eprtv]]
          [mansect] page ...
 
@@ -1678,7 +1678,7 @@ SYNOPSIS
      man -k [-d] [-M manpath] [-P pager] [-S mansect] keyword ...
      apropos [-d] [-s mansect] keyword ...
 
-DESCRIPTION
+<h3>DESCRIPTION</h3>
      The man utility finds and displays online manual documentation pages.  If mansect is
      provided, man restricts the search to the specific section of the manual.
 
@@ -1758,7 +1758,7 @@ DESCRIPTION
      and whatis implementation provided.  The MANPATH, MANSECT, and MANPAGER environment variables
      will similarly be honored.
 
-IMPLEMENTATION NOTES
+<h3>IMPLEMENTATION NOTES</h3>
    Locale Specific Searches
      The man utility supports manual pages in different locales.  The search behavior is dictated
      by the first of three environment variables with a nonempty string: LC_ALL, LC_CTYPE, or
@@ -1780,7 +1780,7 @@ IMPLEMENTATION NOTES
      The man utility also supports displaying a specific manual page if passed a path to the file
      as long as it contains a ‘/’ character.
 
-ENVIRONMENT
+<h3>ENVIRONMENT</h3>
 The following environment variables affect the execution of man:
 
      LC_ALL, LC_CTYPE, LANG
@@ -1821,16 +1821,16 @@ The following environment variables affect the execution of man:
                      If unset, and color support is disabled, then PAGER is used.  If that has no
                      value either, “less -s” is used.
 
-FILES
+<h3>FILES</h3>
      /etc/man.conf
              System configuration file.
      /usr/local/etc/man.d/*.conf
              Local configuration files.
 
-EXIT STATUS
+<h3>EXIT STATUS</h3>
      The man utility exits 0 on success, and >0 if an error occurs.
 
-EXAMPLES
+<h3>EXAMPLES</h3>
      Show the manual page for stat(2):
            $ man 2 stat
 
@@ -1850,13 +1850,13 @@ EXAMPLES
 
            $ man -w ls
 
-SEE ALSO
+<h3>SEE ALSO</h3>
      apropos(1), intro(1), mandoc(1), manpath(1), whatis(1), intro(2), intro(3), intro(3lua),
      intro(4), intro(5), man.conf(5), intro(6), intro(7), mdoc(7), intro(8), intro(9)`,
-  vi: `NAME
+  vi: `<h3>NAME</h3>
        vim - Vi IMproved, a programmer's text editor
 
-SYNOPSIS
+<h3>SYNOPSIS</h3>
        vim [options] [file ..]
        vim [options] -
        vim [options] -t tag
@@ -1867,7 +1867,7 @@ SYNOPSIS
        gvim gview evim eview
        rvim rview rgvim rgview
 
-DESCRIPTION
+<h3>DESCRIPTION</h3>
        Vim is a text editor that is upwards compatible to Vi.  It can be used to edit all kinds of
        plain text.  It is especially useful for editing programs.
 
@@ -1935,7 +1935,7 @@ DESCRIPTION
                  Like the above, but with restrictions.  It will not be possible to start shell
                  commands, or suspend Vim.  Can also be done with the "-Z" argument.
 
-OPTIONS
+<h3>OPTIONS</h3>
        The options may be given in any order, before or after filenames.  Options without an
        argument can be combined after a single dash.
 
@@ -2192,14 +2192,14 @@ OPTIONS
                    Win32 GUI only: Make gVim try to use the window {id} as a parent, so that it
                    runs inside that window.
 
-ON-LINE HELP
+<h3>ON-LINE HELP</h3>
        Type ":help" in Vim to get started.  Type ":help subject" to get help on a specific
        subject.  For example: ":help ZZ" to get help for the "ZZ" command.  Use <Tab> and CTRL-D
        to complete subjects (":help cmdline-completion").  Tags are present to jump from one place
        to another (sort of hypertext links, see ":help").  All documentation files can be viewed
        in this way, for example ":help syntax.txt".
        
-FILES
+<h3>FILES</h3>
        /usr/local/share/vim/vim??/doc/*.txt
                       The Vim documentation files.  Use ":help doc-file-list" to get the complete
                       list.
@@ -2248,16 +2248,16 @@ FILES
        For recent info read the VIM home page:
        <URL:http://www.vim.org/>
 
-SEE ALSO
+<h3>SEE ALSO</h3>
        vimtutor(1)
 
-AUTHOR
+<h3>AUTHOR</h3>
        Most of Vim was made by Bram Moolenaar, with a lot of help from others.  See ":help
        credits" in Vim.
        Vim is based on Stevie, worked on by: Tim Thompson, Tony Andrews and G.R. (Fred) Walter.
        Although hardly any of the original code remains.
 
-BUGS
+<h3>BUGS</h3>
        Probably.  See ":help todo" for a list of known problems.
 
        Note that a number of things that may be regarded as bugs by some, are in fact caused by a
@@ -2265,13 +2265,13 @@ BUGS
        "because Vi does it differently", you should take a closer look at the vi_diff.txt file (or
        type :help vi_diff.txt when in Vim).  Also have a look at the 'compatible' and 'cpoptions'
        options.`,
-  ls: `NAME
+  ls: `<h3>NAME</h3>
      ls – list directory contents
 
-SYNOPSIS
+<h3>SYNOPSIS</h3>
      ls [-@ABCFGHILOPRSTUWabcdefghiklmnopqrstuvwxy1%,] [--color=when] [-D format] [file ...]
 
-DESCRIPTION
+<h3>DESCRIPTION</h3>
      For each operand that names a file of a type other than directory, ls displays its name as
      well as any requested, associated information.  For each operand that names a file of type
      directory, ls displays the names of files contained within that directory, as well as any
@@ -2560,7 +2560,7 @@ DESCRIPTION
      does not.  The ls utility does not show the actual ACL unless the -e option is used in
      conjunction with the -l option.
 
-ENVIRONMENT
+<h3>ENVIRONMENT</h3>
      The following environment variables affect the execution of ls:
 
      BLOCKSIZE           If this is set, its value, rounded up to 512 or down to a multiple of
@@ -2656,10 +2656,10 @@ ENVIRONMENT
      TZ                  The timezone to use when displaying dates.  See environ(7) for more
                          information.
 
-EXIT STATUS
+<h3>EXIT STATUS</h3>
      The ls utility exits 0 on success, and >0 if an error occurs.
 
-EXAMPLES
+<h3>EXAMPLES</h3>
      List the contents of the current working directory in long format:
 
            $ ls -l
@@ -2675,11 +2675,11 @@ EXAMPLES
 
            $ ls -lt /var/log
 
-COMPATIBILITY
+<h3>COMPATIBILITY</h3>
      The group field is now automatically included in the long listing for files in order to be
      compatible with the IEEE Std 1003.2 (“POSIX.2”) specification.
 
-LEGACY DESCRIPTION
+<h3>LEGACY DESCRIPTION</h3>
      In legacy mode, the -f option does not turn on the -a option and the -g, -n, and -o options
      do not turn on the -l option.
 
@@ -2692,21 +2692,21 @@ LEGACY DESCRIPTION
 
      For more information about legacy mode, see compat(5).
 
-SEE ALSO
+<h3>SEE ALSO</h3>
      chflags(1), chmod(1), sort(1), xterm(1), localeconv(3), strftime(3), strmode(3), compat(5),
      termcap(5), sticky(7), symlink(7)
      
-STANDARDS
+<h3>STANDARDS</h3>
      With the exception of options -g, -n and -o, the ls utility conforms to IEEE Std 1003.1-2001
      (“POSIX.1”) and IEEE Std 1003.1-2008 (“POSIX.1”).  The options -B, -D, -G, -I, -T, -U, -W,
      -Z, -b, -h, -w, -y and -, are non-standard extensions.
 
      The ACL support is compatible with IEEE Std 1003.2c (“POSIX.2c”) Draft 17 (withdrawn).
 
-HISTORY
+<h3>HISTORY</h3>
      An ls command appeared in Version 1 AT&T UNIX.
 
-BUGS
+<h3>BUGS</h3>
      To maintain backward compatibility, the relationships between the many options are quite
      complex.
 
@@ -2716,7 +2716,7 @@ BUGS
 
      IEEE Std 1003.2 (“POSIX.2”) mandates opposite sort orders for files with the same timestamp
      when sorting with the -t option.`,
-  cd: `NAME
+  cd: `<h3>NAME</h3>
      builtin, !, %, ., :, @, [, {, }, alias, alloc, bg, bind, bindkey, break, breaksw, builtins,
      case, cd, chdir, command, complete, continue, default, dirs, do, done, echo, echotc, elif,
      else, end, endif, endsw, esac, eval, exec, exit, export, false, fc, fg, filetest, fi, for,
@@ -2727,10 +2727,10 @@ BUGS
      umask, unalias, uncomplete, unhash, unlimit, unset, unsetenv, until, wait, where, which,
      while – shell built-in commands
 
-SYNOPSIS
+<h3>SYNOPSIS</h3>
      See the built-in command description in the appropriate shell manual page.
 
-DESCRIPTION
+<h3>DESCRIPTION</h3>
      Shell builtin commands are commands that can be executed within the running shell's process.
      Note that, in the case of csh(1) builtin commands, the command is executed in a subshell if
      it occurs as any component of a pipeline except the last.
@@ -2865,13 +2865,13 @@ DESCRIPTION
            which             Yes             Yes          No
            while             No              Yes          Yes
 
-SEE ALSO
+<h3>SEE ALSO</h3>
      csh(1), dash(1), echo(1), false(1), info(1), kill(1), login(1), nice(1), nohup(1),
      printenv(1), printf(1), pwd(1), sh(1), test(1), time(1), true(1), which(1), zsh(1)
 
-HISTORY
+<h3>HISTORY</h3>
      The builtin manual page first appeared in FreeBSD 3.4.
      
-AUTHORS
+<h3>AUTHORS</h3>
      This manual page was written by Sheldon Hearn <sheldonh@FreeBSD.org>.`,
 };
