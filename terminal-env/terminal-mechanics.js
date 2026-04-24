@@ -74,25 +74,13 @@ function goingBackDir() {
 }
 
 function listingDirs() {
-  // ls
-  // ls -a
+  // ls (direcories)
+  // ls -a (directories and files)
+  // ls -la (lists all files, including hidden ones,)
   // currentFilePath
   let fileDirection = currentFilePath.split("/");
   console.log("this is the current listing: " + fileDirection);
-  // if (fileDirection.length == 1) {
-  //   console.log("just one file");
-  //   for (let i = 1; i < fileDirection.length; i += 1) {
-  //     commentsDiv.innerHTML += `<div class='white'>${fileDirection[i]}</div>`;
-  //   }
-  // } else {
-  //   /**
-  //   jennylauren@Mac / % cd usr
-  //   jennylauren@Mac /usr % ls
-  //   bin		libexec		sbin		standalone	X11R6
-  //   lib		local		share		X11
-  //   jennylauren@Mac /usr % cd br
-  //   cd: no such file or directory: br
-  //   */
+
   console.log("more than one file");
   let findingDir = false;
   let currentFile = 1;
