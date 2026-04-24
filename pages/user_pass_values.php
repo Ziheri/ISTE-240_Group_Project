@@ -32,34 +32,7 @@
         die("Execute failed: " . $start->error);
     }
 
-    echo "Success!";
     $start->close();
-    
-    // if($_POST['usernames'] == $query[0]){
-    //     echo "<p> usernames has already been claimed</p>";
-    // } else {
-    //     if($mysqli && !empty($_POST['usernames']) && !empty($_POST['passwords'])){
-    //         $start = $mysqli->prepare('INSERT INTO 240UnixGroupProject (User, Pass) VALUES (?, ?)');
-    //         $start->bind_param("ss", $_POST['usernames'], $_POST['passwords']);
-    //         $start->execute();
-    //         $start->close();
-    //     }
-    // }
+    header('Location: /pages/login.php');
+    exit();
 ?>
-
-<script>
-    // function updateDisplay() {
-    // const usernamess = document.POSTElementById('usernames').value;
-    // const password = document.POSTElementById('password').value;
-
-    // for (let i = 0; i < "databases rows amount".length; i++){
-    //     if ((usernames && password) == "id, Database usernames && id, database password"){
-    //         "does something id yet"
-    //     }
-    //     else{
-    //       "invalid, password or usernames is unavailable."
-    //     }
-    // }
-
-// }
-</script>

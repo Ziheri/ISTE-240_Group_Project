@@ -20,6 +20,24 @@ document.getElementById("quiz_submit").addEventListener("click", function () {
         }
     }
 
-    document.getElementById("quiz_result").textContent =
-        `You scored ${score} out of ${Object.keys(answers).length}!`;
+    const total = Object.keys(answers).length;
+    const resultEl = document.getElementById("quiz_result");
+    resultEl.textContent = `You scored ${score} out of ${total}!`;
+
+    // POST score to server — only saves if user is logged in
+    const formData = new FormData();
+    formData.append('score', score);
+
+    fetch('/pages/save_score.php', { method: 'POST', body: formData })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                resultEl.textContent += ' Score saved to scoreboard!';
+            } else if (data.message === 'Not logged in') {
+                resultEl.textContent += ' Log in to save your score to the scoreboard.';
+            }
+        })
+        .catch(() => {
+            // Network error — score display still works
+        });
 });

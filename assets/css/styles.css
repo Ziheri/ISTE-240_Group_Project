@@ -228,6 +228,13 @@ html {
     color: #FFF200;
     border-color: #FFF200;
 }
+
+.login_error {
+    color: #ED1C24;
+    font-size: 1.4rem;
+    text-align: center;
+    margin: 0.5rem 0;
+}
 /**End Login/Signup Page CSS*/
 
 /**Start Scoreboard Page CSS*/
