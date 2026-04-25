@@ -11,7 +11,7 @@
     <section class="grid_container">
     <img id="mobile_nav" src="../assets/images/Nav Bars.png" alt="Mobile Navigation Button">
     <a href="index.php">
-        <img id="title_pc" src="../assets/images/Long Title.png" alt="Intro to UNIX title card">
+        <img id="title_pc" src="../images/Long Title.png" alt="Intro to UNIX title card">
         <img id="title_mobile" src="../assets/images/Logo.png" alt="Intro to UNIX title card">
     </a>
     <nav>
