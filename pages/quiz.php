@@ -1,32 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Intro To UNIX - Quiz</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
-</head>
-<body>
-    <!-- Header -->
-    <section class="grid_container">
-        <img id="mobile_nav" src="style_content/Nav Bars.png" alt="Mobile Navigation Button">
-        <a href="index.html">
-            <img id="title_pc" src="style_content/(Updated-Long) Group-Project_Logo.png" alt="Into to UNIX title card">
-            <img id="title_mobile" src="style_content/(Updated) Group-Project_Logo.png" alt="Into to UNIX title card">
-        </a>
-        <nav>
-            <ul class="navbar">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="history.html">History</a></li>
-                <li><a href="#">Tutorial</a></li>
-                <li><a href="quiz.html">Quiz</a></li>
-            </ul>
-            <ul class="navbar-2">
-                <li><a href="#">Login</a></li>
-            </ul>
-        </nav>
-    </section>
-  
+<?php
+    include "../assets/files/nav.php";
+?>
 
     <div id="quiz_container">
         <h1>UNIX Quiz</h1>
@@ -129,6 +103,6 @@
         <p id="quiz_result"></p>
     </div>
 
-    <script src="assets/js/quiz.js"></script>
+    <script src="../assets/js/quiz.js"></script>
 </body>
 </html>
