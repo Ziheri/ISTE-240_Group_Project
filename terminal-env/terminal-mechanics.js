@@ -1,4 +1,5 @@
 import { generalCommnads } from "./allManInfo.js";
+import { getAllDirectories } from "./helperfunc.js";
 // VARIABLES
 let pastCommands = [];
 let timesPressedUp = 0;
@@ -85,6 +86,7 @@ function listingDirs() {
   let findingDir = false;
   let currentFile = 1;
   let level = generalFileSystem;
+  let chosenDirectory = "";
   if (fileDirection.length == 1) {
     Object.keys(generalFileSystem).forEach((key) => {
       commentsDiv.innerHTML += `<div class='white'>${key}</div>`;
@@ -95,6 +97,7 @@ function listingDirs() {
       if (Object.keys(level).includes(direction)) {
         let temp = level;
         level = temp[direction];
+        chosenDirectory = level;
         currentFile += 1;
       }
       if (currentFile > fileDirection.length - 1) {
@@ -106,6 +109,7 @@ function listingDirs() {
       }
     }
   }
+  return chosenDirectory;
 }
 
 function whoAmIFunct() {
@@ -113,12 +117,59 @@ function whoAmIFunct() {
 }
 
 function changeDir() {
+  let directory = document.querySelector(".directory");
+  // directory.innerHTML += "/themes";
+
   // cd
   // "cd ..": goingBackDir,
   //"cd ../": goingBackDir,
   // "cd ~": homeFunct,
   //"cd /": cdSlashFunction,
-  commentsDiv.innerHTML += "<div class='white'>change the directory</div>";
+
+  // desiredUserCommand
+  // currentFilePath = "/usr/unix";
+
+  console.log("what is teh heck cd: " + desiredUserCommand);
+
+  if (desiredUserCommand.includes("..") === true) {
+    let fileDirection = currentFilePath.split("/");
+    fileDirection.pop();
+    let newFilePath = fileDirection.join("/");
+    currentFilePath = newFilePath.substring(0, newFilePath.length);
+    let directoryStuff = currentFilePath.split("/");
+    directory.innerHTML += `${directoryStuff[directoryStuff.length - 1]}`;
+  }
+  if (desiredUserCommand.includes("../") === true) {
+    let currentListing = currentFilePath.split("/");
+    let goingbackCount = desiredUserCommand.split("/");
+    for (let i = 0; i < goingbackCount.length; i += 1) {
+      let currentCommand = goingbackCount[i];
+      if (goingbackCount === "..") {
+        currentListing.pop();
+      } else {
+        currentFilePath += `/${goingbackCount[i]}`;
+      }
+    }
+    currentFilePath = currentListing.join("/");
+  }
+  if (desiredUserCommand.includes("~") === true || desiredUserCommand === "") {
+    currentFilePath = "/usr/unix";
+    directory.innerHTML += "~";
+  }
+  if (String(desiredUserCommand).startsWith("/") === true) {
+    if (desiredUserCommand.length > 1) {
+      // use the loop
+      let fileDirection = currentFilePath.split("/");
+      let newDirecotry = fileDirection.pop();
+      directory.innerHTML += `${newDirecotry}`;
+    } else {
+      currentFilePath = "/";
+      directory.innerHTML += "/";
+    }
+  }
+  // else {
+  //   directory.innerHTML += `${desiredUserCommand}`;
+  // }
 }
 
 function pwdFunct() {
@@ -277,9 +328,11 @@ function addComment() {
   // let directory = document.querySelector(".directory");
 
   if (userCommand === "") {
-    commentsDiv.innerHTML += `<label class="green"><span class="yellow">unix</span>@user:~$ <span class="white">${userCommand}</span> </label>`;
+    commentsDiv.innerHTML += `<label class="green"><span class="yellow">unix</span>@user:<span
+                        class="directory red"></span>$ <span class="white">${userCommand}</span> </label>`;
   }
-  newComment.innerHTML = `<label class="green"><span class="yellow">unix</span>@user:~$ <span class="white">${userCommand}</span> </label>`;
+  newComment.innerHTML = `<label class="green"><span class="yellow">unix</span>@user:<span
+                        class="directory red"></span>$ <span class="white">${userCommand}</span> </label>`;
   commentsDiv.appendChild(newComment);
   // Output 232: whoami,clear,cd ..,cd ../,ls,cd ,pwd,cd ~,echo,mkdir ,rmdir ,rm ,touch ,ls -a ,cp ,mv ,history,cat ,grep , | ,man ,cd /,vi
   console.log("What is in here: " + allCmds);
