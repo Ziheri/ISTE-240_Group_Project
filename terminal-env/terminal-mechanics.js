@@ -129,6 +129,7 @@ function changeDir() {
   // desiredUserCommand
   // currentFilePath = "/usr/unix";
 
+  directory.innerHTML += "";
   console.log("what is teh heck cd: " + desiredUserCommand);
 
   if (desiredUserCommand.includes("..") === true) {
@@ -137,9 +138,10 @@ function changeDir() {
     let newFilePath = fileDirection.join("/");
     currentFilePath = newFilePath.substring(0, newFilePath.length);
     let directoryStuff = currentFilePath.split("/");
+    document.getElementById("cdResult").innerHTML +=
+      `${directoryStuff[directoryStuff.length - 1]}`; //cdResult;
     directory.innerHTML += `${directoryStuff[directoryStuff.length - 1]}`;
-  }
-  if (desiredUserCommand.includes("../") === true) {
+  } else if (desiredUserCommand.includes("../") === true) {
     let currentListing = currentFilePath.split("/");
     let goingbackCount = desiredUserCommand.split("/");
     for (let i = 0; i < goingbackCount.length; i += 1) {
@@ -151,12 +153,13 @@ function changeDir() {
       }
     }
     currentFilePath = currentListing.join("/");
-  }
-  if (desiredUserCommand.includes("~") === true || desiredUserCommand === "") {
+  } else if (
+    desiredUserCommand.includes("~") === true ||
+    desiredUserCommand === ""
+  ) {
     currentFilePath = "/usr/unix";
     directory.innerHTML += "~";
-  }
-  if (String(desiredUserCommand).startsWith("/") === true) {
+  } else if (String(desiredUserCommand).startsWith("/") === true) {
     if (desiredUserCommand.length > 1) {
       // use the loop
 
@@ -167,8 +170,7 @@ function changeDir() {
       currentFilePath = "/";
       directory.innerHTML += "/";
     }
-  }
-  if (/^[A-Za-z]+$/.test(desiredUserCommand[0]) === true) {
+  } else if (/^[A-Za-z]+$/.test(desiredUserCommand[0]) === true) {
     if (desiredUserCommand.includes("/") === true) {
       let givenPath = desiredUserCommand.split("/");
       let fileDirection = currentFilePath.split("/");
@@ -185,6 +187,9 @@ function changeDir() {
       currentFilePath += "/" + desiredUserCommand;
       directory.innerHTML += `${desiredUserCommand}`;
     }
+  } else {
+    currentFilePath = "/usr/unix";
+    directory.innerHTML += "~";
   }
 }
 
