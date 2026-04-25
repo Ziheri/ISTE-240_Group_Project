@@ -6,6 +6,22 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: "Barlow";
+    src: url('Barlow-Medium.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Workbench";
+    src: url('Workbench-Regular-VariableFont_BLED,SCAN.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+    font-display: swap;
+}
+
 body {
     background: black;
     font-family: "Handjet", Arial, Helvetica, sans-serif;
@@ -13,6 +29,47 @@ body {
     padding: 20px;
 }
 
+h1 {
+    /**margin-top: 32rem;**/
+    margin-left: 3rem;
+    color: #009444;
+    font-size: 4rem;
+}
+
+h2, h3 {
+    color: #009444;
+    font-family: "Workbench", Arial, Helvetica, sans-serif;
+    font-size: 3rem;
+}
+
+p{
+    color: #FFF;
+    font-family: "Barlow", Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+}
+
+.tracks {
+    padding: 2rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    border-radius: 2rem;
+    font-size: 2rem;
+    justify-self: center;
+    color: #ED1C24;
+    background: lightgray;
+}
+
+#tracks_grid {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-around;
+}
+
+.tracks:hover {
+    color: #FFF200;
+}
+
+/**Start NavBar**/
 .grid_container{
     display: grid;
     grid-template-areas: 
@@ -51,7 +108,7 @@ nav {
     gap: 1.5rem;
     padding: 1rem 2rem;
     border-radius: 2rem;
-    font-size: 5rem;
+    font-size: 4rem;
     background: lightgray;
     margin: 0;
 }
@@ -97,43 +154,7 @@ a {
     color: #006700;
     font-size: 50px;
 }
-
-
-h1 {
-    margin-top: 32rem;
-    margin-left: 3rem;
-    color: #009444;
-    font-size: 4rem;
-}
-
-h2, h3 {
-    color: #009444;
-}
-
-p{
-    color: #FFF
-}
-
-.tracks {
-    padding: 2rem;
-    padding-left: 4rem;
-    padding-right: 4rem;
-    border-radius: 2rem;
-    font-size: 2rem;
-    justify-self: center;
-    color: #ED1C24;
-    background: lightgray;
-}
-
-#tracks_grid {
-    display: grid;
-    grid-template-columns: auto auto;
-    justify-content: space-around;
-}
-
-.tracks:hover {
-    color: #FFF200;
-}
+/**End NavBar**/
 
 /**Start Siderbar CSS*/
 .sidebar {
