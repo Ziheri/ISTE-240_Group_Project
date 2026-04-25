@@ -3,7 +3,7 @@ import { getAllDirectories } from "./helperfunc.js";
 // VARIABLES
 let pastCommands = [];
 let timesPressedUp = 0;
-let desiredUserCommand;
+let desiredUserCommand = "";
 let currentFilePath = "/usr/unix";
 
 //helper functions....
@@ -159,6 +159,7 @@ function changeDir() {
   if (String(desiredUserCommand).startsWith("/") === true) {
     if (desiredUserCommand.length > 1) {
       // use the loop
+
       let fileDirection = currentFilePath.split("/");
       let newDirecotry = fileDirection.pop();
       directory.innerHTML += `${newDirecotry}`;
@@ -167,9 +168,24 @@ function changeDir() {
       directory.innerHTML += "/";
     }
   }
-  // else {
-  //   directory.innerHTML += `${desiredUserCommand}`;
-  // }
+  if (/^[A-Za-z]+$/.test(desiredUserCommand[0]) === true) {
+    if (desiredUserCommand.includes("/") === true) {
+      let givenPath = desiredUserCommand.split("/");
+      let fileDirection = currentFilePath.split("/");
+      let currentPart = 0;
+      for (let i = 0; i < givenPath.length; i += 1) {
+        if (fileDirection[currentPart] !== givenPath[i]) {
+          fileDirection.push(givenPath[i]);
+          currentPart += 1;
+        }
+      }
+      directory.innerHTML += `${fileDirection[fileDirection.length - 1]}`;
+      currentFilePath = fileDirection.join("/");
+    } else {
+      currentFilePath += "/" + desiredUserCommand;
+      directory.innerHTML += `${desiredUserCommand}`;
+    }
+  }
 }
 
 function pwdFunct() {
@@ -341,7 +357,7 @@ function addComment() {
   } else {
     let commandComponent = userCommand.split(" ");
     if (allCmds.includes(commandComponent[0])) {
-      desiredUserCommand = commandComponent.slice(1, commandComponent.length);
+      desiredUserCommand = commandComponent.slice(1).join(" ");
       rootCmds[commandComponent[0]]();
     } else {
       handleInvalidCommand(userCommand);
