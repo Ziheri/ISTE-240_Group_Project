@@ -1,30 +1,62 @@
-// import { desiredUserCommand } from "./terminal-mechanics.js";
+import { generalFileSystem } from "./terminal-mechanics.js";
 
-let viTypeArea = document.getElementsByClassName("user-command-vi")[0];
-// document.getElementById("modeLabel").innerHTML =
-//   `"${desiredUserCommand}" [New File]`;
+export let updatedContented = "";
 
-function modelabel() {
-  let content = viTypeArea.value;
+function updateContent(update) {
+  let fileDirections = currentFilePath.split("/").filter((part) => part !== "");
+
+  let currentDirectory = generalFileSystem[fileDirections[0]];
+  console.log("current directory???: " + currentDirectory);
+  for (let i = 1; i < fileDirections.length; i += 1) {
+    let currentKey = fileDirections[i];
+    let temp = currentDirectory;
+    currentDirectory = temp[currentKey];
+  }
+  currentDirectory[`${desiredUserCommand}`] = update;
+}
+
+if (window.location.pathname.endsWith("viEditor.php")) {
+  let viTypeArea = document.getElementsByClassName("user-command-vi")[0];
+
   document.addEventListener("keydown", (e) => {
-    if (e.key == "Escape") {
+    if (e.key === "Escape") {
+      e.preventDefault();
       document.getElementById("modeLabel").innerHTML += "";
-      if (
-        document.getElementById("mode-change").value === ":x" ||
-        document.getElementById("mode-change").value === ":X"
-      ) {
-        // save into the file....
-        window.location.replace("terminal-mechanics.js");
-      } else {
-        document.getElementById("modeLabel").innerHTML += "";
-      }
+      document.getElementById("modeLabel").style.display = "none";
+      document.getElementById("mode-change").style.display = "inline";
+      viTypeArea.readOnly = true;
+    }
+    if (e.key === "i") {
+      e.preventDefault();
+      document.getElementById("modeLabel").style.display = "inline";
+      document.getElementById("mode-change").style.display = "none";
+      document.getElementById("modeLabel").innerHTML = "--INSERT--";
+      viTypeArea.readOnly = false;
+      viTypeArea.focus();
+    }
+    if (
+      (document.getElementById("mode-change").value === ":x" ||
+        document.getElementById("mode-change").value === ":X") &&
+      e.key === "Enter"
+    ) {
+      // save into the file....
+      e.preventDefault();
+      console.log("this is saved");
+      updatedContented = viTypeArea.value;
+      updateContent(updatedContented);
+      window.location.replace("terminalHome.php");
     }
   }); // keep track of the esc key >.<
 
-  if (content.startsWith("i") || content.startsWith("I") || content !== "") {
-    document.getElementById("modeLabel").innerHTML += "--INSERT--";
-  }
-  // return the value to export into the fil....
-}
+  function modelabel() {
+    let content = viTypeArea.value;
 
-viTypeArea.addEventListener("input", modelabel);
+    if (content.startsWith("i") || content.startsWith("I") || content !== "") {
+      document.getElementById("modeLabel").innerHTML = "--INSERT--";
+      viTypeArea.readOnly = false;
+    }
+    // return the value to export into the fil....
+  }
+
+  viTypeArea.addEventListener("input", modelabel);
+}

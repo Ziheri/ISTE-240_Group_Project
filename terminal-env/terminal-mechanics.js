@@ -1,5 +1,7 @@
 import { generalCommnads } from "./allManInfo.js";
 import { getAllDirectories, fiilePathExisit } from "./helperfunc.js";
+import { updatedContented } from "./viEditor.js";
+
 // VARIABLES
 let pastCommands = [];
 let timesPressedUp = 0;
@@ -350,6 +352,8 @@ function viFunction() {
   ///
   commentsDiv.innerHTML += `vi a file`;
   window.location.replace("viEditor.php");
+  // updatedContented
+  commentsDiv.innerHTML += `vi a file ${updatedContented}`;
 }
 
 export let commentsDiv = document.querySelector(".comments");
