@@ -1,3 +1,5 @@
+import { handleInvalidCommand, generalFileSystem } from "./terminal-mechanics";
+
 export function getAllDirectories(filePath) {
   let keys = Object.keys(filePath);
   keys.forEach((key) => {
@@ -44,4 +46,21 @@ function listingDirs() {
     }
   }
   return chosenDirectory;
+}
+
+function fiilePathExisit(filePath) {
+  const parts = filePath.split("/").filter((part) => part !== "");
+
+  let starting = generalFileSystem;
+
+  for (let i = 0; i < parts.length; i += 1) {
+    let fileLoc = parts[i];
+    if (starting[fileLoc] !== undefined) {
+      starting = starting[fileLoc];
+    } else {
+      return false;
+    }
+  }
+
+  return true;
 }

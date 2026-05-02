@@ -131,18 +131,25 @@ function changeDir() {
 
   directory.innerHTML += "";
   console.log("what is teh heck cd: " + desiredUserCommand);
+  // currentFilePath
+  let previousPath = currentFilePath;
 
   if (desiredUserCommand.includes("..") === true) {
-    let fileDirection = currentFilePath.split("/");
+    let fileDirection = previousPath.split("/");
+    console.log("WHAT IST THE FILE DIRECTION: " + fileDirection);
+
+    fileDirection = fileDirection.filter((part) => part !== "");
+
     fileDirection.pop();
-    let newFilePath = fileDirection.join("/");
+    let newFilePath = "/" + fileDirection.join("/");
     currentFilePath = newFilePath.substring(0, newFilePath.length);
-    let directoryStuff = currentFilePath.split("/");
+    console.log("new filepath...");
+    let directoryStuff = previousPath.split("/");
     document.getElementById("cdResult").innerHTML +=
       `${directoryStuff[directoryStuff.length - 1]}`; //cdResult;
     directory.innerHTML += `${directoryStuff[directoryStuff.length - 1]}`;
   } else if (desiredUserCommand.includes("../") === true) {
-    let currentListing = currentFilePath.split("/");
+    let currentListing = previousPath.split("/");
     let goingbackCount = desiredUserCommand.split("/");
     for (let i = 0; i < goingbackCount.length; i += 1) {
       let currentCommand = goingbackCount[i];
@@ -163,7 +170,7 @@ function changeDir() {
     if (desiredUserCommand.length > 1) {
       // use the loop
 
-      let fileDirection = currentFilePath.split("/");
+      let fileDirection = previousPath.split("/");
       let newDirecotry = fileDirection.pop();
       directory.innerHTML += `${newDirecotry}`;
     } else {
@@ -173,7 +180,7 @@ function changeDir() {
   } else if (/^[A-Za-z]+$/.test(desiredUserCommand[0]) === true) {
     if (desiredUserCommand.includes("/") === true) {
       let givenPath = desiredUserCommand.split("/");
-      let fileDirection = currentFilePath.split("/");
+      let fileDirection = previousPath.split("/");
       let currentPart = 0;
       for (let i = 0; i < givenPath.length; i += 1) {
         if (fileDirection[currentPart] !== givenPath[i]) {
@@ -181,15 +188,27 @@ function changeDir() {
           currentPart += 1;
         }
       }
+      directory.innerHTML += "";
       directory.innerHTML += `${fileDirection[fileDirection.length - 1]}`;
-      currentFilePath = fileDirection.join("/");
+      previousPath = fileDirection.join("/");
     } else {
-      currentFilePath += "/" + desiredUserCommand;
+      previousPath += "/" + desiredUserCommand;
       directory.innerHTML += `${desiredUserCommand}`;
     }
   } else {
-    currentFilePath = "/usr/unix";
+    previousPath = "/usr/unix";
     directory.innerHTML += "~";
+  }
+
+  if (fiilePathExisit(previousPath)) {
+    currentFilePath = previousPath;
+
+    let displayParts = currentFilePath.split("/").filter((p) => p !== "");
+    let lastDir =
+      displayParts.length > 0 ? displayParts[displayParts.length - 1] : "/";
+    directory.innerHTML = lastDir;
+  } else {
+    handleInvalidCommand(currentFilePath);
   }
 }
 
@@ -207,25 +226,72 @@ function homeFunct() {
 }
 
 function echoFunct() {
+  // desiredUserCommand
   console.log("what is the list message: " + desiredUserCommand);
-  let echoMsg = desiredUserCommand.join(" ");
+  let echoMsg = desiredUserCommand;
   commentsDiv.innerHTML += `<div class='white'>${echoMsg}</div>`;
 }
 
 function mkDirFunct() {
-  commentsDiv.innerHTML += "<div class='white'>make a new directory</div>";
+  // generalFileSystem {{},{},{}} key: value..
+  // currentFilePath.. = "/usr/unix";
+  let fileDirections = currentFilePath.split("/");
+  let currentDirectory = generalFileSystem[fileDirections[1]];
+
+  for (let i = 0; i < fileDirections.length; i += 1) {
+    let currentKey = fileDirections[i];
+    if (i >= 1) {
+      let temp = currentDirectory;
+      currentDirectory = temp[currentKey];
+    }
+  }
+  currentDirectory[`${desiredUserCommand}`] = {};
+  commentsDiv.innerHTML += `<div class='white'>make a new directory ${desiredUserCommand} ${currentFilePath} ${generalFileSystem}</div>`;
 }
 
 function rmDirFunct() {
+  let fileDirections = currentFilePath.split("/");
+  let currentDirectory = generalFileSystem[fileDirections[1]];
+
+  for (let i = 0; i < fileDirections.length; i += 1) {
+    let currentKey = fileDirections[i];
+    if (i >= 1) {
+      let temp = currentDirectory;
+      currentDirectory = temp[currentKey];
+    }
+  }
+  delete currentDirectory[`${desiredUserCommand}`];
   commentsDiv.innerHTML +=
     "<div class='white'>get rid of a new directory</div>";
 }
 
 function rmFunction() {
+  let fileDirections = currentFilePath.split("/");
+  let currentDirectory = generalFileSystem[fileDirections[1]];
+
+  for (let i = 0; i < fileDirections.length; i += 1) {
+    let currentKey = fileDirections[i];
+    if (i >= 1) {
+      let temp = currentDirectory;
+      currentDirectory = temp[currentKey];
+    }
+  }
+  delete currentDirectory[`${desiredUserCommand}`];
   commentsDiv.innerHTML += `remove the file`;
 }
 
 function touchFunction() {
+  let fileDirections = currentFilePath.split("/");
+  let currentDirectory = generalFileSystem[fileDirections[1]];
+
+  for (let i = 0; i < fileDirections.length; i += 1) {
+    let currentKey = fileDirections[i];
+    if (i >= 1) {
+      let temp = currentDirectory;
+      currentDirectory = temp[currentKey];
+    }
+  }
+  currentDirectory[`${desiredUserCommand}`] = "";
   commentsDiv.innerHTML += `touch/make an empty`;
 }
 
@@ -258,7 +324,11 @@ function pipeFunction() {
 
 function manFunction() {
   console.log("man hit");
-  let currentCommand = desiredUserCommand[0];
+  let currentCommand = desiredUserCommand;
+  if (currentCommand.indexOf(" ") !== -1) {
+    let allParts = currentCommand.split(" ");
+    currentCommand = allParts[0];
+  }
   console.log("man hit: " + currentCommand);
   commentsDiv.innerHTML += `<div class='white'>${generalCommnads[currentCommand]}</div>`;
 }
@@ -273,7 +343,7 @@ function viFunction() {
 
 export let commentsDiv = document.querySelector(".comments");
 
-let generalFileSystem = {
+export let generalFileSystem = {
   bin: {}, // stores key: {}
   opt: {},
   boot: {},
@@ -346,7 +416,8 @@ function addComment() {
   // Get user comment + add it to the chat screen
   let userCommandDiv = document.querySelector(".user-command");
   let userCommand = document.querySelector(".user-command").value.trim();
-  // let directory = document.querySelector(".directory");
+  let directory = document.querySelector(".directory");
+  directory.innerHTML = "~";
 
   if (userCommand === "") {
     commentsDiv.innerHTML += `<label class="green"><span class="yellow">unix</span>@user:<span
@@ -363,6 +434,7 @@ function addComment() {
     let commandComponent = userCommand.split(" ");
     if (allCmds.includes(commandComponent[0])) {
       desiredUserCommand = commandComponent.slice(1).join(" ");
+      console.log("what is this??: " + desiredUserCommand);
       rootCmds[commandComponent[0]]();
     } else {
       handleInvalidCommand(userCommand);
@@ -372,6 +444,6 @@ function addComment() {
   userCommandDiv.value = "";
 }
 
-function handleInvalidCommand(cmmd) {
+export function handleInvalidCommand(cmmd) {
   commentsDiv.innerHTML += `zsh: command not found: ${cmmd}`;
 }

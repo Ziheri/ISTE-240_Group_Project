@@ -1,2 +1,14 @@
 test this again.....
 asdiofjuap9iesfjhawe
+
+
+- [ ] mkdir: mkDirFunct, —- 4 (use with la -a and la -la) %%%%%%%%%
+- [ ]   rmdir: rmDirFunct, —- 4 (use with la -a and la -la) %%%%%%%%%
+- [ ]   rm: rmFunction, —- 4 %%%%%%%%
+- [ ]   touch: touchFunction, —- 4 %%%%%%%%%%
+
+
+
+ls
+pwd
+cd 
