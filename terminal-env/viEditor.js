@@ -1,13 +1,11 @@
-import { desiredUserCommand } from "./terminal-mechanics.js";
+// import { desiredUserCommand } from "./terminal-mechanics.js";
 
-let viTypeArea = document.getElementsByClassName("user-command-vi");
-document.getElementById("modeLabel").innerHTML =
-  `"${desiredUserCommand}" [New File]`;
+let viTypeArea = document.getElementsByClassName("user-command-vi")[0];
+// document.getElementById("modeLabel").innerHTML =
+//   `"${desiredUserCommand}" [New File]`;
 
 function modelabel() {
-  let content = document.querySelector(
-    'div[contenteditable="plaintext-only"]',
-  ).value;
+  let content = document.querySelector("user-command-vi").value;
   document.addEventListener("keydown", (e) => {
     if (e.key == "Escape") {
       document.getElementById("modeLabel").innerHTML += "";
