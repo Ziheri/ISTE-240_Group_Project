@@ -26,12 +26,12 @@ body {
     background: black;
     font-family: "Handjet", Arial, Helvetica, sans-serif;
     margin: 0;
-    padding: 20px;
+    padding: 6rem;
 }
 
 h1 {
     /**margin-top: 32rem;**/
-    margin-left: 3rem;
+    /**margin-left: 3rem;**/
     color: #009444;
     font-size: 4rem;
 }
