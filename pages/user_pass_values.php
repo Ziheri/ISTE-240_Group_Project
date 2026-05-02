@@ -1,6 +1,6 @@
 <?php
-    //Accesses the Database
-    include '../../dbcon.php';
+    include '../dbCon.php';
+    // $query = "SELECT * FROM 240UnixGroupProject (user, pass)";
 
     //Queries the Database for Usernames and Passwords
     $res = $mysqli->query("SELECT user, pass FROM 240UnixGroupProject");

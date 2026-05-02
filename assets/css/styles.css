@@ -6,6 +6,22 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: "Barlow";
+    src: url('Barlow-Medium.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Workbench";
+    src: url('Workbench-Regular-VariableFont_BLED,SCAN.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+    font-display: swap;
+}
+
 body {
     background: black;
     font-family: "Handjet", Arial, Helvetica, sans-serif;
@@ -13,6 +29,47 @@ body {
     padding: 20px;
 }
 
+h1 {
+    /**margin-top: 32rem;**/
+    margin-left: 3rem;
+    color: #009444;
+    font-size: 4rem;
+}
+
+h2, h3 {
+    color: #009444;
+    font-family: "Workbench", Arial, Helvetica, sans-serif;
+    font-size: 3rem;
+}
+
+p{
+    color: #FFF;
+    font-family: "Barlow", Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+}
+
+.tracks {
+    padding: 2rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    border-radius: 2rem;
+    font-size: 2rem;
+    justify-self: center;
+    color: #ED1C24;
+    background: lightgray;
+}
+
+#tracks_grid {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-around;
+}
+
+.tracks:hover {
+    color: #FFF200;
+}
+
+/**Start NavBar**/
 .grid_container{
     display: grid;
     grid-template-areas: 
@@ -51,7 +108,7 @@ nav {
     gap: 1.5rem;
     padding: 1rem 2rem;
     border-radius: 2rem;
-    font-size: 5rem;
+    font-size: 4rem;
     background: lightgray;
     margin: 0;
 }
@@ -97,43 +154,7 @@ a {
     color: #006700;
     font-size: 50px;
 }
-
-
-h1 {
-    margin-top: 32rem;
-    margin-left: 3rem;
-    color: #009444;
-    font-size: 4rem;
-}
-
-h2, h3 {
-    color: #009444;
-}
-
-p{
-    color: #FFF
-}
-
-.tracks {
-    padding: 2rem;
-    padding-left: 4rem;
-    padding-right: 4rem;
-    border-radius: 2rem;
-    font-size: 2rem;
-    justify-self: center;
-    color: #ED1C24;
-    background: lightgray;
-}
-
-#tracks_grid {
-    display: grid;
-    grid-template-columns: auto auto;
-    justify-content: space-around;
-}
-
-.tracks:hover {
-    color: #FFF200;
-}
+/**End NavBar**/
 
 /**Start Siderbar CSS*/
 .sidebar {
@@ -229,6 +250,164 @@ html {
     border-color: #FFF200;
 }
 /**End Login/Signup Page CSS*/
+
+/**Start Scoreboard Page CSS*/
+#scoreboard_heading {
+    margin-top: 2rem;
+    margin-left: 0;
+    color: #009444;
+    font-size: 4rem;
+    text-align: center;
+}
+
+#scoreboard_container {
+    max-width: 700px;
+    margin: 2rem auto 4rem auto;
+    padding: 0 1rem;
+}
+
+#scoreboard_table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 2rem;
+    background: lightgray;
+    border-radius: 1.5rem;
+    overflow: hidden;
+}
+
+#scoreboard_table thead {
+    background: #ED1C24;
+    color: #fff;
+}
+
+#scoreboard_table th {
+    padding: 1rem 2rem;
+    text-align: left;
+}
+
+#scoreboard_table td {
+    padding: 0.75rem 2rem;
+    color: #000;
+    border-top: 1px solid #aaa;
+}
+
+#scoreboard_table tbody tr:hover {
+    background: #d4d4d4;
+    color: #FFF200;
+}
+
+.rank_col {
+    color: #ED1C24;
+    font-weight: bold;
+    width: 3rem;
+    text-align: center;
+}
+
+#no_scores {
+    color: #fff;
+    font-size: 1.5rem;
+    text-align: center;
+    margin-top: 2rem;
+}
+/**End Scoreboard Page CSS*/
+
+/**Start Quiz Page CSS*/
+#quiz_container {
+    max-width: 800px;
+    margin: 2rem auto 5rem auto;
+    padding: 0 1.5rem;
+}
+
+#quiz_container h1 {
+    margin-top: 2rem;
+    margin-left: 0;
+    font-size: 4rem;
+    text-align: center;
+    color: #009444;
+}
+
+#quiz_form {
+    display: block;
+}
+
+#quiz_form > div {
+    padding: 0.5rem 0;
+}
+
+#quiz_form > div:hover {
+}
+
+#quiz_form > div p:first-child {
+    font-size: 1.6rem;
+    color: #009444;
+    margin: 0 0 0.5rem 0;
+    font-weight: bold;
+}
+
+#quiz_form > div p {
+    margin: 0.3rem 0;
+    font-size: 1.4rem;
+}
+
+#quiz_form label {
+    cursor: pointer;
+    display: block;
+    padding: 0.4rem 0.5rem;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+}
+
+#quiz_form label:hover {
+    background: #2e2e2e;
+    color: #FFF200;
+}
+
+#quiz_form input[type="radio"] {
+    accent-color: #ED1C24;
+    margin-right: 0.5rem;
+    transform: scale(1.3);
+    cursor: pointer;
+}
+
+#quiz_submit {
+    font-family: "Handjet", Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+    color: #ED1C24;
+    background: lightgray;
+    border: none;
+    border-radius: 2rem;
+    padding: 1rem 3rem;
+    cursor: pointer;
+    align-self: center;
+    margin-top: 1rem;
+    transition: color 0.2s, background 0.2s;
+}
+
+#quiz_submit:hover {
+    color: #FFF200;
+    background: #333;
+}
+
+#quiz_result {
+    font-size: 2rem;
+    color: #009444;
+    text-align: center;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: #1a1a1a;
+    border-radius: 12px;
+    border: 2px solid #009444;
+}
+
+/* Correct/Incorrect feedback states (set by quiz.js) */
+#quiz_form > div.correct p:first-child {
+    color: #00c853;
+}
+
+#quiz_form > div.incorrect p:first-child {
+    color: #ED1C24;
+}
+/**End Quiz Page CSS*/
 
 @media (max-width: 600px) {
     #title_pc {
