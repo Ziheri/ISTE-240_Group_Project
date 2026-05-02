@@ -31,7 +31,7 @@
                     style="color: coral; width: 200vw; height: 90vh;"></textarea>
                 <!-- the source of where in info came from: https://github.com/beekurt98/terminal-portfolio.git -->
             </div>
-            <div id="modeLabel" style="color: white;" onclick="modelabel()">[New File]</div>
+            <div id="modeLabel" style="color: white;">[New File]</div>
             <input id="mode-change" style="display: none; color: white;"
                 placeholder="something here that will be display non until mode changes">
 

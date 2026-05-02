@@ -1,10 +1,13 @@
-function modelabel() {
-  console.log("in the mode label function");
-  let content = document.querySelector("user-command-vi").value;
-  console.log("content before: " + content);
-  document.getElementById("modeLabel").innerHTML =
-    `"${desiredUserCommand}" [New File]`;
+import { desiredUserCommand } from "./terminal-mechanics.js";
 
+let viTypeArea = document.getElementsByClassName("user-command-vi");
+document.getElementById("modeLabel").innerHTML =
+  `"${desiredUserCommand}" [New File]`;
+
+function modelabel() {
+  let content = document.querySelector(
+    'div[contenteditable="plaintext-only"]',
+  ).value;
   document.addEventListener("keydown", (e) => {
     if (e.key == "Escape") {
       document.getElementById("modeLabel").innerHTML += "";
@@ -23,8 +26,7 @@ function modelabel() {
   if (content.startWith("i") || content.startWith("I") || content !== "") {
     document.getElementById("modeLabel").innerHTML += "--INSERT--";
   }
-
-  console.log("content after: " + content);
-
   // return the value to export into the fil....
 }
+
+viTypeArea.addEventListener("input", modelabel);

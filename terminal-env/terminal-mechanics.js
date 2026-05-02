@@ -3,7 +3,7 @@ import { getAllDirectories, fiilePathExisit } from "./helperfunc.js";
 // VARIABLES
 let pastCommands = [];
 let timesPressedUp = 0;
-let desiredUserCommand = "";
+export let desiredUserCommand = "";
 let currentFilePath = "/usr/unix";
 
 //helper functions....
