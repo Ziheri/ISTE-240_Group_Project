@@ -1,38 +1,56 @@
 <?php
-    include '../../dbcon.php';
+    include '../dbCon.php';
     // $query = "SELECT * FROM 240UnixGroupProject (user, pass)";
 
-    //echo $_POST["usernames"];
-    //echo $_POST["passwords"];
-    //echo $query;
-    // error_reporting(E_ALL);
-    // ini_set('display_errors', 1);
+    //Queries the Database for Usernames and Passwords
+    $res = $mysqli->query("SELECT user, pass FROM 240UnixGroupProject");
+    if($res) {
+		while($rowholder = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
+			$records[] = $rowholder;
+		}
+	}
 
-    // $start = $mysqli->prepare("INSERT INTO `240UnixGroupProject` (user, pass) VALUES (?, ?)");
-    // $start->bind_param("ss", $_POST['usernames'], $_POST['passwords']);
-    // $start->execute();
-    // $start->close();
-
-    // var_dump($_POST);
-    // die();
-
-    if ($mysqli->connect_error) {
-    die("Connection failed: " . $mysqli->connect_error);
+    //Start Signup Function
+    $taken = false;
+    if(!empty($_POST['usernames']) && !empty($_POST['passwords'])) {
+        foreach($records as $this_row) {
+            if($_POST['usernames'] == $this_row['user']) {
+                echo "<p> This Username has already been taken. </p>";
+                $taken = true;
+                break;
+            } else {
+                $taken = false;
+                continue;
+            }
+        }
+        if($mysqli && !empty($_POST['usernames']) && !empty($_POST['passwords'] && !$taken)) {
+            $start = $mysqli->prepare('INSERT INTO 240UnixGroupProject (User, Pass) VALUES (?, ?)');
+            $start->bind_param("ss", $_POST['usernames'], $_POST['passwords']);
+            $start->execute();
+            $start->close();
+            echo "<p> Signup Completed. Welcome, " . $_POST['usernames'] . ".</p>";
+        }
+    } else {
+        echo "<p>Username or Password is Missing.";
     }
+    //End Signup Function
 
-    $start = $mysqli->prepare("INSERT INTO `240UnixGroupProject` (user, pass) VALUES (?, ?)");
-
-    if (!$start) {
-        die("Prepare failed: " . $mysqli->error);
+    //Start Login Function
+    $login = false;
+    if(!empty($_POST['usernamel']) && !empty($_POST['passwordl'])) {
+        foreach($records as $this_row) {
+            if($_POST['usernamel'] == $this_row['user'] && $_POST['passwordl'] == $this_row['pass']) {
+                echo "<p> Login Successful. Welcome, " . $_POST['usernamel'] . ".</p>";
+                $login = true;
+                break;
+            } else {
+                $login = false;
+                continue;
+            }
+        }
+        if(!$login) {
+            echo "<p>Login Failed. Username or Password is Incorrect.</p>";
+        }
     }
-
-    $start->bind_param("ss", $_POST['usernames'], $_POST['passwords']);
-
-    if (!$start->execute()) {
-        die("Execute failed: " . $start->error);
-    }
-
-    $start->close();
-    header('Location: /pages/login.php');
-    exit();
+    //End Login Function
 ?>

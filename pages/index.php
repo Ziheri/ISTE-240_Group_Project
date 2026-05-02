@@ -1,35 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Intro To UNIX</title>
-    <link rel="stylesheet" href="../assets/css/styles.css">
-</head>
-<body>
-    <!-- Header Section -->
-    <section class="grid_container">
-    <img id="mobile_nav" src="style_content/Nav Bars.png" alt="Mobile Navigation Button">
-    <a href="index.html">
-        <img id="title_pc" src="style_content/(Updated V6) Long Title.png" alt="Into to UNIX title card">
-        <img id="title_mobile" src="style_content/(Updated) Group-Project_Logo.png" alt="Into to UNIX title card">
-    </a>
-    <nav>
-        <ul class="navbar">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="history.html">History</a></li>
-            <li><a href="#">Tutorial</a></li>
-            <li><a href="quiz.html">Quiz</a></li>
-        </ul>
-        <ul class="navbar-2">
-            <li><a href="assets/files/login.html">Login</a></li>
-        </ul>
-    </nav>
-    <!-- Header Section ^ -->
-    <h1>Learning Tracks</h1>
+<?php include "../assets/files/nav.php"; ?>
+
+    <h1>Learning Unix By Doing</h1>
+
     <section id="tracks_grid">
-        <a href="#"><h2 class="tracks">Track 1 - Unix Foundations</h2></a>
-        <a href="#"><h2 class="tracks">Track 2 - Shell Scripting</h2></a>
+        <a href="history.php"><h2 class="tracks">History</h2></a>
+        <a href="tutorials.php"><h2 class="tracks">Tutorial</h2></a>
     </section>
+
 </body>
 </html>

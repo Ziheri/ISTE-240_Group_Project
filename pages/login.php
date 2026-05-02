@@ -1,14 +1,35 @@
 <!--Currently unused classes in both forms in all inputs-->
-<? 
-    include "../assets/files/nav.php";
-?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login or Sign Up</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+    <section class="grid_container">
+    <img id="mobile_nav" src="../style_content/Nav Bars.png" alt="Mobile Navigation Button">
+    <a href="index.html">
+        <img id="title_pc" src="../style_content/(Updated V6) Long Title.png" alt="Into to UNIX title card">
+        <img id="title_mobile" src="../style_content/(Updated) Group-Project_Logo.png" alt="Into to UNIX title card">
+    </a>
+    <nav>
+        <ul class="navbar">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="history.html">History</a></li>
+            <li><a href="#">Tutorial</a></li>
+            <li><a href="#">Quiz</a></li>
+        </ul>
+        <ul class="navbar-2">
+            <li><a href="login.html">Login</a></li>
+        </ul>
+    </nav>
     <section id="login_overgrid">
         <div>
             <h1 class="login_header">Login</h1>
-            <?php if ($login_error): ?>
-                <p class="login_error"><?php echo htmlspecialchars($login_error); ?></p>
-            <?php endif; ?>
-            <form class="login_grid" id="login_seperate" method="POST" action="/pages/login.php">
+            <form class="login_grid" id="login_seperate" action="#">
                 <input type="text" class="login_form username" id="username" name="usernamel" placeholder="Username">
                 <input type="password" class="login_form password" id="password" name="passwordl" placeholder="Password">
                 <input type="submit" class="login_button submit" value="Login">
