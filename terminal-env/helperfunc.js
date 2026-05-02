@@ -1,4 +1,7 @@
-import { handleInvalidCommand, generalFileSystem } from "./terminal-mechanics";
+import {
+  handleInvalidCommand,
+  generalFileSystem,
+} from "./terminal-mechanics.js";
 
 export function getAllDirectories(filePath) {
   let keys = Object.keys(filePath);
@@ -48,7 +51,7 @@ function listingDirs() {
   return chosenDirectory;
 }
 
-function fiilePathExisit(filePath) {
+export function fiilePathExisit(filePath) {
   const parts = filePath.split("/").filter((part) => part !== "");
 
   let starting = generalFileSystem;
@@ -62,5 +65,5 @@ function fiilePathExisit(filePath) {
     }
   }
 
-  return true;
+  return typeof starting === "object" && starting !== null;
 }

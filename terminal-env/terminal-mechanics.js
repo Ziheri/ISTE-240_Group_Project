@@ -1,5 +1,5 @@
 import { generalCommnads } from "./allManInfo.js";
-import { getAllDirectories } from "./helperfunc.js";
+import { getAllDirectories, fiilePathExisit } from "./helperfunc.js";
 // VARIABLES
 let pastCommands = [];
 let timesPressedUp = 0;
@@ -128,76 +128,77 @@ function changeDir() {
 
   // desiredUserCommand
   // currentFilePath = "/usr/unix";
-
-  directory.innerHTML += "";
-  console.log("what is teh heck cd: " + desiredUserCommand);
   // currentFilePath
   let previousPath = currentFilePath;
 
   if (desiredUserCommand.includes("..") === true) {
     let fileDirection = previousPath.split("/");
     console.log("WHAT IST THE FILE DIRECTION: " + fileDirection);
-
     fileDirection = fileDirection.filter((part) => part !== "");
-
     fileDirection.pop();
-    let newFilePath = "/" + fileDirection.join("/");
-    currentFilePath = newFilePath.substring(0, newFilePath.length);
-    console.log("new filepath...");
-    let directoryStuff = previousPath.split("/");
-    document.getElementById("cdResult").innerHTML +=
-      `${directoryStuff[directoryStuff.length - 1]}`; //cdResult;
-    directory.innerHTML += `${directoryStuff[directoryStuff.length - 1]}`;
-  } else if (desiredUserCommand.includes("../") === true) {
-    let currentListing = previousPath.split("/");
-    let goingbackCount = desiredUserCommand.split("/");
-    for (let i = 0; i < goingbackCount.length; i += 1) {
-      let currentCommand = goingbackCount[i];
-      if (goingbackCount === "..") {
-        currentListing.pop();
-      } else {
-        currentFilePath += `/${goingbackCount[i]}`;
-      }
-    }
-    currentFilePath = currentListing.join("/");
+    previousPath = "/" + fileDirection.join("/");
   } else if (
     desiredUserCommand.includes("~") === true ||
     desiredUserCommand === ""
   ) {
-    currentFilePath = "/usr/unix";
-    directory.innerHTML += "~";
-  } else if (String(desiredUserCommand).startsWith("/") === true) {
-    if (desiredUserCommand.length > 1) {
-      // use the loop
-
-      let fileDirection = previousPath.split("/");
-      let newDirecotry = fileDirection.pop();
-      directory.innerHTML += `${newDirecotry}`;
-    } else {
-      currentFilePath = "/";
-      directory.innerHTML += "/";
-    }
-  } else if (/^[A-Za-z]+$/.test(desiredUserCommand[0]) === true) {
-    if (desiredUserCommand.includes("/") === true) {
-      let givenPath = desiredUserCommand.split("/");
-      let fileDirection = previousPath.split("/");
-      let currentPart = 0;
-      for (let i = 0; i < givenPath.length; i += 1) {
-        if (fileDirection[currentPart] !== givenPath[i]) {
-          fileDirection.push(givenPath[i]);
-          currentPart += 1;
-        }
-      }
-      directory.innerHTML += "";
-      directory.innerHTML += `${fileDirection[fileDirection.length - 1]}`;
-      previousPath = fileDirection.join("/");
-    } else {
-      previousPath += "/" + desiredUserCommand;
-      directory.innerHTML += `${desiredUserCommand}`;
-    }
-  } else {
     previousPath = "/usr/unix";
-    directory.innerHTML += "~";
+    // directory.innerHTML += "~";
+  }
+
+  // else if (desiredUserCommand.includes("../") === true) {
+  //   let currentListing = previousPath.split("/");
+  //   let goingbackCount = desiredUserCommand.split("/");
+  //   for (let i = 0; i < goingbackCount.length; i += 1) {
+  //     let currentCommand = goingbackCount[i];
+  //     if (goingbackCount === "..") {
+  //       currentListing.pop();
+  //     } else {
+  //       currentFilePath += `/${goingbackCount[i]}`;
+  //     }
+  //   }
+  //   currentFilePath = currentListing.join("/");
+  // }
+  else if (String(desiredUserCommand).startsWith("/") === true) {
+    // previousPath
+    previousPath = desiredUserCommand;
+    // if (desiredUserCommand.length > 1) {
+    //   // use the loop
+
+    //   let fileDirection = previousPath.split("/");
+    //   let newDirecotry = fileDirection.pop();
+    //   directory.innerHTML += `${newDirecotry}`;
+    // } else {
+    //   currentFilePath = "/";
+    //   directory.innerHTML += "/";
+    // }
+  }
+
+  // else if (/^[A-Za-z]+$/.test(desiredUserCommand[0]) === true) {
+  //   if (desiredUserCommand.includes("/") === true) {
+  //     let givenPath = desiredUserCommand.split("/");
+  //     let fileDirection = previousPath.split("/");
+  //     let currentPart = 0;
+  //     for (let i = 0; i < givenPath.length; i += 1) {
+  //       if (fileDirection[currentPart] !== givenPath[i]) {
+  //         fileDirection.push(givenPath[i]);
+  //         currentPart += 1;
+  //       }
+  //     }
+  //     directory.innerHTML += "";
+  //     directory.innerHTML += `${fileDirection[fileDirection.length - 1]}`;
+  //     previousPath = fileDirection.join("/");
+  //   } else {
+  //     previousPath += "/" + desiredUserCommand;
+  //     directory.innerHTML += `${desiredUserCommand}`;
+  //   }
+  // }
+  else {
+    // previousPath = "/usr/unix";
+    // directory.innerHTML += "~";
+    let slash = previousPath.endsWith("/") ? "" : "/";
+    console.log("what is in slash: " + slash);
+    previousPath = previousPath + slash + desiredUserCommand;
+    console.log("waht is in the previousPath: " + previousPath);
   }
 
   if (fiilePathExisit(previousPath)) {
@@ -206,9 +207,11 @@ function changeDir() {
     let displayParts = currentFilePath.split("/").filter((p) => p !== "");
     let lastDir =
       displayParts.length > 0 ? displayParts[displayParts.length - 1] : "/";
-    directory.innerHTML = lastDir;
+    // directory.innerHTML = lastDir;
+    directory.innerHTML = lastDir === "unix" ? "~" : lastDir;
   } else {
-    handleInvalidCommand(currentFilePath);
+    commentsDiv.innerHTML += `<div class='white'>cd: no such file or directory: ${desiredUserCommand}</div>`;
+    //handleInvalidCommand(currentFilePath);
   }
 }
 
