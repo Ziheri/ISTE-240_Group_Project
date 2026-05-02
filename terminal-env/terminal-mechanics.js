@@ -310,18 +310,17 @@ function historyFunction() {
 }
 
 function catFunction() {
-  let fileDirections = currentFilePath.split("/");
-  let currentDirectory = generalFileSystem[fileDirections[1]];
+  let fileDirections = currentFilePath.split("/").filter((part) => part !== "");
 
-  for (let i = 0; i < fileDirections.length; i += 1) {
+  let currentDirectory = generalFileSystem[fileDirections[0]];
+  console.log("current directory???: " + currentDirectory);
+  for (let i = 1; i < fileDirections.length; i += 1) {
     let currentKey = fileDirections[i];
-    if (i >= 1) {
-      let temp = currentDirectory;
-      currentDirectory = temp[currentKey];
-    }
+    let temp = currentDirectory;
+    currentDirectory = temp[currentKey];
   }
 
-  commentsDiv.innerHTML += `content of the file ${currentDirectory[`${desiredUserCommand}`]}`;
+  commentsDiv.innerHTML += `${currentDirectory[`${desiredUserCommand}`]}`;
 }
 
 function grepFunction() {
