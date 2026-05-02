@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include "../assets/files/nav.php";
 ?>
 
@@ -103,6 +104,10 @@
         <p id="quiz_result"></p>
     </div>
 
+    <script>
+        const isLoggedIn = <?php echo isset($_SESSION['username']) ? 'true' : 'false'; ?>;
+        const loggedInUser = <?php echo isset($_SESSION['username']) ? json_encode($_SESSION['username']) : 'null'; ?>;
+    </script>
     <script src="../assets/js/quiz.js"></script>
 </body>
 </html>
