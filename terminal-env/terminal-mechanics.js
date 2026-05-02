@@ -267,33 +267,29 @@ function rmDirFunct() {
 }
 
 function rmFunction() {
-  let fileDirections = currentFilePath.split("/");
-  let currentDirectory = generalFileSystem[fileDirections[1]];
+  let fileDirections = currentFilePath.split("/").filter((part) => part !== "");
 
-  for (let i = 0; i < fileDirections.length; i += 1) {
+  let currentDirectory = generalFileSystem[fileDirections[0]];
+  console.log("current file???: " + currentDirectory);
+  for (let i = 1; i < fileDirections.length; i += 1) {
     let currentKey = fileDirections[i];
-    if (i >= 1) {
-      let temp = currentDirectory;
-      currentDirectory = temp[currentKey];
-    }
+    let temp = currentDirectory;
+    currentDirectory = temp[currentKey];
   }
   delete currentDirectory[`${desiredUserCommand}`];
-  commentsDiv.innerHTML += `remove the file`;
 }
 
 function touchFunction() {
-  let fileDirections = currentFilePath.split("/");
-  let currentDirectory = generalFileSystem[fileDirections[1]];
+  let fileDirections = currentFilePath.split("/").filter((part) => part !== "");
 
-  for (let i = 0; i < fileDirections.length; i += 1) {
+  let currentDirectory = generalFileSystem[fileDirections[0]];
+  console.log("current directory???: " + currentDirectory);
+  for (let i = 1; i < fileDirections.length; i += 1) {
     let currentKey = fileDirections[i];
-    if (i >= 1) {
-      let temp = currentDirectory;
-      currentDirectory = temp[currentKey];
-    }
+    let temp = currentDirectory;
+    currentDirectory = temp[currentKey];
   }
   currentDirectory[`${desiredUserCommand}`] = "";
-  commentsDiv.innerHTML += `touch/make an empty`;
 }
 
 function cpFunction() {
