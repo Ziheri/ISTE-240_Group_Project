@@ -5,7 +5,7 @@ let viTypeArea = document.getElementsByClassName("user-command-vi")[0];
 //   `"${desiredUserCommand}" [New File]`;
 
 function modelabel() {
-  let content = document.querySelector("user-command-vi").value;
+  let content = viTypeArea.value;
   document.addEventListener("keydown", (e) => {
     if (e.key == "Escape") {
       document.getElementById("modeLabel").innerHTML += "";
@@ -21,7 +21,7 @@ function modelabel() {
     }
   }); // keep track of the esc key >.<
 
-  if (content.startWith("i") || content.startWith("I") || content !== "") {
+  if (content.startsWith("i") || content.startsWith("I") || content !== "") {
     document.getElementById("modeLabel").innerHTML += "--INSERT--";
   }
   // return the value to export into the fil....
