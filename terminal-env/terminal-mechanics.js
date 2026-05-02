@@ -87,10 +87,13 @@ function listingDirs() {
   let currentFile = 1;
   let level = generalFileSystem;
   let chosenDirectory = "";
+  console.log("we are in the ls!!");
   if (fileDirection.length == 1) {
     Object.keys(generalFileSystem).forEach((key) => {
       commentsDiv.innerHTML += `<div class='white'>${key}</div>`;
     });
+
+    console.log("there is stuff in here!!!!");
   } else {
     while (findingDir === false) {
       let direction = fileDirection[currentFile];
@@ -238,18 +241,16 @@ function echoFunct() {
 function mkDirFunct() {
   // generalFileSystem {{},{},{}} key: value..
   // currentFilePath.. = "/usr/unix";
-  let fileDirections = currentFilePath.split("/");
-  let currentDirectory = generalFileSystem[fileDirections[1]];
+  let fileDirections = currentFilePath.split("/").filter((part) => part !== "");
 
-  for (let i = 0; i < fileDirections.length; i += 1) {
+  let currentDirectory = generalFileSystem[fileDirections[0]];
+  console.log("current directory???: " + currentDirectory);
+  for (let i = 1; i < fileDirections.length; i += 1) {
     let currentKey = fileDirections[i];
-    if (i >= 1) {
-      let temp = currentDirectory;
-      currentDirectory = temp[currentKey];
-    }
+    let temp = currentDirectory;
+    currentDirectory = temp[currentKey];
   }
   currentDirectory[`${desiredUserCommand}`] = {};
-  commentsDiv.innerHTML += `<div class='white'>make a new directory ${desiredUserCommand} ${currentFilePath} ${generalFileSystem}</div>`;
 }
 
 function rmDirFunct() {
@@ -299,6 +300,8 @@ function touchFunction() {
 }
 
 function cpFunction() {
+  // cp sourcefile-path destination-path
+
   commentsDiv.innerHTML += `copy a file and directories`;
 }
 
@@ -314,7 +317,18 @@ function historyFunction() {
 }
 
 function catFunction() {
-  commentsDiv.innerHTML += `content of the file`;
+  let fileDirections = currentFilePath.split("/");
+  let currentDirectory = generalFileSystem[fileDirections[1]];
+
+  for (let i = 0; i < fileDirections.length; i += 1) {
+    let currentKey = fileDirections[i];
+    if (i >= 1) {
+      let temp = currentDirectory;
+      currentDirectory = temp[currentKey];
+    }
+  }
+
+  commentsDiv.innerHTML += `content of the file ${currentDirectory[`${desiredUserCommand}`]}`;
 }
 
 function grepFunction() {
