@@ -67,3 +67,7 @@ export function fiilePathExisit(filePath) {
 
   return typeof starting === "object" && starting !== null;
 }
+
+function getAbsoluteFilePath() {
+  // "/usr/unix";
+}

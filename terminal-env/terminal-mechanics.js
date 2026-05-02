@@ -347,7 +347,9 @@ function cdSlashFunction() {
 }
 
 function viFunction() {
+  ///
   commentsDiv.innerHTML += `vi a file`;
+  window.location.replace("viEditor.php");
 }
 
 export let commentsDiv = document.querySelector(".comments");

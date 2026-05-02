@@ -114,6 +114,17 @@ body {
     font-size: large;
     touch-action: none;
 }
+.user-command-vi 
+{
+    width: 95%;
+    border: none;
+    font-family: monospace;
+    caret-color: white;
+    color: white;
+    background-color: black;
+    font-size: large;
+    touch-action: none;
+}
 
 .red {
     color: palevioletred;
