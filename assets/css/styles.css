@@ -276,7 +276,7 @@ html {
 }
 
 #scoreboard_table thead {
-    background: #ED1C24;
+    background: green;
     color: #fff;
 }
 
@@ -287,7 +287,7 @@ html {
 
 #scoreboard_table td {
     padding: 0.75rem 2rem;
-    color: #000;
+    color: green;
     border-top: 1px solid #aaa;
 }
 
