@@ -22,4 +22,6 @@ document.getElementById("quiz_submit").addEventListener("click", function () {
 
     document.getElementById("quiz_result").textContent =
         `You scored ${score} out of ${Object.keys(answers).length}!`;
+
+    window.location.href = '../pages/quiz_score_submit.php?score=' + score;
 });

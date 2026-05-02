@@ -2,7 +2,7 @@
 session_start();
 
 if (isset($_SESSION['username'])) {
-    header('Location: quiz.php');
+    header('Location: dashboard.php');
     exit();
 }
 
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($password === $dbPass) {
                 $_SESSION['username'] = $dbUser;
                 $stmt->close();
-                header('Location: quiz.php');
+                header('Location: dashboard.php');
                 exit();
             } else {
                 $login_error = 'Incorrect password.';
