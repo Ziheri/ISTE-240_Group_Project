@@ -14,7 +14,12 @@
     <h2>Quiz Score Submit and High Score</h2>
     <p>When you finish the quiz your score gets sent to quiz_score_submit.php. It updates the quiz column in the database with your most recent score. Then it checks if that score is higher than the score column which stores your best score. If it is higher it updates the best score too. The profile page pulls both values out of the database and shows your last score and your best score.</p>
 
-    <h2>Scoreboard</h2>
+    <h2>Logout Functionality</h2>
+    <p>The logout functionality destroys the session and redirects the user to the login page. This ensures that the user's session data is cleared and they need to log in again to access protected pages.</p>
+
+
+
+    <h2>Scoreboards</h2>
     <p>The scoreboard page queries the database for all users who have a score and orders them from highest to lowest. It shows the rank, username, and score in a table. If there are no scores yet it shows a message telling you to take the quiz.</p>
 
     <h2>History</h2>
