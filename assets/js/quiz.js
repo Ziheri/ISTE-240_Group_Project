@@ -25,18 +25,15 @@ document.getElementById("quiz_submit").addEventListener("click", function () {
     resultEl.textContent = `You scored ${score} out of ${total}!`;
 
     if (typeof isLoggedIn !== 'undefined' && isLoggedIn) {
-        fetch('save_score.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ score: score })
-        })
-        .then(r => r.json())
-        .then(data => {
+        fetch(`quiz_score_submit.php?score=${score}`)
+            .then(r => r.json()) //Add this line to parse the response
+            .then(data => {      //data goes here, not in the first .then()
             if (data.success) {
                 resultEl.textContent += ' Your score has been saved.';
             }
-        })
-        .catch(() => {});
+    })
+    .catch(() => {});
+    
     } else {
         resultEl.textContent += ' Log in to save your score.';
     }
