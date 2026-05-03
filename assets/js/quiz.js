@@ -26,10 +26,11 @@ document.getElementById("quiz_submit").addEventListener("click", function () {
 
     if (typeof isLoggedIn !== 'undefined' && isLoggedIn) {
         fetch(`quiz_score_submit.php?score=${score}`)
-    .then(r => {
-        if (data.success) {
-            resultEl.textContent += ' Your score has been saved.';
-        }
+            .then(r => r.json()) //Add this line to parse the response
+            .then(data => {      //data goes here, not in the first .then()
+            if (data.success) {
+                resultEl.textContent += ' Your score has been saved.';
+            }
     })
     .catch(() => {});
     
