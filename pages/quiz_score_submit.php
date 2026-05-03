@@ -1,9 +1,9 @@
 <?php
-session_start();
-include '../dbCon.php';
+    session_start();
+    include '../dbCon.php';
 
-$score = (int)$_GET['score'];
-$selection = $_SESSION['username'];
+    $score = (int)$_GET['score'];
+    $selection = $_SESSION['username'];
 
 //Start Submit Quiz
     if (!empty($selection)) {

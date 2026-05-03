@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include "../assets/files/nav.php";
 ?>
     <ul class="sidebar">

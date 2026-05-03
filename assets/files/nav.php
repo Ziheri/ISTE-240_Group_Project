@@ -24,7 +24,11 @@
             <li><a href="grading.php">Grading</a></li>
         </ul>
         <ul class="navbar-2">
+            <?php if (isset($_SESSION['username'])): ?>
+            <li><a href="logout.php">Logout</a></li>
+            <?php else: ?>
             <li><a href="login.php">Login</a></li>
+            <?php endif; ?>
         </ul>
     </nav>
     <!-- Header Section ^ -->
