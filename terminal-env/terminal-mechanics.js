@@ -510,8 +510,15 @@ function grepFunction() {
 
   let fileStuff = getFolderObject(fileName);
 
+  let content = typeof fileStuff === "string" ? fileStuff : fileStuff.content;
+
+  if (!content) {
+    commentsDiv.innerHTML += `<div class='white'>grep: ${fileName}: Is a directory or empty</div>`;
+    return;
+  }
+
   let regex = new RegExp(`/^.*${regexPattern}.*$/gm`, "gm");
-  let matchedStuff = fileStuff.match(regex);
+  let matchedStuff = fileStuff.match(regex); // fileStuff.match is not a function
   if (matchedStuff == true) {
     commentsDiv.innerHTML += `<div class="white">${matchedStuff.join("<br>")}</div>`;
   } else {
