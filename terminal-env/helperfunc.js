@@ -68,6 +68,47 @@ export function fiilePathExisit(filePath) {
   return starting !== undefined;
 }
 
-function getAbsoluteFilePath() {
+function getAbsoluteFilePath(currentMap, filePath, path) {
   // "/usr/unix";
+  let absolutePath = [];
+  let destination;
+  let topLvl = Object.keys(defaultJSONFileSys);
+  // defaultJSONFileSys = file system... would get get the length of top view
+  if (filePath.includes("/")) {
+    let pathParts = filePath.split("/");
+    destination = pathParts[pathParts.length - 1];
+  } else {
+    destination = filePath;
+  }
+
+  for (let key in defaultJSONFileSys) {
+    let possiblePath = [...topLvl, key];
+    if (defaultJSONFileSys[key] === destination) // if found on the first level
+    {
+      absolutePath.push(possiblePath);
+    }
+
+    if (
+      typeof defaultJSONFileSys[key] === "object" &&
+      defaultJSONFileSys[key] !== null
+    ) {
+      absolutePath = absolutePath.concat(
+        getAbsoluteFilePath(defaultJSONFileSys[key], destination, pathParts),
+      );
+    }
+  }
+
+  return absolutePath.join("/");
+}
+
+function getFileContent(absolutePath) {
+  let fileDirection = absolutePath.split("/");
+
+  let currentDirectory = defaultJSONFileSys[fileDirections[0]];
+  for (let i = 1; i < fileDirection.length; i += 1) {
+    let currentKey = fileDirection[i];
+    let temp = currentDirectory;
+    currentDirectory = temp[currentKey];
+  }
+  return currentDirectory[`${desiredUserCommand}`];
 }

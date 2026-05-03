@@ -301,12 +301,41 @@ function touchFunction() {
 
 function cpFunction() {
   // cp sourcefile-path destination-path
+  let paths = desiredUserCommand.split(" ");
+  let sourceFile = paths[0];
+  let destinationFile = paths[1];
+  let currentPathSource = [];
+  let currentPathDestination = [];
+
+  let sourcePath = getAbsoluteFilePath(
+    defaultJSONFileSys,
+    sourceFile,
+    currentPathSource,
+  );
+  let destinationPath = getAbsoluteFilePath(
+    defaultJSONFileSys,
+    destinationFile,
+    currentPathDestination,
+  );
+  let directionDestination = destinationPath.split("/");
+
+  let currentDirectory = defaultJSONFileSys[fileDirections[0]];
+  for (let i = 1; i < directionDestination.length; i += 1) {
+    let currentKey = directionDestination[i];
+    let temp = currentDirectory;
+    currentDirectory = temp[currentKey];
+  }
+  currentDirectory[`${desiredUserCommand}`] = getFileContent(sourcePath);
 
   commentsDiv.innerHTML += `copy a file and directories`;
+  setingFileSys();
 }
 
 function mvFunction() {
+  // cp sourcefile-path destination-path
+
   commentsDiv.innerHTML += `move a file and directories`;
+  setingFileSys();
 }
 
 function historyFunction() {
