@@ -48,6 +48,17 @@ p{
     font-size: 2rem;
 }
 
+li {
+    color: #FFF;
+    font-family: "Barlow", Arial, Helvetica, sans-serif;
+    font-size: 1.8rem;
+    padding: 0.3rem 0;
+}
+
+li b {
+    color: #ED1C24;
+}
+
 .tracks {
     padding: 2rem;
     padding-left: 4rem;
