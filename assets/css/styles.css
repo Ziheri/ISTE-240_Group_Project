@@ -77,14 +77,16 @@ p{
     'nav-main';
     gap: 20px;
     justify-items: center;
+    width: 100%;
 }
 
 #title_pc {
     grid-area: title;
-    max-width: 400px;
-    width: 30%;
+    max-width: 700px;
+    width: 55%;
     height: auto;
-    justify-self: center;
+    display: block;
+    margin: 0 auto;
 }
 
 #title_mobile {
