@@ -20,6 +20,24 @@ document.getElementById("quiz_submit").addEventListener("click", function () {
         }
     }
 
-    document.getElementById("quiz_result").textContent =
-        `You scored ${score} out of ${Object.keys(answers).length}!`;
+    const total = Object.keys(answers).length;
+    const resultEl = document.getElementById("quiz_result");
+    resultEl.textContent = `You scored ${score} out of ${total}!`;
+
+    if (typeof isLoggedIn !== 'undefined' && isLoggedIn) {
+        fetch('save_score.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ score: score })
+        })
+        .then(r => r.json())
+        .then(data => {
+            if (data.success) {
+                resultEl.textContent += ' Your score has been saved.';
+            }
+        })
+        .catch(() => {});
+    } else {
+        resultEl.textContent += ' Log in to save your score.';
+    }
 });
