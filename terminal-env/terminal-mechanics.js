@@ -504,27 +504,19 @@ function grepFunction() {
 
   let sourcePath = getAbsoluteFilePath(defaultJSONFileSys, fileName, []);
   if (!sourcePath) {
-    commentsDiv.innerHTML += `<div class='white'>cp: ${fileName}: No such file</div>`;
+    commentsDiv.innerHTML += `<div class='white'>grep: ${fileName}: No such file</div>`;
     return;
   }
 
-  let destParts = destinationFile.split("/").filter((p) => p !== "");
-  let targetFileName = destParts.pop();
+  let fileStuff = getFolderObject(fileName);
 
-  let currentDirectory = destinationFile.startsWith("/")
-    ? defaultJSONFileSys
-    : getFolderObject(currentFilePath);
-
-  for (let part of destParts) {
-    if (currentDirectory[part] && typeof currentDirectory[part] === "object") {
-      currentDirectory = currentDirectory[part];
-    } else {
-      commentsDiv.innerHTML += `<div class='white'>grep: directory not found: ${part}</div>`;
-      return;
-    }
-  }
   let regex = new RegExp(`/^.*${regexPattern}.*$/gm`, "gm");
-  commentsDiv.innerHTML += currentDirectory[targetFileName].match(regex);
+  let matchedStuff = fileStuff.match(regex);
+  if (matchedStuff == true) {
+    commentsDiv.innerHTML += `<div class="white">${matchedStuff.join("<br>")}</div>`;
+  } else {
+    commentsDiv.innerHTML += `<div class='white'>grep: ${fileName}: No such file</div>`;
+  }
   setingFileSys();
   // commentsDiv.innerHTML += `using grep`;
 }
