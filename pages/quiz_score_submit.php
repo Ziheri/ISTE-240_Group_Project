@@ -31,7 +31,7 @@ $selection = $_SESSION['username'];
     //
     if(!empty($records)) {
         $recent = $records[0]['quiz'];
-        $best = $records[0]['score'];
+        $best = $records[0]['score'] ?? 0;
 
         //Checks if the recent score if higher than the best score
         if ($recent > $best) {
