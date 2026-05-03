@@ -260,6 +260,26 @@
                 <li><b>brew update</b> then <b>brew upgrade</b> - Update Homebrew and all installed packages on macOS.</li>
             </ul>
             </div>
+
+            <div id="terminal-section" class="tutorial_section">
+                <h2>Practice Terminal</h2>
+                <link rel="stylesheet" href="../terminal-env/terminal-styles.css">
+                <div class="terminal-div">
+                    <div class="terminal-header">
+                        <div class="title">
+                            <?php include "../terminal-env/terminalImg.php"; ?>
+                            Terminal
+                        </div>
+                    </div>
+                    <div class="terminal-chat">
+                        <div class="comments"></div>
+                        <div class="comment-div">
+                            <label class="green"><span class="yellow">unix</span>@user:<span class="directory red" id="cdResult"></span>$</label><input class="user-command">
+                        </div>
+                    </div>
+                </div>
+                <script type="module" src="../terminal-env/terminal-mechanics.js"></script>
+            </div>
         </div>
     </div>                
 </body>
