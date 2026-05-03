@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include "../assets/files/nav.php";
 ?>
     <h1>Grading Page</h1>

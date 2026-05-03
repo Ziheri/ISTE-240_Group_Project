@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include '../dbCon.php';
     include "../assets/files/nav.php";
 

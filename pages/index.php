@@ -1,4 +1,7 @@
-<?php include "../assets/files/nav.php"; ?>
+<?php 
+    session_start();
+    include "../assets/files/nav.php"; 
+?>
 
     <h1>Learning Unix By Doing</h1>
 
