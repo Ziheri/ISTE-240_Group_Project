@@ -1,5 +1,10 @@
 import { generalCommnads } from "./allManInfo.js";
-import { getAllDirectories, fiilePathExisit } from "./helperfunc.js";
+import {
+  getAllDirectories,
+  fiilePathExisit,
+  getFileContent,
+  getAbsoluteFilePath,
+} from "./helperfunc.js";
 import { updatedContented } from "./viEditor.js";
 
 // VARIABLES
@@ -333,6 +338,32 @@ function cpFunction() {
 
 function mvFunction() {
   // cp sourcefile-path destination-path
+  let paths = desiredUserCommand.split(" ");
+  let sourceFile = paths[0];
+  let destinationFile = paths[1];
+  let currentPathSource = [];
+  let currentPathDestination = [];
+
+  let sourcePath = getAbsoluteFilePath(
+    defaultJSONFileSys,
+    sourceFile,
+    currentPathSource,
+  );
+  let destinationPath = getAbsoluteFilePath(
+    defaultJSONFileSys,
+    destinationFile,
+    currentPathDestination,
+  );
+  let directionDestination = destinationPath.split("/");
+
+  let currentDirectory = defaultJSONFileSys[fileDirections[0]];
+  for (let i = 1; i < directionDestination.length; i += 1) {
+    let currentKey = directionDestination[i];
+    let temp = currentDirectory;
+    currentDirectory = temp[currentKey];
+  }
+  currentDirectory[`${desiredUserCommand}`] = getFileContent(sourcePath);
+  delete getFileContent(sourcePath);
 
   commentsDiv.innerHTML += `move a file and directories`;
   setingFileSys();

@@ -68,7 +68,7 @@ export function fiilePathExisit(filePath) {
   return starting !== undefined;
 }
 
-function getAbsoluteFilePath(currentMap, filePath, path) {
+export function getAbsoluteFilePath(currentMap, filePath, path) {
   // "/usr/unix";
   let absolutePath = [];
   let destination;
@@ -101,7 +101,7 @@ function getAbsoluteFilePath(currentMap, filePath, path) {
   return absolutePath.join("/");
 }
 
-function getFileContent(absolutePath) {
+export function getFileContent(absolutePath) {
   let fileDirection = absolutePath.split("/");
 
   let currentDirectory = defaultJSONFileSys[fileDirections[0]];
