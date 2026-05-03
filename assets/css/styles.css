@@ -240,8 +240,10 @@ a {
 /**Start Login/Signup Page CSS*/
 #login_overgrid {
     display: grid;
-    grid-template-columns: auto auto;
-    justify-content: space-around;
+    grid-template-columns: 1fr 1fr; /* equal columns instead of auto auto */
+    justify-content: center;
+    max-width: 900px;
+    margin: 2rem auto; /* centers the whole section */
 }
 
 .login_grid {
@@ -257,8 +259,10 @@ a {
 
 .login_header {
     font-family: "Handjet", Arial, Helvetica, sans-serif;
-    margin: 0px;
-    justify-self: center;
+    text-align: center; /* center the login/signup titles */
+    margin: 0;
+    font-size: 3rem;
+    color: #009444;
 }
 
 .login_form {
