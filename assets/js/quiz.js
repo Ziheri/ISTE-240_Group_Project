@@ -20,8 +20,21 @@ document.getElementById("quiz_submit").addEventListener("click", function () {
         }
     }
 
-    document.getElementById("quiz_result").textContent =
-        `You scored ${score} out of ${Object.keys(answers).length}!`;
+    const total = Object.keys(answers).length;
+    const resultEl = document.getElementById("quiz_result");
+    resultEl.textContent = `You scored ${score} out of ${total}!`;
 
-    window.location.href = '../pages/quiz_score_submit.php?score=' + score;
+    if (typeof isLoggedIn !== 'undefined' && isLoggedIn) {
+        fetch(`quiz_score_submit.php?score=${score}`)
+            .then(r => r.json()) //Add this line to parse the response
+            .then(data => {      //data goes here, not in the first .then()
+            if (data.success) {
+                resultEl.textContent += ' Your score has been saved.';
+            }
+    })
+    .catch(() => {});
+    
+    } else {
+        resultEl.textContent += ' Log in to save your score.';
+    }
 });

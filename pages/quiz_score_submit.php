@@ -1,11 +1,9 @@
 <?php
+    session_start();
+    include '../dbCon.php';
 
-include '../dbCon.php';
-
-session_start();
-
-$score = $_GET['score'];
-$selection = $_SESSION['username'];
+    $score = (int)$_GET['score'];
+    $selection = $_SESSION['username'];
 
 //Start Submit Quiz
     if (!empty($selection)) {
@@ -18,21 +16,32 @@ $selection = $_SESSION['username'];
 
 //Start High Score Check
     //Queries the database, identifying quiz score values
-    $res = $mysqli->query("SELECT id, quiz, score FROM 240UnixGroupProject WHERE user = '$selection'");
+    $stmt = $mysqli->prepare("SELECT quiz, score FROM 240UnixGroupProject WHERE user = ?");
+    $stmt->bind_param("s", $selection);
+    $stmt->execute();
+    $res = $stmt->get_result();
+
+    $records = [];
     if ($res) {
 		while($rowholder = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
 			$records[] = $rowholder;
 		}
 	}
-    $recent = $records[0]['quiz'];
-    $best = $records[0]['score'];
-    var_dump($records);
 
-    //Checks if the recent score if higher than the best score
-    if ($recent > $best) {
-        $start = $mysqli->prepare("UPDATE 240UnixGroupProject SET score = ? WHERE user = ?");
-        $start->bind_param("is", $recent, $selection);
-        $start->execute();
-        $start->close();
+    //
+    if(!empty($records)) {
+        $recent = $records[0]['quiz'];
+        $best = $records[0]['score'] ?? 0;
+
+        //Checks if the recent score if higher than the best score
+        if ($recent > $best) {
+            $start = $mysqli->prepare("UPDATE 240UnixGroupProject SET score = ? WHERE user = ?");
+            $start->bind_param("is", $recent, $selection);
+            $start->execute();
+            $start->close();
+        }
     }
+
+    echo json_encode(['success' => true]);
+    exit();
 ?>
