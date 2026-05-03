@@ -2,12 +2,13 @@
     session_start();
     include "../assets/files/nav.php";
 ?>
+    <h1>Tutorial</h1>
+    
     <div id="tutorials_layout">
     <?php 
         include "../assets/files/sidebar.php"; 
     ?>
         <div id="tutorials_content">
-            <h1>Tutorial</h1>
 
             <div id="requirements" class="tutorial_section">
             <h2>Requirements & Setup</h2>
