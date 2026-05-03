@@ -4,6 +4,7 @@ import {
   fiilePathExisit,
   getFileContent,
   getAbsoluteFilePath,
+  getFolderObject,
 } from "./helperfunc.js";
 import { updatedContented } from "./viEditor.js";
 
@@ -301,86 +302,162 @@ function touchFunction() {
   setingFileSys();
 }
 
+// function cpFunction() {
+//   // cp sourcefile-path destination-path
+//   let paths = desiredUserCommand.split(" ");
+//   let sourceFile = paths[0];
+//   let destinationFile = paths[1];
+
+//   let currentPathSource = [];
+//   let currentPathDestination = [];
+
+//   let sourcePath = getAbsoluteFilePath(
+//     defaultJSONFileSys,
+//     sourceFile,
+//     currentPathSource,
+//   );
+//   if (!sourcePath) {
+//     return;
+//   }
+//   // let destinationPath = getAbsoluteFilePath(
+//   //   defaultJSONFileSys,
+//   //   destinationFile,
+//   //   currentPathDestination,
+//   // );
+//   // if (destinationPath === null) {
+//   //   return; // so da program don't crash.....
+//   // }
+//   let directionDestination = destinationFile.split("/").filter((p) => p !== "");
+//   let fileName = directionDestination.pop();
+//   let currentDirectory = defaultJSONFileSys;
+
+//   for (let place of directionDestination) {
+//     if (currentDirectory[place]) {
+//       currentDirectory = currentDirectory[place];
+//     } else {
+//       return;
+//     }
+//   }
+//   currentDirectory[`${sourceFile}`] = getFileContent(sourcePath);
+
+//   commentsDiv.innerHTML += `copy a file and directories`;
+//   setingFileSys();
+// }
+
 function cpFunction() {
-  // cp sourcefile-path destination-path
   let paths = desiredUserCommand.split(" ");
+  if (paths.length < 2) return;
+
   let sourceFile = paths[0];
   let destinationFile = paths[1];
 
-  let currentPathSource = [];
-  let currentPathDestination = [];
-
-  let sourcePath = getAbsoluteFilePath(
-    defaultJSONFileSys,
-    sourceFile,
-    currentPathSource,
-  );
+  let sourcePath = getAbsoluteFilePath(defaultJSONFileSys, sourceFile, []);
   if (!sourcePath) {
+    commentsDiv.innerHTML += `<div class='white'>cp: ${sourceFile}: No such file</div>`;
     return;
   }
-  // let destinationPath = getAbsoluteFilePath(
-  //   defaultJSONFileSys,
-  //   destinationFile,
-  //   currentPathDestination,
-  // );
-  // if (destinationPath === null) {
-  //   return; // so da program don't crash.....
-  // }
-  let directionDestination = destinationFile.split("/").filter((p) => p !== "");
-  let fileName = directionDestination.pop();
-  let currentDirectory = defaultJSONFileSys;
+  let content = getFileContent(sourcePath);
 
-  for (let place of directionDestination) {
-    if (currentDirectory[place]) {
-      currentDirectory = currentDirectory[place];
+  let destParts = destinationFile.split("/").filter((p) => p !== "");
+  let targetFileName = destParts.pop();
+
+  let currentDirectory = destinationFile.startsWith("/")
+    ? defaultJSONFileSys
+    : getFolderObject(currentFilePath);
+
+  for (let part of destParts) {
+    if (currentDirectory[part] && typeof currentDirectory[part] === "object") {
+      currentDirectory = currentDirectory[part];
     } else {
+      commentsDiv.innerHTML += `<div class='white'>cp: directory not found: ${part}</div>`;
       return;
     }
   }
-  currentDirectory[`${sourceFile}`] = getFileContent(sourcePath);
 
-  commentsDiv.innerHTML += `copy a file and directories`;
+  currentDirectory[targetFileName] = content;
   setingFileSys();
+  commentsDiv.innerHTML += `<div class='white'>copy a file and directories</div>`;
 }
 
+// function mvFunction() {
+//   // cp sourcefile-path destination-path
+//   let paths = desiredUserCommand.split(" ");
+//   if (paths.length < 2) {
+//     return;
+//   }
+//   let sourceFile = paths[0];
+//   let destinationFile = paths[1];
+//   let currentPathSource = [];
+//   let currentPathDestination = [];
+
+//   let sourcePath = getAbsoluteFilePath(
+//     defaultJSONFileSys,
+//     sourceFile,
+//     currentPathSource,
+//   );
+//   if (!sourcePath) {
+//     return;
+//   }
+
+//   // let destinationPath = getAbsoluteFilePath(
+//   //   defaultJSONFileSys,
+//   //   destinationFile,
+//   //   currentPathDestination,
+//   // );
+//   let directionDestination = destinationFile.split("/").filter((p) => p !== "");
+//   let targetFileName = directionDestination.pop();
+
+//   let currentDirectory = defaultJSONFileSys;
+//   for (let part of directionDestination) {
+//     if (currentDirectory[part] && typeof currentDirectory[part] === "object") {
+//       currentDirectory = currentDirectory[currentKey];
+//     } else {
+//       return;
+//     }
+//   }
+//   currentDirectory[targetFileName] = getFileContent(sourcePath);
+
+//   let sourceParts = sourcePath.split("/");
+//   let sourceName = sourceParts.pop();
+//   let sourceParent = defaultJSONFileSys;
+//   for (let part of sourceParts) {
+//     sourceParent = sourceParent[part];
+//   }
+//   delete sourceParent[sourceName];
+
+//   commentsDiv.innerHTML += `move a file and directories`;
+//   setingFileSys();
+// }
+
 function mvFunction() {
-  // cp sourcefile-path destination-path
   let paths = desiredUserCommand.split(" ");
-  if (paths.length < 2) {
-    return;
-  }
+  if (paths.length < 2) return;
+
   let sourceFile = paths[0];
   let destinationFile = paths[1];
-  let currentPathSource = [];
-  let currentPathDestination = [];
 
-  let sourcePath = getAbsoluteFilePath(
-    defaultJSONFileSys,
-    sourceFile,
-    currentPathSource,
-  );
-  if (!sourcePath) {
-    return;
-  }
+  let sourcePath = getAbsoluteFilePath(defaultJSONFileSys, sourceFile);
+  if (!sourcePath) return;
 
-  // let destinationPath = getAbsoluteFilePath(
-  //   defaultJSONFileSys,
-  //   destinationFile,
-  //   currentPathDestination,
-  // );
+  let content = getFileContent(sourcePath);
+
   let directionDestination = destinationFile.split("/").filter((p) => p !== "");
   let targetFileName = directionDestination.pop();
 
   let currentDirectory = defaultJSONFileSys;
   for (let part of directionDestination) {
+    // FIX: Reference 'part' and 'currentDirectory', not 'currentKey' or 'temp'
     if (currentDirectory[part] && typeof currentDirectory[part] === "object") {
-      currentDirectory = currentDirectory[currentKey];
+      currentDirectory = currentDirectory[part];
     } else {
       return;
     }
   }
-  currentDirectory[targetFileName] = getFileContent(sourcePath);
 
+  // Set the new file
+  currentDirectory[targetFileName] = content;
+
+  // Delete the old file
   let sourceParts = sourcePath.split("/");
   let sourceName = sourceParts.pop();
   let sourceParent = defaultJSONFileSys;
@@ -389,7 +466,7 @@ function mvFunction() {
   }
   delete sourceParent[sourceName];
 
-  commentsDiv.innerHTML += `move a file and directories`;
+  commentsDiv.innerHTML += `<div class='white'>moved ${sourceFile} to ${destinationFile}</div>`;
   setingFileSys();
 }
 

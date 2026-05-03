@@ -68,48 +68,87 @@ export function fiilePathExisit(filePath) {
   return starting !== undefined;
 }
 
-export function getAbsoluteFilePath(currentMap, filePath, path) {
-  // "/usr/unix";
-  let absolutePath = [];
-  let destination;
-  // defaultJSONFileSys = file system... would get get the length of top view
-  // if (filePath.includes("/")) {
-  //   let pathParts = filePath.split("/");
-  //   destination = pathParts[pathParts.length - 1];
-  // } else {
-  //   destination = filePath;
-  // }
+// export function getAbsoluteFilePath(currentMap, filePath, path) {
+//   // "/usr/unix";
+//   let absolutePath = [];
+//   let destination;
+//   // defaultJSONFileSys = file system... would get get the length of top view
+//   // if (filePath.includes("/")) {
+//   //   let pathParts = filePath.split("/");
+//   //   destination = pathParts[pathParts.length - 1];
+//   // } else {
+//   //   destination = filePath;
+//   // }
 
+//   for (let key in currentMap) {
+//     let possiblePath = [...path, key];
+//     if (key === destination) // if found on the first level
+//     {
+//       return possiblePath.join("/");
+//     }
+
+//     if (typeof currentMap[key] === "object" && currentMap[key] !== null) {
+//       absolutePath = getAbsoluteFilePath(
+//         defaultJSONFileSys[key],
+//         filePath,
+//         possiblePath,
+//       );
+//       if (absolutePath) {
+//         return absolutePath;
+//       }
+//     }
+//   }
+
+//   return null;
+// }
+
+// export function getFileContent(absolutePath) {
+//   let fileDirection = absolutePath.split("/");
+
+//   let currentDirectory = defaultJSONFileSys[fileDirections[0]];
+//   for (let i = 1; i < fileDirection.length; i += 1) {
+//     let currentKey = fileDirection[i];
+//     let temp = currentDirectory;
+//     currentDirectory = temp[currentKey];
+//   }
+//   return currentDirectory[`${desiredUserCommand}`];
+// }
+
+export function getAbsoluteFilePath(currentMap, targetName, path = []) {
   for (let key in currentMap) {
-    let possiblePath = [...path, key];
-    if (key === destination) // if found on the first level
-    {
-      return possiblePath.join("/");
+    let currentPath = [...path, key];
+
+    if (key === targetName) {
+      return currentPath.join("/");
     }
 
     if (typeof currentMap[key] === "object" && currentMap[key] !== null) {
-      absolutePath = getAbsoluteFilePath(
-        defaultJSONFileSys[key],
-        filePath,
-        possiblePath,
-      );
-      if (absolutePath) {
-        return absolutePath;
-      }
+      let found = getAbsoluteFilePath(currentMap[key], targetName, currentPath);
+      if (found) return found;
     }
   }
-
   return null;
 }
 
 export function getFileContent(absolutePath) {
-  let fileDirection = absolutePath.split("/");
+  let parts = absolutePath.split("/");
+  let current = defaultJSONFileSys;
 
-  let currentDirectory = defaultJSONFileSys[fileDirections[0]];
-  for (let i = 1; i < fileDirection.length; i += 1) {
-    let currentKey = fileDirection[i];
-    let temp = currentDirectory;
-    currentDirectory = temp[currentKey];
+  for (let part of parts) {
+    if (current[part] !== undefined) {
+      current = current[part];
+    }
   }
-  return currentDirectory[`${desiredUserCommand}`];
+  return current;
+}
+
+export function getFolderObject(pathString) {
+  let parts = pathString.split("/").filter((p) => p !== "");
+  let current = defaultJSONFileSys;
+  for (let part of parts) {
+    if (current[part]) {
+      current = current[part];
+    }
+  }
+  return current;
 }
