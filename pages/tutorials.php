@@ -1,14 +1,7 @@
 <?php
     include "../assets/files/nav.php";
+    include "../assets/files/sidebar.php";
 ?>
-    <ul class="sidebar">
-        <li>Requirements & Setup</li>
-        <li class="sidebar_inbetween">--------------------</li>
-        <li>File System Hierarchy</li>
-        <li>Security & Permission</li>
-        <li>Shell & Sub Support</li>
-        <li>Scripting</li>
-    </ul>
     <h1>Tutorial</h1>
     <h2>Requirements & Setup</h2>
     <h3>Operating System</h3>

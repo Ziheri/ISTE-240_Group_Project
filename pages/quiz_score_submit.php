@@ -18,7 +18,7 @@ $selection = $_SESSION['username'];
 
 //Start High Score Check
     //Queries the database, identifying quiz score values
-    $res = $mysqli->query("SELECT quiz, score FROM 240UnixGroupProject WHERE user = '$selection'");
+    $res = $mysqli->query("SELECT id, quiz, score FROM 240UnixGroupProject WHERE user = '$selection'");
     if ($res) {
 		while($rowholder = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
 			$records[] = $rowholder;
@@ -26,6 +26,7 @@ $selection = $_SESSION['username'];
 	}
     $recent = $records[0]['quiz'];
     $best = $records[0]['score'];
+    var_dump($records);
 
     //Checks if the recent score if higher than the best score
     if ($recent > $best) {

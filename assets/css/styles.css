@@ -164,7 +164,7 @@ a {
     max-width: 12rem;
     list-style-type: none;
     margin-left: 3rem;
-    margin-top: 20rem;
+    margin-top: 50%;
     padding-left: 1rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -194,11 +194,11 @@ html {
     scroll-behavior: smooth;
 }
 
-.test {
+/* .test {
     color: white;
     margin-left: 50%;
     margin-bottom: 100%;
-}
+} */
 /**End Sidebar CSS*/
 
 /**Start Login/Signup Page CSS*/
