@@ -28,9 +28,9 @@
             </ul>
             <ul class="navbar-2">
                 <?php if (isset($_SESSION['username'])): ?>
-                <li><a href="logout.php">Logout</a></li>
+                <li><a href="profile.php" <?php echo $current_page == 'profile.php' ? 'class="active"' : ''; ?>>Profile</a></li>
                 <?php else: ?>
-                <li><a href="login.php">Login</a></li>
+                <li><a href="login.php" <?php echo $current_page == 'login.php' ? 'class="active"' : ''; ?>>Login</a></li>
                 <?php endif; ?>
             </ul>
         </nav>
