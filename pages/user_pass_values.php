@@ -42,7 +42,7 @@
         foreach($records as $this_row) {
             if($_POST['usernamel'] == $this_row['user'] && $_POST['passwordl'] == $this_row['pass']) {
                 session_start();
-                $_SESSION['username'] = $_POST['usernamel']
+                $_SESSION['username'] = $_POST['usernamel'];
                 $login = true;
                 break;
             } else {
