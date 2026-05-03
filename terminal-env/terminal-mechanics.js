@@ -497,29 +497,74 @@ function catFunction() {
 
 function grepFunction() {
   let paths = desiredUserCommand.split(" ");
-  if (paths.length < 2) {
+  if (paths.length < 2) return;
+
+  let regexPattern = paths[0].replace(/['"]+/g, "");
+  let fileName = paths[1].replace(/['"]+/g, "");
+
+  let currentDir = getFolderObject(currentFilePath);
+
+  let contentStuff = currentDir[fileName];
+
+  if (!contentStuff) {
+    let altLookUp = getFolderObject(fileName);
+    contentStuff = altLookUp ? altLookUp[fileName] : null;
+  }
+
+  if (!contentStuff) {
+    commentsDiv.innerHTML += `<div class='white'>grep: ${fileName}: No such file</div>`;
     return;
   }
 
-  let regexPattern = paths[0]; // sourceFile
-  let fileName = paths[1]; // destinationFile
+  let textToSearch =
+    typeof contentStuff === "string" ? contentStuff : contentStuff.content;
 
-  let fileStuff = getFolderObject(fileName);
-  let contentStuff = fileStuff[fileName];
-
-  if (typeof contentStuff !== "string") {
-    commentsDiv.innerHTML += `<div class='white'>grep: ${fileName}: Is a directory or empty</div>`;
+  if (typeof textToSearch !== "string") {
+    commentsDiv.innerHTML += `<div class='white'>grep: ${fileName}: Is a directory</div>`;
     return;
   }
 
   let regex = new RegExp(`^.*${regexPattern}.*$`, "gm");
-  let matchedStuff = contentStuff.match(regex); // fileStuff.match is not a function
-  if (matchedStuff && matchedStuff.length > 0) {
+  let matchedStuff = textToSearch.match(regex);
+
+  if (matchedStuff) {
     commentsDiv.innerHTML += `<div class="white">${matchedStuff.join("<br>")}</div>`;
-  } else {
-    commentsDiv.innerHTML += `<div class='white'>grep: ${fileName}: No such file</div>`;
   }
+
   setingFileSys();
+  // let paths = desiredUserCommand.split(" ");
+  // if (paths.length < 2) {
+  //   return;
+  // }
+
+  // let regexPattern = paths[0].replace(/['"]+/g, ""); // sourceFile
+  // let fileName = paths[1].replace(/['"]+/g, ""); // destinationFile
+
+  // let fileStuff = getFolderObject(fileName);
+
+  // if (!fileStuff || !fileStuff[fileName]) {
+  //   commentsDiv.innerHTML += `<div class='white'>grep: ${fileName}: No such file</div>`;
+  //   return;
+  // }
+
+  // let contentStuff = fileStuff[fileName];
+
+  // let textRegex =
+  //   typeof contentStuff === "string" ? contentStuff : contentStuff.content;
+
+  // if (typeof textRegex !== "string") {
+  //   commentsDiv.innerHTML += `<div class='white'>grep: ${fileName}: Is a directory or empty</div>`;
+  //   return;
+  // }
+
+  // let regex = new RegExp(`^.*${regexPattern}.*$`, "gm");
+  // let matchedStuff = textRegex.match(regex); // fileStuff.match is not a function
+  // if (matchedStuff) {
+  //   commentsDiv.innerHTML += `<div class="white">${matchedStuff.join("<br>")}</div>`;
+  // } else {
+  //   commentsDiv.innerHTML += `<div class='white'>grep: ${fileName}: No such file</div>`;
+  // }
+  // setingFileSys();
   // commentsDiv.innerHTML += `using grep`;
 }
 
