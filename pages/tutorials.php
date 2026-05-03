@@ -263,7 +263,81 @@
 
             <div id="terminal-section" class="tutorial_section">
                 <h2>Practice Terminal</h2>
-                <link rel="stylesheet" href="../terminal-env/terminal-styles.css">
+                <style>
+                    #terminal-section .terminal-div {
+                        --gray: #2E2E2E;
+                        height: 400px;
+                        width: 100%;
+                        min-width: 350px;
+                        min-height: 200px;
+                        display: flex;
+                        flex-direction: column;
+                        background-color: #2E2E2E;
+                        background-image: linear-gradient(to right, #2E2E2E, #565656);
+                        position: relative;
+                        border-radius: 5px;
+                        resize: both;
+                        overflow-y: auto;
+                        overflow-x: hidden;
+                        font-family: monospace;
+                        font-size: large;
+                    }
+                    #terminal-section .terminal-header {
+                        height: 30px;
+                        width: 100%;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: flex-end;
+                        align-items: center;
+                    }
+                    #terminal-section .title {
+                        margin-right: auto;
+                        margin-left: 5px;
+                        color: white;
+                        font-family: monospace;
+                        font-size: 1rem;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 7px;
+                    }
+                    #terminal-section .terminal-chat {
+                        padding-left: 2.5%;
+                        padding-right: 2.5%;
+                        padding-top: 10px;
+                        height: 100%;
+                        width: 100%;
+                        background-color: black;
+                        scrollbar-width: thin;
+                        overflow-y: auto;
+                    }
+                    #terminal-section .comments {
+                        display: flex;
+                        flex-direction: column;
+                        color: white;
+                    }
+                    #terminal-section .comment-div {
+                        display: grid;
+                        grid-template-columns: auto 8fr;
+                        gap: 10px;
+                        margin-top: 20px;
+                    }
+                    #terminal-section .user-command {
+                        width: 95%;
+                        border: none;
+                        font-family: monospace;
+                        caret-color: white;
+                        color: white;
+                        background-color: black;
+                        font-size: large;
+                        outline: none;
+                    }
+                    #terminal-section .green { color: #adff2f; }
+                    #terminal-section .yellow { color: #ffff00; }
+                    #terminal-section .red { color: palevioletred; }
+                    #terminal-section .white { color: white; }
+                    #terminal-section span { white-space: nowrap; }
+                </style>
                 <div class="terminal-div">
                     <div class="terminal-header">
                         <div class="title">
