@@ -26,21 +26,28 @@ body {
     background: black;
     font-family: "Handjet", Arial, Helvetica, sans-serif;
     margin: 0;
-    padding: 6rem;
+    padding-left: 10rem;
+    padding-right: 10rem;
 }
 
 h1 {
-    /**margin-top: 32rem;**/
+    justify-self: center;
     text-align: center;
     margin-left: 0;
     color: #009444;
     font-size: 4rem;
 }
 
-h2, h3 {
+h2 {
     color: #009444;
     font-family: "Workbench", Arial, Helvetica, sans-serif;
     font-size: 3rem;
+}
+
+h3 {
+    color: #009444;
+    font-family: "Workbench", Arial, Helvetica, sans-serif;
+    font-size: 2.5rem;
 }
 
 p{
@@ -210,7 +217,7 @@ a {
 .sidebar {
     font-family: "Handjet", Arial, Helvetica, sans-serif;
     position: sticky;
-    top: 2rem;
+    top: 40%;
     color: #ED1C24;
     font-size: 1.5rem;
     list-style-type: none;
