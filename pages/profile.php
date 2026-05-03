@@ -30,7 +30,6 @@
 ?>
     <div id="profile_container">
         <h1>Welcome, <?php echo htmlspecialchars($selection); ?>!</h1>
-        <a href="logout.php"><button class="logout_button">Logout</button></a>
         <h2>Quiz Scores</h2>
         <?php if (!empty($records) && $records[0]['quiz'] !== null): ?>
             <p>Last Score: <?php echo $records[0]['quiz']; ?></p>
