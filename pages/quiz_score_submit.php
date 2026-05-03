@@ -42,6 +42,6 @@ $selection = $_SESSION['username'];
         }
     }
 
-    header('Location: profile.php');
-    exit(); 
+    echo json_encode(['success' => true]);
+    exit();
 ?>
