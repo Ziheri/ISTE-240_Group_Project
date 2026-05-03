@@ -1,3 +1,6 @@
+<?php
+    $current_page = basename($_SERVER['PHP_SELF']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,12 +19,12 @@
         </a>
         <nav>
             <ul class="navbar">
-                <li><a href="index.php">Home</a></li>
-                <li><a href="history.php">History</a></li>
-                <li><a href="tutorials.php">Tutorial</a></li>
-                <li><a href="quiz.php">Quiz</a></li>
-                <li><a href="scoreboard.php">Scoreboard</a></li>
-                <li><a href="grading.php">Grading</a></li>
+                <li><a href="index.php" <?php echo $current_page == 'index.php' ? 'class="active"' : ''; ?>>Home</a></li>
+                <li><a href="history.php" <?php echo $current_page == 'history.php' ? 'class="active"' : ''; ?>>History</a></li>
+                <li><a href="tutorials.php" <?php echo $current_page == 'tutorials.php' ? 'class="active"' : ''; ?>>Tutorial</a></li>
+                <li><a href="quiz.php" <?php echo $current_page == 'quiz.php' ? 'class="active"' : ''; ?>>Quiz</a></li>
+                <li><a href="scoreboard.php" <?php echo $current_page == 'scoreboard.php' ? 'class="active"' : ''; ?>>Scoreboard</a></li>
+                <li><a href="grading.php" <?php echo $current_page == 'grading.php' ? 'class="active"' : ''; ?>>Grading</a></li>
             </ul>
             <ul class="navbar-2">
                 <?php if (isset($_SESSION['username'])): ?>
