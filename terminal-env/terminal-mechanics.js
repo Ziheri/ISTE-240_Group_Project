@@ -507,7 +507,6 @@ function grepFunction() {
     commentsDiv.innerHTML += `<div class='white'>cp: ${fileName}: No such file</div>`;
     return;
   }
-  let content = getFileContent(sourcePath);
 
   let destParts = destinationFile.split("/").filter((p) => p !== "");
   let targetFileName = destParts.pop();
@@ -520,14 +519,13 @@ function grepFunction() {
     if (currentDirectory[part] && typeof currentDirectory[part] === "object") {
       currentDirectory = currentDirectory[part];
     } else {
-      commentsDiv.innerHTML += `<div class='white'>cp: directory not found: ${part}</div>`;
+      commentsDiv.innerHTML += `<div class='white'>grep: directory not found: ${part}</div>`;
       return;
     }
   }
-
-  currentDirectory[targetFileName] = content;
+  commentsDiv.innerHTML += currentDirectory[targetFileName];
   setingFileSys();
-  commentsDiv.innerHTML += `using grep`;
+  // commentsDiv.innerHTML += `using grep`;
 }
 
 function pipeFunction() {
