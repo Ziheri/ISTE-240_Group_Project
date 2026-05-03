@@ -31,7 +31,7 @@
         }
     }
     
-    if (!empty($records)) {
+    if (!empty($records) && $records[0]['quiz'] !== null) {
         $recent = $records[0]['quiz'];
         $best = $records[0]['score'];
         echo "<p>Last Score: ". $recent . "</p>";
