@@ -523,7 +523,8 @@ function grepFunction() {
       return;
     }
   }
-  commentsDiv.innerHTML += currentDirectory[targetFileName];
+  let regex = new RegExp(`/^.*${regexPattern}.*$/gm`, "gm");
+  commentsDiv.innerHTML += currentDirectory[targetFileName].match(regex);
   setingFileSys();
   // commentsDiv.innerHTML += `using grep`;
 }
