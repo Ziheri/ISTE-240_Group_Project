@@ -512,7 +512,7 @@ function grepFunction() {
     return;
   }
 
-  let regex = new RegExp(`/^.*${regexPattern}.*$/gm`, "gm");
+  let regex = new RegExp(`^.*${regexPattern}.*$`, "gm");
   let matchedStuff = contentStuff.match(regex); // fileStuff.match is not a function
   if (matchedStuff == true) {
     commentsDiv.innerHTML += `<div class="white">${matchedStuff.join("<br>")}</div>`;
