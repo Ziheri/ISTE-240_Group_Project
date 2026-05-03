@@ -514,7 +514,7 @@ function grepFunction() {
 
   let regex = new RegExp(`^.*${regexPattern}.*$`, "gm");
   let matchedStuff = contentStuff.match(regex); // fileStuff.match is not a function
-  if (matchedStuff == true) {
+  if (matchedStuff === true) {
     commentsDiv.innerHTML += `<div class="white">${matchedStuff.join("<br>")}</div>`;
   } else {
     commentsDiv.innerHTML += `<div class='white'>grep: ${fileName}: No such file</div>`;
