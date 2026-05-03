@@ -414,6 +414,13 @@ html {
 }
 /**End Quiz Page CSS*/
 
+#tutorials_layout {
+    display: grid;
+    grid-template-columns: 15rem auto;
+    gap: 2rem;
+    align-items: start;
+}
+
 @media (max-width: 600px) {
     #title_pc {
         display: none;
