@@ -1,7 +1,8 @@
 <?php
     session_start();
     include "../assets/files/nav.php";
-    include "terminal-env/terminalHome.php";
+    include "../terminal-env/terminalHome.php";
+    include "../terminal-env/terminal-styles.css"
 ?>
     <h1>Tutorial</h1>
     
