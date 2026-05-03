@@ -60,6 +60,15 @@ li b {
     color: #ED1C24;
 }
 
+.navbar li,
+.navbar-2 li,
+.sidebar li {
+    font-family: "Handjet", Arial, Helvetica, sans-serif;
+    font-size: 1.5rem;
+    color: #ED1C24;
+    padding: 0;
+}
+
 .tracks {
     padding: 2rem;
     padding-left: 4rem;
