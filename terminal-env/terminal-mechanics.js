@@ -497,22 +497,17 @@ function catFunction() {
 
 function grepFunction() {
   let paths = desiredUserCommand.split(" ");
-  if (paths.length < 2) return;
+  if (paths.length < 2) {
+    return;
+  }
 
   let regexPattern = paths[0]; // sourceFile
   let fileName = paths[1]; // destinationFile
 
-  let sourcePath = getAbsoluteFilePath(defaultJSONFileSys, fileName, []);
-  if (!sourcePath) {
-    commentsDiv.innerHTML += `<div class='white'>grep: ${fileName}: No such file</div>`;
-    return;
-  }
-
   let fileStuff = getFolderObject(fileName);
+  let contentStuff = fileStuff[fileName];
 
-  let content = typeof fileStuff === "string" ? fileStuff : fileStuff.content;
-
-  if (!content) {
+  if (typeof fileStuff !== "string") {
     commentsDiv.innerHTML += `<div class='white'>grep: ${fileName}: Is a directory or empty</div>`;
     return;
   }
