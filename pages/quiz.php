@@ -19,11 +19,11 @@
 
             
             <div id="q2_block">
-                <p>2. Who developed the Linux operating system?</p>
-                <p><label><input type="radio" name="q2" value="A"> A.) Linus Torvalds</label></p>
-                <p><label><input type="radio" name="q2" value="B"> B.) Richard Stallman</label></p>
-                <p><label><input type="radio" name="q2" value="C"> C.) Steve Jobs</label></p>
-                <p><label><input type="radio" name="q2" value="D"> D.) Bill Gates</label></p>
+                <p>2. Which of the following brought huge interest to UNIX?</p>
+                <p><label><input type="radio" name="q2" value="A"> A.) A paper in Communications of the ACM</label></p>
+                <p><label><input type="radio" name="q2" value="B"> B.) An article in Times Magazine</label></p>
+                <p><label><input type="radio" name="q2" value="C"> C.) References to the OS made in science fiction movies</label></p>
+                <p><label><input type="radio" name="q2" value="D"> D.) A large marketing campaign by AT&T</label></p>
             </div>
 
           
@@ -73,11 +73,11 @@
 
           
             <div id="q8_block">
-                <p>8. Which project started by Richard Stallman aimed to build a free Unix-like operating system?</p>
-                <p><label><input type="radio" name="q8" value="A"> A.) BSD</label></p>
-                <p><label><input type="radio" name="q8" value="B"> B.) GNU</label></p>
-                <p><label><input type="radio" name="q8" value="C"> C.) Solaris</label></p>
-                <p><label><input type="radio" name="q8" value="D"> D.) DOS</label></p>
+                <p>8. Which of the following two were involved in creating UNIX?</p>
+                <p><label><input type="radio" name="q8" value="A"> A.) Linus Torvalds and Andrew S. Tanenbaum</label></p>
+                <p><label><input type="radio" name="q8" value="B"> B.) Ken Thompson and Dennis Ritchie</label></p>
+                <p><label><input type="radio" name="q8" value="C"> C.) Gabe Newell and Linus Sebastian</label></p>
+                <p><label><input type="radio" name="q8" value="D"> D.) William R. Della Croce Jr. and Steve Wozniak</label></p>
             </div>
 
          
