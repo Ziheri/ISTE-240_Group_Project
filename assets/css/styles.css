@@ -81,8 +81,10 @@ p{
 
 #title_pc {
     grid-area: title;
-    max-width: 60%;
+    max-width: 400px;
+    width: 30%;
     height: auto;
+    justify-self: center;
 }
 
 #title_mobile {
