@@ -3,6 +3,7 @@
     // $query = "SELECT * FROM 240UnixGroupProject (user, pass)";
 
     //Queries the Database for Usernames and Passwords
+    $records = [];
     $res = $mysqli->query("SELECT user, pass FROM 240UnixGroupProject");
     if($res) {
 		while($rowholder = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
@@ -23,12 +24,12 @@
                 continue;
             }
         }
-        if($mysqli && !empty($_POST['usernames']) && !empty($_POST['passwords'] && !$taken)) {
+        if($mysqli && !empty($_POST['usernames']) && !empty($_POST['passwords']) && !$taken) {
             $start = $mysqli->prepare('INSERT INTO 240UnixGroupProject (User, Pass) VALUES (?, ?)');
             $start->bind_param("ss", $_POST['usernames'], $_POST['passwords']);
             $start->execute();
             $start->close();
-            echo "<p> Signup Completed. Welcome, " . $_POST['usernames'] . ".</p>";
+            header('Location: profile.php');
         }
     } else {
         echo "<p>Username or Password is Missing.";
@@ -40,7 +41,8 @@
     if(!empty($_POST['usernamel']) && !empty($_POST['passwordl'])) {
         foreach($records as $this_row) {
             if($_POST['usernamel'] == $this_row['user'] && $_POST['passwordl'] == $this_row['pass']) {
-                echo "<p> Login Successful. Welcome, " . $_POST['usernamel'] . ".</p>";
+                session_start();
+                $_SESSION['username'] = $_POST['usernamel']
                 $login = true;
                 break;
             } else {
@@ -50,6 +52,9 @@
         }
         if(!$login) {
             echo "<p>Login Failed. Username or Password is Incorrect.</p>";
+        } else {
+            header('Location: profile.php');
+            exit();
         }
     }
     //End Login Function
