@@ -7,7 +7,7 @@ export function getAllDirectories(filePath) {
   let keys = Object.keys(filePath);
   keys.forEach((key) => {
     if (typeof filePath[key] === "object" && filePath[key] !== null) {
-      keys = keys.concat(getAllKeys(filePath[key]));
+      keys = keys.concat(getAllDirectories(filePath[key]));
     }
   });
   return keys;
@@ -72,33 +72,34 @@ export function getAbsoluteFilePath(currentMap, filePath, path) {
   // "/usr/unix";
   let absolutePath = [];
   let destination;
-  let topLvl = Object.keys(defaultJSONFileSys);
   // defaultJSONFileSys = file system... would get get the length of top view
-  if (filePath.includes("/")) {
-    let pathParts = filePath.split("/");
-    destination = pathParts[pathParts.length - 1];
-  } else {
-    destination = filePath;
-  }
+  // if (filePath.includes("/")) {
+  //   let pathParts = filePath.split("/");
+  //   destination = pathParts[pathParts.length - 1];
+  // } else {
+  //   destination = filePath;
+  // }
 
-  for (let key in defaultJSONFileSys) {
-    let possiblePath = [...topLvl, key];
-    if (defaultJSONFileSys[key] === destination) // if found on the first level
+  for (let key in currentMap) {
+    let possiblePath = [...path, key];
+    if (key === destination) // if found on the first level
     {
-      absolutePath.push(possiblePath);
+      return possiblePath.join("/");
     }
 
-    if (
-      typeof defaultJSONFileSys[key] === "object" &&
-      defaultJSONFileSys[key] !== null
-    ) {
-      absolutePath = absolutePath.concat(
-        getAbsoluteFilePath(defaultJSONFileSys[key], destination, pathParts),
+    if (typeof currentMap[key] === "object" && currentMap[key] !== null) {
+      absolutePath = getAbsoluteFilePath(
+        defaultJSONFileSys[key],
+        filePath,
+        possiblePath,
       );
+      if (absolutePath) {
+        return absolutePath;
+      }
     }
   }
 
-  return absolutePath.join("/");
+  return null;
 }
 
 export function getFileContent(absolutePath) {

@@ -87,15 +87,12 @@ function listingDirs() {
   // ls -a (directories and files)
   // ls -la (lists all files, including hidden ones,)
   // currentFilePath
-  let fileDirection = currentFilePath.split("/");
-  console.log("this is the current listing: " + fileDirection);
-
-  console.log("more than one file");
+  let fileDirection = currentFilePath.split("/").filter((part) => part !== "");
   let findingDir = false;
-  let currentFile = 1;
+  let currentFile = 0;
   let level = defaultJSONFileSys;
   let chosenDirectory = "";
-  console.log("we are in the ls!!");
+  // console.log("we are in the ls!!");
   if (fileDirection.length == 1) {
     Object.keys(defaultJSONFileSys).forEach((key) => {
       commentsDiv.innerHTML += `<div class='white'>${key}</div>`;
@@ -309,6 +306,7 @@ function cpFunction() {
   let paths = desiredUserCommand.split(" ");
   let sourceFile = paths[0];
   let destinationFile = paths[1];
+
   let currentPathSource = [];
   let currentPathDestination = [];
 
@@ -317,20 +315,29 @@ function cpFunction() {
     sourceFile,
     currentPathSource,
   );
-  let destinationPath = getAbsoluteFilePath(
-    defaultJSONFileSys,
-    destinationFile,
-    currentPathDestination,
-  );
-  let directionDestination = destinationPath.split("/");
-
-  let currentDirectory = defaultJSONFileSys[fileDirections[0]];
-  for (let i = 1; i < directionDestination.length; i += 1) {
-    let currentKey = directionDestination[i];
-    let temp = currentDirectory;
-    currentDirectory = temp[currentKey];
+  if (!sourcePath) {
+    return;
   }
-  currentDirectory[`${desiredUserCommand}`] = getFileContent(sourcePath);
+  // let destinationPath = getAbsoluteFilePath(
+  //   defaultJSONFileSys,
+  //   destinationFile,
+  //   currentPathDestination,
+  // );
+  // if (destinationPath === null) {
+  //   return; // so da program don't crash.....
+  // }
+  let directionDestination = destinationFile.split("/").filter((p) => p !== "");
+  let fileName = directionDestination.pop();
+  let currentDirectory = defaultJSONFileSys;
+
+  for (let place of directionDestination) {
+    if (currentDirectory[place]) {
+      currentDirectory = currentDirectory[place];
+    } else {
+      return;
+    }
+  }
+  currentDirectory[`${sourceFile}`] = getFileContent(sourcePath);
 
   commentsDiv.innerHTML += `copy a file and directories`;
   setingFileSys();
@@ -339,6 +346,9 @@ function cpFunction() {
 function mvFunction() {
   // cp sourcefile-path destination-path
   let paths = desiredUserCommand.split(" ");
+  if (paths.length < 2) {
+    return;
+  }
   let sourceFile = paths[0];
   let destinationFile = paths[1];
   let currentPathSource = [];
@@ -349,21 +359,35 @@ function mvFunction() {
     sourceFile,
     currentPathSource,
   );
-  let destinationPath = getAbsoluteFilePath(
-    defaultJSONFileSys,
-    destinationFile,
-    currentPathDestination,
-  );
-  let directionDestination = destinationPath.split("/");
-
-  let currentDirectory = defaultJSONFileSys[fileDirections[0]];
-  for (let i = 1; i < directionDestination.length; i += 1) {
-    let currentKey = directionDestination[i];
-    let temp = currentDirectory;
-    currentDirectory = temp[currentKey];
+  if (!sourcePath) {
+    return;
   }
-  currentDirectory[`${desiredUserCommand}`] = getFileContent(sourcePath);
-  delete getFileContent(sourcePath);
+
+  // let destinationPath = getAbsoluteFilePath(
+  //   defaultJSONFileSys,
+  //   destinationFile,
+  //   currentPathDestination,
+  // );
+  let directionDestination = destinationFile.split("/").filter((p) => p !== "");
+  let targetFileName = directionDestination.pop();
+
+  let currentDirectory = defaultJSONFileSys;
+  for (let part of directionDestination) {
+    if (currentDirectory[part] && typeof currentDirectory[part] === "object") {
+      currentDirectory = currentDirectory[currentKey];
+    } else {
+      return;
+    }
+  }
+  currentDirectory[targetFileName] = getFileContent(sourcePath);
+
+  let sourceParts = sourcePath.split("/");
+  let sourceName = sourceParts.pop();
+  let sourceParent = defaultJSONFileSys;
+  for (let part of sourceParts) {
+    sourceParent = sourceParent[part];
+  }
+  delete sourceParent[sourceName];
 
   commentsDiv.innerHTML += `move a file and directories`;
   setingFileSys();
