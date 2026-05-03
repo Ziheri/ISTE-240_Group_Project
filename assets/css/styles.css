@@ -131,7 +131,7 @@ nav {
 }
 
 .navbar, .navbar-2{
-    font-family: "Barlow", Arial, Helvetica, sans-serif;
+    font-family: "Handjet", Arial, Helvetica, sans-serif;
     list-style: none;
     display: grid;
     grid-auto-flow: column;
@@ -188,6 +188,7 @@ a {
 
 /**Start Siderbar CSS*/
 .sidebar {
+    font-family: "Handjet", Arial, Helvetica, sans-serif;
     position: sticky;
     top: 2rem;
     color: #ED1C24;
@@ -209,6 +210,7 @@ a {
 }
 
 .sidebar a {
+    font-family: "Handjet", Arial, Helvetica, sans-serif;
     color: #ED1C24;
     text-decoration: none;
     display: block;
@@ -484,7 +486,7 @@ a {
         gap: 0.5rem;
         padding: 0.5rem 2rem;
         font-size: 2.5rem;
-        font-family: "Barlow", Arial, Helvetica, sans-serif;
+        font-family: "Handjet", Arial, Helvetica, sans-serif;
     }
 
     nav.open .navbar li::after {
