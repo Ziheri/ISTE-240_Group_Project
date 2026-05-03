@@ -87,7 +87,6 @@ li b {
     padding-left: 4rem;
     padding-right: 4rem;
     border-radius: 2rem;
-    font-size: 2rem;
     justify-self: center;
     color: #ED1C24;
     background: lightgray;
@@ -96,7 +95,6 @@ li b {
 #tracks_grid {
     display: grid;
     grid-template-columns: auto auto;
-    justify-content: center;
     gap: 2rem;
     margin: 2rem auto;
     max-width: 1200px;
@@ -104,7 +102,7 @@ li b {
 
 #tracks_grid a p {
     color: #FFF;
-    max-width: 20rem;
+    text-align: center;
 }
 
 body > p {
@@ -191,6 +189,11 @@ a {
 }
 
 .navbar li a.active {
+    color: #f62c2c;
+    border-bottom: 3px solid #f62c2c;
+}
+
+.navbar-2 li a.active {
     color: #f62c2c;
     border-bottom: 3px solid #f62c2c;
 }
@@ -495,6 +498,8 @@ a {
 #profile_container p {
     text-align: center;
 }
+
+
 
 
 @media (max-width: 600px) {

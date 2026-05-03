@@ -34,6 +34,9 @@
         <?php if (!empty($records) && $records[0]['quiz'] !== null): ?>
             <p>Last Score: <?php echo $records[0]['quiz']; ?></p>
             <p>Best Score: <?php echo $records[0]['score']; ?></p>
+            <form method="POST" action="logout.php">
+                <input type="submit" value="Logout" class="login_button">
+            </form>
         <?php else: ?>
             <p>No score recorded. Take the quiz to receive scores.</p>
         <?php endif; ?>

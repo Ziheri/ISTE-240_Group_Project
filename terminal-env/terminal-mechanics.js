@@ -1,182 +1,652 @@
+import { generalCommnads } from "./allManInfo.js";
+import {
+  getAllDirectories,
+  fiilePathExisit,
+  getFileContent,
+  getAbsoluteFilePath,
+  getFolderObject,
+} from "./helperfunc.js";
+import { updatedContented } from "./viEditor.js";
+
 // VARIABLES
-let pastCommands = [];
+//let pastCommands = [];
+let pastCommands = JSON.parse(sessionStorage.getItem("terminalHistory")) || [];
 let timesPressedUp = 0;
+let desiredUserCommand = "";
+let currentFilePath = "/usr/unix";
 
 //helper functions....
-function enterFunction()
-{
-    timesPressedUp = 0;
-    addComment();
-    document.querySelector(".comment-div").scrollIntoView();
-    console.log("pressed enter");
+function enterFunction() {
+  timesPressedUp = 0;
+  addComment();
+  document.querySelector(".comment-div").scrollIntoView();
+  console.log("pressed enter");
 }
 
-function arrowUpFunction()
-{
-    if (pastCommands.length > timesPressedUp) (timesPressedUp++);
-        let lastCommand = pastCommands[pastCommands.length - timesPressedUp];
-        document.querySelector(".user-command").value = lastCommand;
+function arrowUpFunction() {
+  if (pastCommands.length > timesPressedUp) timesPressedUp++;
+  let lastCommand = pastCommands[pastCommands.length - timesPressedUp];
+  document.querySelector(".user-command").value = lastCommand;
+  if (document.querySelector(".user-command").value == "undefined") {
+    document.querySelector(".user-command").value = "";
+  }
+  console.log("pressed arrow up");
+}
+
+function arrowDownFunction() {
+  if (timesPressedUp == 0) {
+    document.querySelector(".user-command").value = "";
     if (document.querySelector(".user-command").value == "undefined") {
-        document.querySelector(".user-command").value = "";
+      document.querySelector(".user-command").value = "";
     }
-    console.log("pressed arrow up");
+  }
+  console.log("pressed down");
 }
 
-function arrowDownFunction()
-{
-    if (timesPressedUp == 0) {
-        document.querySelector(".user-command").value = "";
-        if (document.querySelector(".user-command").value == "undefined") {
-            document.querySelector(".user-command").value = "";
-        }
-    }
-    console.log("pressed down");
+function tabFunction() {
+  e.preventDefault();
+  let ongoingInput = document.querySelector(".user-command").value;
+  let dict =
+    typeof commandDict[currentlyIn] == "object"
+      ? Object.keys(commandDict[currentlyIn])
+      : commandDict[currentlyIn];
+  ongoingInput === ""
+    ? (document.querySelector(".user-command").value = "")
+    : dict.map((cmd) => {
+        if (cmd.startsWith(ongoingInput))
+          document.querySelector(".user-command").value = cmd;
+      });
+  console.log("pressed tab");
 }
 
-function tabFunction()
-{
-    e.preventDefault();
-    let ongoingInput = document.querySelector(".user-command").value;
-    let dict = typeof commandDict[currentlyIn] == "object" ? Object.keys(commandDict[currentlyIn]) : commandDict[currentlyIn];
-    ongoingInput === "" ? document.querySelector(".user-command").value = "" : dict.map((cmd) => {
-        if (cmd.startsWith(ongoingInput)) document.querySelector(".user-command").value = cmd;
-    })
-    console.log("pressed tab");
-}
-
-let commandOption =
-{
-    "Enter": enterFunction,
-    "ArrowUp": arrowUpFunction,
-    "ArrowDown": arrowDownFunction,
-    "Tab": tabFunction,
+let commandOption = {
+  Enter: enterFunction,
+  ArrowUp: arrowUpFunction,
+  ArrowDown: arrowDownFunction,
+  Tab: tabFunction,
 };
 
 // Event listeners
-document.addEventListener("keydown", (e) =>
-{
-    // commandOption.keys().has(e.key)
-    if (e.key in commandOption)
-    {
-        commandOption[e.key]();
-    }
-})
+document.addEventListener("keydown", (e) => {
+  // commandOption.keys().has(e.key)
+  if (e.key in commandOption) {
+    commandOption[e.key]();
+  }
+});
 
-function clearingFunction()
-{
-    commentsDiv.innerHTML = "";
+function clearingFunction() {
+  commentsDiv.innerHTML = "";
 }
 
-function helpFeauture()
-{
-    let currentDirArray = currentlyIn === "root" ? [...Object.keys(rootCmds), ...mainCmds] : [...themes, ...mainCmds];
-        commentsDiv.innerHTML += `<ul> ${currentDirArray.map((command) => {
-            return `<li class="ls-item"> ${command}</li>`;
-        }).join("")} </ul>`;
+function goingBackDir() {
+  commentsDiv.innerHTML +=
+    "<div class='white'>this is going back a directory</div>";
 }
 
-function goingBackDir()
-{
-    let directory = document.querySelector(".directory");
-    if (currentlyIn == "root")
-    {
-        commentsDiv.innerHTML += "";
-        userCommandDiv.value = "";
+function listingDirs() {
+  // ls (direcories)
+  // ls -a (directories and files)
+  // ls -la (lists all files, including hidden ones,)
+  // currentFilePath
+  let fileDirection = currentFilePath.split("/").filter((part) => part !== "");
+  let findingDir = false;
+  let currentFile = 0;
+  let level = defaultJSONFileSys;
+  let chosenDirectory = "";
+  // console.log("we are in the ls!!");
+  if (fileDirection.length == 1) {
+    Object.keys(defaultJSONFileSys).forEach((key) => {
+      commentsDiv.innerHTML += `<div class='white'>${key}</div>`;
+    });
+
+    console.log("there is stuff in here!!!!");
+  } else {
+    while (findingDir === false) {
+      let direction = fileDirection[currentFile];
+      if (Object.keys(level).includes(direction)) {
+        let temp = level;
+        level = temp[direction];
+        chosenDirectory = level;
+        currentFile += 1;
+      }
+      if (currentFile > fileDirection.length - 1) {
+        Object.keys(level).forEach((key) => {
+          console.log("the file it ended up: " + level);
+          commentsDiv.innerHTML += `<div class='white'>${key}</div>`;
+        });
+        findingDir = true;
+      }
     }
-    currentlyIn = "root";
-    let directories = directory.innerText.split("/");
-    directories.pop();
-    directory.innerHTML = "";
-    directory.innerHTML = directories.map((x) => {
-        if (x !== "") return `/${x}`;
-    }).join('');
+  }
+  return chosenDirectory;
 }
 
-function listingDirs()
-{
-    if (currentlyIn === "themes") // make it get into different directories to show..
-    {
-        commentsDiv.innerHTML += `<div class="ls-cont"> ${[...themes, "root"].map((theme) => {
-            `<div class="ls-item">${theme}</div>`;
-        }).join("")} </div>`;
+function whoAmIFunct() {
+  commentsDiv.innerHTML += "<div class='white'>unix</div>";
+}
+
+function changeDir() {
+  let directory = document.querySelector(".directory");
+  // directory.innerHTML += "/themes";
+
+  // cd
+  // "cd ..": goingBackDir,
+  //"cd ../": goingBackDir,
+  // "cd ~": homeFunct,
+  //"cd /": cdSlashFunction,
+
+  // desiredUserCommand
+  // currentFilePath = "/usr/unix";
+  // currentFilePath
+  let previousPath = currentFilePath;
+
+  if (desiredUserCommand.includes("..") === true) {
+    let fileDirection = previousPath.split("/");
+    console.log("WHAT IST THE FILE DIRECTION: " + fileDirection);
+    fileDirection = fileDirection.filter((part) => part !== "");
+    fileDirection.pop();
+    previousPath = "/" + fileDirection.join("/");
+  } else if (
+    desiredUserCommand.includes("~") === true ||
+    desiredUserCommand === ""
+  ) {
+    previousPath = "/usr/unix";
+    // directory.innerHTML += "~";
+  }
+
+  // else if (desiredUserCommand.includes("../") === true) {
+  //   let currentListing = previousPath.split("/");
+  //   let goingbackCount = desiredUserCommand.split("/");
+  //   for (let i = 0; i < goingbackCount.length; i += 1) {
+  //     let currentCommand = goingbackCount[i];
+  //     if (goingbackCount === "..") {
+  //       currentListing.pop();
+  //     } else {
+  //       currentFilePath += `/${goingbackCount[i]}`;
+  //     }
+  //   }
+  //   currentFilePath = currentListing.join("/");
+  // }
+  else if (String(desiredUserCommand).startsWith("/") === true) {
+    // previousPath
+    previousPath = desiredUserCommand;
+    // if (desiredUserCommand.length > 1) {
+    //   // use the loop
+
+    //   let fileDirection = previousPath.split("/");
+    //   let newDirecotry = fileDirection.pop();
+    //   directory.innerHTML += `${newDirecotry}`;
+    // } else {
+    //   currentFilePath = "/";
+    //   directory.innerHTML += "/";
+    // }
+  }
+
+  // else if (/^[A-Za-z]+$/.test(desiredUserCommand[0]) === true) {
+  //   if (desiredUserCommand.includes("/") === true) {
+  //     let givenPath = desiredUserCommand.split("/");
+  //     let fileDirection = previousPath.split("/");
+  //     let currentPart = 0;
+  //     for (let i = 0; i < givenPath.length; i += 1) {
+  //       if (fileDirection[currentPart] !== givenPath[i]) {
+  //         fileDirection.push(givenPath[i]);
+  //         currentPart += 1;
+  //       }
+  //     }
+  //     directory.innerHTML += "";
+  //     directory.innerHTML += `${fileDirection[fileDirection.length - 1]}`;
+  //     previousPath = fileDirection.join("/");
+  //   } else {
+  //     previousPath += "/" + desiredUserCommand;
+  //     directory.innerHTML += `${desiredUserCommand}`;
+  //   }
+  // }
+  else {
+    // previousPath = "/usr/unix";
+    // directory.innerHTML += "~";
+    let slash = previousPath.endsWith("/") ? "" : "/";
+    console.log("what is in slash: " + slash);
+    previousPath = previousPath + slash + desiredUserCommand;
+    console.log("waht is in the previousPath: " + previousPath);
+  }
+
+  if (fiilePathExisit(previousPath)) {
+    currentFilePath = previousPath;
+
+    let displayParts = currentFilePath.split("/").filter((p) => p !== "");
+    let lastDir =
+      displayParts.length > 0 ? displayParts[displayParts.length - 1] : "/";
+    // directory.innerHTML = lastDir;
+    directory.innerHTML = lastDir === "unix" ? "~" : lastDir;
+  } else {
+    commentsDiv.innerHTML += `<div class='white'>cd: no such file or directory: ${desiredUserCommand}</div>`;
+    //handleInvalidCommand(currentFilePath);
+  }
+}
+
+function pwdFunct() {
+  // unix@user:~$
+  commentsDiv.innerHTML += `<div class='white'>${currentFilePath}</div>`;
+
+  // unix@user:/$
+  // commentsDiv.innerHTML += `<div class='white'>/</div>`;
+}
+
+function homeFunct() {
+  commentsDiv.innerHTML +=
+    "<div class='white'>going back to the root directory</div>";
+}
+
+function echoFunct() {
+  // desiredUserCommand
+  console.log("what is the list message: " + desiredUserCommand);
+  let echoMsg = desiredUserCommand;
+  commentsDiv.innerHTML += `<div class='white'>${echoMsg}</div>`;
+}
+
+function mkDirFunct() {
+  // defaultJSONFileSys {{},{},{}} key: value..
+  // currentFilePath.. = "/usr/unix";
+  let fileDirections = currentFilePath.split("/").filter((part) => part !== "");
+
+  let currentDirectory = defaultJSONFileSys[fileDirections[0]];
+  console.log("current directory???: " + currentDirectory);
+  for (let i = 1; i < fileDirections.length; i += 1) {
+    let currentKey = fileDirections[i];
+    let temp = currentDirectory;
+    currentDirectory = temp[currentKey];
+  }
+  currentDirectory[`${desiredUserCommand}`] = {};
+  setingFileSys();
+}
+
+function rmDirFunct() {
+  let fileDirections = currentFilePath.split("/").filter((part) => part !== "");
+
+  let currentDirectory = defaultJSONFileSys[fileDirections[0]];
+  console.log("current directory???: " + currentDirectory);
+  for (let i = 1; i < fileDirections.length; i += 1) {
+    let currentKey = fileDirections[i];
+    let temp = currentDirectory;
+    currentDirectory = temp[currentKey];
+  }
+  delete currentDirectory[`${desiredUserCommand}`];
+  setingFileSys();
+}
+
+function rmFunction() {
+  let fileDirections = currentFilePath.split("/").filter((part) => part !== "");
+
+  let currentDirectory = defaultJSONFileSys[fileDirections[0]];
+  console.log("current file???: " + currentDirectory);
+  for (let i = 1; i < fileDirections.length; i += 1) {
+    let currentKey = fileDirections[i];
+    let temp = currentDirectory;
+    currentDirectory = temp[currentKey];
+  }
+  delete currentDirectory[`${desiredUserCommand}`];
+  setingFileSys();
+}
+
+function touchFunction() {
+  let fileDirections = currentFilePath.split("/").filter((part) => part !== "");
+
+  let currentDirectory = defaultJSONFileSys[fileDirections[0]];
+  console.log("current directory???: " + currentDirectory);
+  for (let i = 1; i < fileDirections.length; i += 1) {
+    let currentKey = fileDirections[i];
+    let temp = currentDirectory;
+    currentDirectory = temp[currentKey];
+  }
+  currentDirectory[`${desiredUserCommand}`] = "";
+  setingFileSys();
+}
+
+// function cpFunction() {
+//   // cp sourcefile-path destination-path
+//   let paths = desiredUserCommand.split(" ");
+//   let sourceFile = paths[0];
+//   let destinationFile = paths[1];
+
+//   let currentPathSource = [];
+//   let currentPathDestination = [];
+
+//   let sourcePath = getAbsoluteFilePath(
+//     defaultJSONFileSys,
+//     sourceFile,
+//     currentPathSource,
+//   );
+//   if (!sourcePath) {
+//     return;
+//   }
+//   // let destinationPath = getAbsoluteFilePath(
+//   //   defaultJSONFileSys,
+//   //   destinationFile,
+//   //   currentPathDestination,
+//   // );
+//   // if (destinationPath === null) {
+//   //   return; // so da program don't crash.....
+//   // }
+//   let directionDestination = destinationFile.split("/").filter((p) => p !== "");
+//   let fileName = directionDestination.pop();
+//   let currentDirectory = defaultJSONFileSys;
+
+//   for (let place of directionDestination) {
+//     if (currentDirectory[place]) {
+//       currentDirectory = currentDirectory[place];
+//     } else {
+//       return;
+//     }
+//   }
+//   currentDirectory[`${sourceFile}`] = getFileContent(sourcePath);
+
+//   commentsDiv.innerHTML += `copy a file and directories`;
+//   setingFileSys();
+// }
+
+function cpFunction() {
+  let paths = desiredUserCommand.split(" ");
+  if (paths.length < 2) return;
+
+  let sourceFile = paths[0];
+  let destinationFile = paths[1];
+
+  let sourcePath = getAbsoluteFilePath(defaultJSONFileSys, sourceFile, []);
+  if (!sourcePath) {
+    commentsDiv.innerHTML += `<div class='white'>cp: ${sourceFile}: No such file</div>`;
+    return;
+  }
+  let content = getFileContent(sourcePath);
+
+  let destParts = destinationFile.split("/").filter((p) => p !== "");
+  let targetFileName = destParts.pop();
+
+  let currentDirectory = destinationFile.startsWith("/")
+    ? defaultJSONFileSys
+    : getFolderObject(currentFilePath);
+
+  for (let part of destParts) {
+    if (currentDirectory[part] && typeof currentDirectory[part] === "object") {
+      currentDirectory = currentDirectory[part];
+    } else {
+      commentsDiv.innerHTML += `<div class='white'>cp: directory not found: ${part}</div>`;
+      return;
     }
-    else
-    {
-        commentsDiv.innerHTML += `<div class="ls-cont"> ${Object.keys(rootCmds).map((command) => {
-            return `<div class="ls-item">${command}</div>`;
-        }).join("")} </div>`;
+  }
+
+  currentDirectory[targetFileName] = content;
+  setingFileSys();
+  commentsDiv.innerHTML += `<div class='white'>copy a file and directories</div>`;
+}
+
+// function mvFunction() {
+//   // cp sourcefile-path destination-path
+//   let paths = desiredUserCommand.split(" ");
+//   if (paths.length < 2) {
+//     return;
+//   }
+//   let sourceFile = paths[0];
+//   let destinationFile = paths[1];
+//   let currentPathSource = [];
+//   let currentPathDestination = [];
+
+//   let sourcePath = getAbsoluteFilePath(
+//     defaultJSONFileSys,
+//     sourceFile,
+//     currentPathSource,
+//   );
+//   if (!sourcePath) {
+//     return;
+//   }
+
+//   // let destinationPath = getAbsoluteFilePath(
+//   //   defaultJSONFileSys,
+//   //   destinationFile,
+//   //   currentPathDestination,
+//   // );
+//   let directionDestination = destinationFile.split("/").filter((p) => p !== "");
+//   let targetFileName = directionDestination.pop();
+
+//   let currentDirectory = defaultJSONFileSys;
+//   for (let part of directionDestination) {
+//     if (currentDirectory[part] && typeof currentDirectory[part] === "object") {
+//       currentDirectory = currentDirectory[currentKey];
+//     } else {
+//       return;
+//     }
+//   }
+//   currentDirectory[targetFileName] = getFileContent(sourcePath);
+
+//   let sourceParts = sourcePath.split("/");
+//   let sourceName = sourceParts.pop();
+//   let sourceParent = defaultJSONFileSys;
+//   for (let part of sourceParts) {
+//     sourceParent = sourceParent[part];
+//   }
+//   delete sourceParent[sourceName];
+
+//   commentsDiv.innerHTML += `move a file and directories`;
+//   setingFileSys();
+// }
+
+function mvFunction() {
+  let paths = desiredUserCommand.split(" ");
+  if (paths.length < 2) return;
+
+  let sourceFile = paths[0];
+  let destinationFile = paths[1];
+
+  let sourcePath = getAbsoluteFilePath(defaultJSONFileSys, sourceFile);
+  if (!sourcePath) return;
+
+  let content = getFileContent(sourcePath);
+
+  let directionDestination = destinationFile.split("/").filter((p) => p !== "");
+  let targetFileName = directionDestination.pop();
+
+  let currentDirectory = defaultJSONFileSys;
+  for (let part of directionDestination) {
+    // FIX: Reference 'part' and 'currentDirectory', not 'currentKey' or 'temp'
+    if (currentDirectory[part] && typeof currentDirectory[part] === "object") {
+      currentDirectory = currentDirectory[part];
+    } else {
+      return;
     }
+  }
+
+  // Set the new file
+  currentDirectory[targetFileName] = content;
+
+  // Delete the old file
+  let sourceParts = sourcePath.split("/");
+  let sourceName = sourceParts.pop();
+  let sourceParent = defaultJSONFileSys;
+  for (let part of sourceParts) {
+    sourceParent = sourceParent[part];
+  }
+  delete sourceParent[sourceName];
+
+  commentsDiv.innerHTML += `<div class='white'>moved ${sourceFile} to ${destinationFile}</div>`;
+  setingFileSys();
+}
+
+function historyFunction() {
+  console.log("history: " + pastCommands);
+  pastCommands.forEach((command) => {
+    commentsDiv.innerHTML += `<div class='white'>${command}</div>`;
+  });
+}
+
+function catFunction() {
+  let fileDirections = currentFilePath.split("/").filter((part) => part !== "");
+
+  let currentDirectory = defaultJSONFileSys[fileDirections[0]];
+  console.log("current directory???: " + currentDirectory);
+  for (let i = 1; i < fileDirections.length; i += 1) {
+    let currentKey = fileDirections[i];
+    let temp = currentDirectory;
+    currentDirectory = temp[currentKey];
+  }
+
+  commentsDiv.innerHTML += `${currentDirectory[`${desiredUserCommand}`]}`;
+}
+
+function grepFunction() {
+  commentsDiv.innerHTML += `using grep`;
+}
+
+function pipeFunction() {
+  commentsDiv.innerHTML += `using pipe `;
+}
+
+function manFunction() {
+  console.log("man hit");
+  let currentCommand = desiredUserCommand;
+  if (currentCommand.indexOf(" ") !== -1) {
+    let allParts = currentCommand.split(" ");
+    currentCommand = allParts[0];
+  }
+  console.log("man hit: " + currentCommand);
+  commentsDiv.innerHTML += `<div class='white'>${generalCommnads[currentCommand]}</div>`;
+}
+
+function cdSlashFunction() {
+  commentsDiv.innerHTML += `cd / stufff`;
+}
+
+function viFunction() {
+  ///
+  commentsDiv.innerHTML += `vi a file`;
+  touchFunction();
+  sessionStorage.setItem("currentFilePath", currentFilePath);
+  sessionStorage.setItem("editingFile", desiredUserCommand);
+  setingFileSys();
+  window.location.replace("viEditor.php");
+  // updatedContented
+  commentsDiv.innerHTML += `vi a file ${updatedContented}`;
 }
 
 export let commentsDiv = document.querySelector(".comments");
 
-let themes = ["hacker", "default", "light", "cute"];
-let rootCmds =
-{
-    "whoami": "unix",
-    "clear": clearingFunction,
-    "help": helpFeauture,
-    "cd ..": goingBackDir,
-    "ls": listingDirs,
+let generalFileSystem = {
+  bin: {}, // stores key: {}
+  opt: {},
+  boot: {},
+  dev: {},
+  sbin: {},
+  etc: {},
+  srv: {},
+  home: {},
+  tmp: {},
+  lib: {},
+
+  usr: {
+    bin: {},
+    include: {},
+    lib: {},
+    sbin: {},
+    unix: {},
+  }, //
+
+  media: {},
+
+  var: {
+    cache: {},
+    log: {},
+    spool: {},
+    tmp: {},
+  }, //
+
+  mnt: {},
 };
-let mainCmds = ["clear", "ls", "cd ..", "help", "echo "]; // 
-let allCmds = [...mainCmds, ...Object.keys(rootCmds), ...themes];
+
+export let defaultJSONFileSys =
+  JSON.parse(localStorage.getItem("terminalFS")) || generalFileSystem;
+
+export function setingFileSys() {
+  localStorage.setItem("terminalFS", JSON.stringify(defaultJSONFileSys));
+}
+
+let rootCmds = {
+  whoami: whoAmIFunct,
+  clear: clearingFunction,
+  ls: listingDirs,
+  cd: changeDir,
+  pwd: pwdFunct,
+  echo: echoFunct,
+  mkdir: mkDirFunct,
+  rmdir: rmDirFunct,
+  rm: rmFunction,
+  touch: touchFunction,
+  cp: cpFunction,
+  mv: mvFunction,
+  history: historyFunction,
+  cat: catFunction,
+  grep: grepFunction,
+  "|": pipeFunction,
+  man: manFunction,
+  vi: viFunction,
+  /*
+    different foms of comemon ones
+    asdfasdfasdf
+  */
+};
+let allCmds = [...Object.keys(rootCmds)];
 let currentlyIn = "root";
 let commandDict = {
-    "root": rootCmds,
-    "themes": themes, // where I got to put into the directory
+  root: rootCmds,
 };
 
-
 let userCommandDiv = document.querySelector(".user-command");
-userCommandDiv.addEventListener("focus", (e) => {
-  e.preventDefault();
-})
 
-function addComment()
-{
-    let newComment = document.createElement("div");
-    newComment.classList.add(".user-comment");
-
-    // Get user comment + add it to the chat screen
-    let userCommandDiv = document.querySelector(".user-command");
-    let userCommand = document.querySelector(".user-command").value.trim();
-    // let directory = document.querySelector(".directory");
-
-    if (userCommand === "")
-    {
-        commentsDiv.innerHTML += `<label class="green"><span class="yellow">unix</span>@user:~$ <span class="white">${userCommand}</span> </label>`;
-    }
-    pastCommands.push(userCommand);
-
-    newComment.innerHTML = `<label class="green"><span class="yellow">unix</span>@user:~$ <span class="white">${userCommand}</span> </label>`;
-    commentsDiv.appendChild(newComment);
-    if (allCmds.includes(userCommand))
-    {
-        rootCmds[userCommand]();
-    }
-    else
-    {
-        if (allCmds.map(cmd => `${cmd.includes(userCommand.substring(0, 4))}`).includes("true"))
-        {
-            commentsDiv.innerHTML += `<div class="white"> ${userCommand.substring(4, userCommand.length)} </div>`;
-        }
-        else
-        {
-            handleInvalidCommand(userCommand);
-        }
-    }
-    userCommandDiv.value = "";
-}
-function changeTheme(theme) { // used to change directories
-    let domBody = document.querySelector("body");
-    let pastTheme = domBody.className;
-    theme == "light" ? commentsDiv.innerHTML += `<div>"${theme}" theme selected. Protect your eyes!</div>` : commentsDiv.innerHTML += `<div>"${theme}" theme selected.</div>`;
-    domBody.classList.remove(pastTheme);
-    domBody.classList.add(theme);
+if (userCommandDiv) {
+  userCommandDiv.addEventListener("focus", (e) => {
+    e.preventDefault();
+  });
 }
 
-function handleInvalidCommand(cmmd)
-{
-    commentsDiv.innerHTML += `zsh: command not found: ${cmmd}`;
+/**
+"focus", (e) => {
+    e.preventDefault();
+  });
+*/
+
+function addComment() {
+  let newComment = document.createElement("div");
+  newComment.classList.add(".user-comment");
+
+  // Get user comment + add it to the chat screen
+  let userCommandDiv = document.querySelector(".user-command");
+  let userCommand = document.querySelector(".user-command").value.trim();
+  let directory = document.querySelector(".directory");
+  directory.innerHTML = "~";
+
+  if (userCommand === "") {
+    commentsDiv.innerHTML += `<label class="green"><span class="yellow">unix</span>@user:<span
+                        class="directory red"></span>$ <span class="white">${userCommand}</span> </label>`;
+  }
+  newComment.innerHTML = `<label class="green"><span class="yellow">unix</span>@user:<span
+                        class="directory red"></span>$ <span class="white">${userCommand}</span> </label>`;
+  commentsDiv.appendChild(newComment);
+  // Output 232: whoami,clear,cd ..,cd ../,ls,cd ,pwd,cd ~,echo,mkdir ,rmdir ,rm ,touch ,ls -a ,cp ,mv ,history,cat ,grep , | ,man ,cd /,vi
+  console.log("What is in here: " + allCmds);
+  if (allCmds.includes(userCommand)) {
+    rootCmds[userCommand]();
+  } else {
+    let commandComponent = userCommand.split(" ");
+    if (allCmds.includes(commandComponent[0])) {
+      desiredUserCommand = commandComponent.slice(1).join(" ");
+      console.log("what is this??: " + desiredUserCommand);
+      rootCmds[commandComponent[0]]();
+    } else {
+      handleInvalidCommand(userCommand);
+    }
+  }
+  pastCommands.push(userCommand);
+  sessionStorage.setItem("terminalHistory", JSON.stringify(pastCommands));
+  userCommandDiv.value = "";
+}
+
+export function handleInvalidCommand(cmmd) {
+  commentsDiv.innerHTML += `zsh: command not found: ${cmmd}`;
 }
