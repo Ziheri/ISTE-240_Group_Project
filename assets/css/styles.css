@@ -118,6 +118,7 @@ nav {
 }
 
 .navbar, .navbar-2{
+    font-family: "Barlow", Arial, Helvetica, sans-serif;
     list-style: none;
     display: grid;
     grid-auto-flow: column;
@@ -438,10 +439,39 @@ a {
         max-width: 5rem;
         margin-top: 0.8rem;
         margin-left: 0.8rem;
+        cursor: pointer;
     }
 
     nav {
         display: none;
+    }
+    
+    /* Show nav when active */
+    nav.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 5rem;
+        left: 0;
+        width: 100%;
+        background: lightgray;
+        z-index: 999;
+        padding: 1rem 0;
+    }
+
+    nav.open .navbar,
+    nav.open .navbar-2 {
+        display: flex;
+        flex-direction: column;
+        background: none;
+        gap: 0.5rem;
+        padding: 0.5rem 2rem;
+        font-size: 2.5rem;
+        font-family: "Barlow", Arial, Helvetica, sans-serif;
+    }
+
+    nav.open .navbar li::after {
+        content: none;
     }
 
     #tracks_grid {
@@ -457,6 +487,16 @@ a {
 
     .tracks {
         font-size: 1.3rem;
-        padding:2rem;
+        padding: 2rem;
+    }
+
+    /* Hide sidebar on mobile */
+    .sidebar {
+        display: none;
+    }
+
+    /* Single column on mobile for tutorials */
+    #tutorials_layout {
+        grid-template-columns: auto;
     }
 }
