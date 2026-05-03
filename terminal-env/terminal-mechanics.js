@@ -3,7 +3,8 @@ import { getAllDirectories, fiilePathExisit } from "./helperfunc.js";
 import { updatedContented } from "./viEditor.js";
 
 // VARIABLES
-let pastCommands = [];
+//let pastCommands = [];
+let pastCommands = JSON.parse(sessionStorage.getItem("terminalHistory")) || [];
 let timesPressedUp = 0;
 let desiredUserCommand = "";
 let currentFilePath = "/usr/unix";
@@ -87,11 +88,11 @@ function listingDirs() {
   console.log("more than one file");
   let findingDir = false;
   let currentFile = 1;
-  let level = generalFileSystem;
+  let level = defaultJSONFileSys;
   let chosenDirectory = "";
   console.log("we are in the ls!!");
   if (fileDirection.length == 1) {
-    Object.keys(generalFileSystem).forEach((key) => {
+    Object.keys(defaultJSONFileSys).forEach((key) => {
       commentsDiv.innerHTML += `<div class='white'>${key}</div>`;
     });
 
@@ -241,11 +242,11 @@ function echoFunct() {
 }
 
 function mkDirFunct() {
-  // generalFileSystem {{},{},{}} key: value..
+  // defaultJSONFileSys {{},{},{}} key: value..
   // currentFilePath.. = "/usr/unix";
   let fileDirections = currentFilePath.split("/").filter((part) => part !== "");
 
-  let currentDirectory = generalFileSystem[fileDirections[0]];
+  let currentDirectory = defaultJSONFileSys[fileDirections[0]];
   console.log("current directory???: " + currentDirectory);
   for (let i = 1; i < fileDirections.length; i += 1) {
     let currentKey = fileDirections[i];
@@ -253,12 +254,13 @@ function mkDirFunct() {
     currentDirectory = temp[currentKey];
   }
   currentDirectory[`${desiredUserCommand}`] = {};
+  setingFileSys();
 }
 
 function rmDirFunct() {
   let fileDirections = currentFilePath.split("/").filter((part) => part !== "");
 
-  let currentDirectory = generalFileSystem[fileDirections[0]];
+  let currentDirectory = defaultJSONFileSys[fileDirections[0]];
   console.log("current directory???: " + currentDirectory);
   for (let i = 1; i < fileDirections.length; i += 1) {
     let currentKey = fileDirections[i];
@@ -266,12 +268,13 @@ function rmDirFunct() {
     currentDirectory = temp[currentKey];
   }
   delete currentDirectory[`${desiredUserCommand}`];
+  setingFileSys();
 }
 
 function rmFunction() {
   let fileDirections = currentFilePath.split("/").filter((part) => part !== "");
 
-  let currentDirectory = generalFileSystem[fileDirections[0]];
+  let currentDirectory = defaultJSONFileSys[fileDirections[0]];
   console.log("current file???: " + currentDirectory);
   for (let i = 1; i < fileDirections.length; i += 1) {
     let currentKey = fileDirections[i];
@@ -279,12 +282,13 @@ function rmFunction() {
     currentDirectory = temp[currentKey];
   }
   delete currentDirectory[`${desiredUserCommand}`];
+  setingFileSys();
 }
 
 function touchFunction() {
   let fileDirections = currentFilePath.split("/").filter((part) => part !== "");
 
-  let currentDirectory = generalFileSystem[fileDirections[0]];
+  let currentDirectory = defaultJSONFileSys[fileDirections[0]];
   console.log("current directory???: " + currentDirectory);
   for (let i = 1; i < fileDirections.length; i += 1) {
     let currentKey = fileDirections[i];
@@ -292,6 +296,7 @@ function touchFunction() {
     currentDirectory = temp[currentKey];
   }
   currentDirectory[`${desiredUserCommand}`] = "";
+  setingFileSys();
 }
 
 function cpFunction() {
@@ -314,7 +319,7 @@ function historyFunction() {
 function catFunction() {
   let fileDirections = currentFilePath.split("/").filter((part) => part !== "");
 
-  let currentDirectory = generalFileSystem[fileDirections[0]];
+  let currentDirectory = defaultJSONFileSys[fileDirections[0]];
   console.log("current directory???: " + currentDirectory);
   for (let i = 1; i < fileDirections.length; i += 1) {
     let currentKey = fileDirections[i];
@@ -354,6 +359,7 @@ function viFunction() {
   touchFunction();
   sessionStorage.setItem("currentFilePath", currentFilePath);
   sessionStorage.setItem("editingFile", desiredUserCommand);
+  setingFileSys();
   window.location.replace("viEditor.php");
   // updatedContented
   commentsDiv.innerHTML += `vi a file ${updatedContented}`;
@@ -361,7 +367,7 @@ function viFunction() {
 
 export let commentsDiv = document.querySelector(".comments");
 
-export let generalFileSystem = {
+let generalFileSystem = {
   bin: {}, // stores key: {}
   opt: {},
   boot: {},
@@ -476,6 +482,7 @@ function addComment() {
     }
   }
   pastCommands.push(userCommand);
+  sessionStorage.setItem("terminalHistory", JSON.stringify(pastCommands));
   userCommandDiv.value = "";
 }
 

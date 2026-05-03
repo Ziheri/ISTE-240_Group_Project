@@ -1,8 +1,4 @@
-import {
-  generalFileSystem,
-  setingFileSys,
-  defaultJSONFileSys,
-} from "./terminal-mechanics.js";
+import { setingFileSys, defaultJSONFileSys } from "./terminal-mechanics.js";
 
 export let updatedContented = "";
 
@@ -12,12 +8,11 @@ function updateContent(update) {
 
   let fileDirections = savedPath.split("/").filter((part) => part !== "");
 
-  let currentDirectory = generalFileSystem[fileDirections[0]];
+  let currentDirectory = defaultJSONFileSys[fileDirections[0]];
   console.log("current directory???: " + currentDirectory);
   for (let i = 1; i < fileDirections.length; i += 1) {
     let currentKey = fileDirections[i];
-    let temp = currentDirectory;
-    currentDirectory = temp[currentKey];
+    currentDirectory = currentDirectory[currentKey];
   }
   currentDirectory[`${savedFile}`] = update;
   setingFileSys();

@@ -1,6 +1,6 @@
 import {
   handleInvalidCommand,
-  generalFileSystem,
+  defaultJSONFileSys,
 } from "./terminal-mechanics.js";
 
 export function getAllDirectories(filePath) {
@@ -24,10 +24,10 @@ function listingDirs() {
   console.log("more than one file");
   let findingDir = false;
   let currentFile = 1;
-  let level = generalFileSystem;
+  let level = defaultJSONFileSys;
   let chosenDirectory = "";
   if (fileDirection.length == 1) {
-    Object.keys(generalFileSystem).forEach((key) => {
+    Object.keys(defaultJSONFileSys).forEach((key) => {
       commentsDiv.innerHTML += `<div class='white'>${key}</div>`;
     });
   } else {
@@ -54,7 +54,7 @@ function listingDirs() {
 export function fiilePathExisit(filePath) {
   const parts = filePath.split("/").filter((part) => part !== "");
 
-  let starting = generalFileSystem;
+  let starting = defaultJSONFileSys;
 
   for (let i = 0; i < parts.length; i += 1) {
     let fileLoc = parts[i];
@@ -65,7 +65,7 @@ export function fiilePathExisit(filePath) {
     }
   }
 
-  return typeof starting === "object" && starting !== null;
+  return starting !== undefined;
 }
 
 function getAbsoluteFilePath() {
