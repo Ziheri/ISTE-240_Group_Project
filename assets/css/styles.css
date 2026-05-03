@@ -31,7 +31,8 @@ body {
 
 h1 {
     /**margin-top: 32rem;**/
-    margin-left: 3rem;
+    text-align: center;
+    margin-left: 0;
     color: #009444;
     font-size: 4rem;
 }
@@ -59,6 +60,21 @@ li b {
     color: #ED1C24;
 }
 
+.navbar li,
+.navbar-2 li{
+    font-family: "Handjet", Arial, Helvetica, sans-serif;
+    color: #ED1C24;
+    padding: 0;
+    font-size: 4rem;
+}
+
+.sidebar li {
+    font-family: "Handjet", Arial, Helvetica, sans-serif;
+    color: #ED1C24;
+    padding: 0;
+    font-size: 1.5rem;
+}
+
 .tracks {
     padding: 2rem;
     padding-left: 4rem;
@@ -73,7 +89,19 @@ li b {
 #tracks_grid {
     display: grid;
     grid-template-columns: auto auto;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem auto;
+    max-width: 1200px;
+}
+
+#tracks_grid a p {
+    color: #FFF;
+    max-width: 20rem;
+}
+
+body > p {
+    text-align: center;
 }
 
 .tracks:hover {
@@ -118,7 +146,7 @@ nav {
 }
 
 .navbar, .navbar-2{
-    font-family: "Barlow", Arial, Helvetica, sans-serif;
+    font-family: "Handjet", Arial, Helvetica, sans-serif;
     list-style: none;
     display: grid;
     grid-auto-flow: column;
@@ -175,6 +203,7 @@ a {
 
 /**Start Siderbar CSS*/
 .sidebar {
+    font-family: "Handjet", Arial, Helvetica, sans-serif;
     position: sticky;
     top: 2rem;
     color: #ED1C24;
@@ -196,6 +225,7 @@ a {
 }
 
 .sidebar a {
+    font-family: "Handjet", Arial, Helvetica, sans-serif;
     color: #ED1C24;
     text-decoration: none;
     display: block;
@@ -210,8 +240,10 @@ a {
 /**Start Login/Signup Page CSS*/
 #login_overgrid {
     display: grid;
-    grid-template-columns: auto auto;
-    justify-content: space-around;
+    grid-template-columns: 1fr 1fr; /* equal columns instead of auto auto */
+    justify-content: center;
+    max-width: 900px;
+    margin: 2rem auto; /* centers the whole section */
 }
 
 .login_grid {
@@ -227,8 +259,10 @@ a {
 
 .login_header {
     font-family: "Handjet", Arial, Helvetica, sans-serif;
-    margin: 0px;
-    justify-self: center;
+    text-align: center; /* center the login/signup titles */
+    margin: 0;
+    font-size: 3rem;
+    color: #009444;
 }
 
 .login_form {
@@ -340,9 +374,6 @@ a {
     padding: 0.5rem 0;
 }
 
-#quiz_form > div:hover {
-}
-
 #quiz_form > div p:first-child {
     font-size: 1.6rem;
     color: #009444;
@@ -420,6 +451,13 @@ a {
     grid-template-columns: 15rem auto;
     gap: 2rem;
     align-items: start;
+    margin-top: 1rem;
+}
+
+.welcome_text {
+    text-align: center;
+    max-width: 800px;
+    margin: 1rem auto;
 }
 
 @media (max-width: 600px) {
@@ -467,7 +505,7 @@ a {
         gap: 0.5rem;
         padding: 0.5rem 2rem;
         font-size: 2.5rem;
-        font-family: "Barlow", Arial, Helvetica, sans-serif;
+        font-family: "Handjet", Arial, Helvetica, sans-serif;
     }
 
     nav.open .navbar li::after {

@@ -4,7 +4,7 @@
 ?>
 
     <h1>Learning Unix By Doing</h1>
-    <p>Welcome to Intro to UNIX a beginner-friendly guide to understanding the UNIX operating system. Explore the sections below to get started.</p>
+    <p class="welcome_text">Welcome to Intro to UNIX a beginner-friendly guide to understanding the UNIX operating system. Explore the sections below to get started.</p>
 
     <section id="tracks_grid">
         <a href="history.php">
