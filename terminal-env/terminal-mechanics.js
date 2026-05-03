@@ -444,7 +444,11 @@ function mvFunction() {
   let directionDestination = destinationFile.split("/").filter((p) => p !== "");
   let targetFileName = directionDestination.pop();
 
-  let currentDirectory = defaultJSONFileSys;
+  let currentDirectory = destinationFile.startsWith("/")
+    ? defaultJSONFileSys
+    : getFolderObject(currentFilePath);
+
+  //let currentDirectory = defaultJSONFileSys;
   for (let part of directionDestination) {
     // FIX: Reference 'part' and 'currentDirectory', not 'currentKey' or 'temp'
     if (currentDirectory[part] && typeof currentDirectory[part] === "object") {
@@ -604,12 +608,6 @@ if (userCommandDiv) {
     e.preventDefault();
   });
 }
-
-/**
-"focus", (e) => {
-    e.preventDefault();
-  });
-*/
 
 function addComment() {
   let newComment = document.createElement("div");
