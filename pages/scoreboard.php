@@ -1,8 +1,9 @@
 <?php
+    session_start();
     include '../dbCon.php';
     include "../assets/files/nav.php";
 
-    $result = $mysqli->query("SELECT user, score FROM `240UnixGroupProject` ORDER BY score DESC");
+    $result = $mysqli->query("SELECT user, score FROM `240UnixGroupProject` WHERE score IS NOT NULL ORDER BY score DESC");
 ?>
 
     <h1 id="scoreboard_heading">Scoreboard</h1>
