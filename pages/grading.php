@@ -23,10 +23,10 @@
     <p>The tutorials page has a sidebar with links to the different sections like Requirements and Setup, File System Hierarchy, Security and Permissions, Shell Support, and Scripting. The page goes through how to open a terminal, navigation commands like ls, cd, and pwd, and other common UNIX commands with explanations for what each one does.</p>
 
     <h2>Terminal</h2>
-    <p>We built an interactive terminal in the terminal-env folder. It looks like a real terminal with a header bar and an input line. You can type commands and it responds. The JavaScript handles keydown events so pressing Enter runs the command, pressing the up arrow brings back previous commands, and pressing Tab tries to autocomplete. The commands are stored in a dictionary and the output gets added to the terminal as you use it.</p>
+    <p>We built an interactive terminal in the terminal-env folder. You can type commands like ls, mkdir, and cd and it will act like a real linux terminal. </p>
 
     <h2>Database</h2>
-    <p>We used a MySQL database through dbCon.php which connects with mysqli. The database stores usernames, passwords, last quiz scores, and best scores. The login, signup, quiz score submit, and scoreboard pages all use this connection. We used prepared statements and bind_param in the places where we are writing data to prevent SQL injection.</p>
+    <p>We used the Adminer.php database through dbCon.php which connects with mysqli. The database stores usernames, passwords, last quiz scores, and best scores. The login, signup, quiz score submit, and scoreboard pages all use this connection. We used prepared statements and bind_param in the places where we are writing data to prevent SQL injection.</p>
 
 </body>
 </html>
