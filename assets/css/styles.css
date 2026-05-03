@@ -79,6 +79,7 @@ p{
     justify-items: center;
     width: 100%;
 }
+/**made it centered**/
 
 #title_pc {
     grid-area: title;
