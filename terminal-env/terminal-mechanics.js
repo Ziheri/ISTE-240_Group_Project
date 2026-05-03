@@ -446,7 +446,7 @@ function mvFunction() {
 
   let currentDirectory = destinationFile.startsWith("/")
     ? defaultJSONFileSys
-    : getFolderObject(curentFilePath);
+    : getFolderObject(currentFilePath);
 
   //let currentDirectory = defaultJSONFileSys;
   for (let part of directionDestination) {
