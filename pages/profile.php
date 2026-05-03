@@ -19,26 +19,25 @@
     $stmt->bind_param("s", $selection);
     $stmt->execute();
     $res = $stmt->get_result();
-?>
-    <h1>Quiz Scores:</h1>
-    <!--Check if there are any scores in the table-->
-    
-<?php
+
+    // Populate $records
     $records = [];
     if ($res) {
         while($rowholder = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
             $records[] = $rowholder;
         }
     }
-    
-    if (!empty($records) && $records[0]['quiz'] !== null) {
-        $recent = $records[0]['quiz'];
-        $best = $records[0]['score'];
-        echo "<p>Last Score: ". $recent . "</p>";
-        echo "<p>Best Score: ". $best . "</p>";
-    } else {
-        echo "<p>No score recorded. Take the quiz to receive scores.</p>";
-    }
 ?>
+    <div id="profile_container">
+        <h1>Welcome, <?php echo htmlspecialchars($selection); ?>!</h1>
+        <a href="logout.php"><button class="logout_button">Logout</button></a>
+        <h2>Quiz Scores</h2>
+        <?php if (!empty($records) && $records[0]['quiz'] !== null): ?>
+            <p>Last Score: <?php echo $records[0]['quiz']; ?></p>
+            <p>Best Score: <?php echo $records[0]['score']; ?></p>
+        <?php else: ?>
+            <p>No score recorded. Take the quiz to receive scores.</p>
+        <?php endif; ?>
+    </div>
 </body>
 </html>
