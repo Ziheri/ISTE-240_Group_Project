@@ -496,6 +496,37 @@ function catFunction() {
 }
 
 function grepFunction() {
+  let paths = desiredUserCommand.split(" ");
+  if (paths.length < 2) return;
+
+  let regexPattern = paths[0]; // sourceFile
+  let fileName = paths[1]; // destinationFile
+
+  let sourcePath = getAbsoluteFilePath(defaultJSONFileSys, fileName, []);
+  if (!sourcePath) {
+    commentsDiv.innerHTML += `<div class='white'>cp: ${fileName}: No such file</div>`;
+    return;
+  }
+  let content = getFileContent(sourcePath);
+
+  let destParts = destinationFile.split("/").filter((p) => p !== "");
+  let targetFileName = destParts.pop();
+
+  let currentDirectory = destinationFile.startsWith("/")
+    ? defaultJSONFileSys
+    : getFolderObject(currentFilePath);
+
+  for (let part of destParts) {
+    if (currentDirectory[part] && typeof currentDirectory[part] === "object") {
+      currentDirectory = currentDirectory[part];
+    } else {
+      commentsDiv.innerHTML += `<div class='white'>cp: directory not found: ${part}</div>`;
+      return;
+    }
+  }
+
+  currentDirectory[targetFileName] = content;
+  setingFileSys();
   commentsDiv.innerHTML += `using grep`;
 }
 
