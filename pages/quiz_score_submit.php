@@ -41,4 +41,7 @@ $selection = $_SESSION['username'];
             $start->close();
         }
     }
+
+    header('Location: profile.php');
+    exit(); 
 ?>
