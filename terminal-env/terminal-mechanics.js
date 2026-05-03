@@ -351,6 +351,9 @@ function cdSlashFunction() {
 function viFunction() {
   ///
   commentsDiv.innerHTML += `vi a file`;
+  touchFunction();
+  sessionStorage.setItem("currentFilePath", currentFilePath);
+  sessionStorage.setItem("editingFile", desiredUserCommand);
   window.location.replace("viEditor.php");
   // updatedContented
   commentsDiv.innerHTML += `vi a file ${updatedContented}`;
@@ -389,6 +392,14 @@ export let generalFileSystem = {
 
   mnt: {},
 };
+
+export let defaultJSONFileSys =
+  JSON.parse(localStorage.getItem("terminalFS")) || generalFileSystem;
+
+export function setingFileSys() {
+  localStorage.setItem("terminalFS", JSON.stringify(defaultJSONFileSys));
+}
+
 let rootCmds = {
   whoami: whoAmIFunct,
   clear: clearingFunction,
@@ -420,9 +431,18 @@ let commandDict = {
 };
 
 let userCommandDiv = document.querySelector(".user-command");
-userCommandDiv.addEventListener("focus", (e) => {
-  e.preventDefault();
-});
+
+if (userCommandDiv) {
+  userCommandDiv.addEventListener("focus", (e) => {
+    e.preventDefault();
+  });
+}
+
+/**
+"focus", (e) => {
+    e.preventDefault();
+  });
+*/
 
 function addComment() {
   let newComment = document.createElement("div");

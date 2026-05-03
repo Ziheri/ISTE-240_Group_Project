@@ -1,9 +1,16 @@
-import { generalFileSystem } from "./terminal-mechanics.js";
+import {
+  generalFileSystem,
+  setingFileSys,
+  defaultJSONFileSys,
+} from "./terminal-mechanics.js";
 
 export let updatedContented = "";
 
 function updateContent(update) {
-  let fileDirections = currentFilePath.split("/").filter((part) => part !== "");
+  let savedPath = sessionStorage.getItem("currentFilePath");
+  let savedFile = sessionStorage.getItem("editingFile");
+
+  let fileDirections = savedPath.split("/").filter((part) => part !== "");
 
   let currentDirectory = generalFileSystem[fileDirections[0]];
   console.log("current directory???: " + currentDirectory);
@@ -12,7 +19,8 @@ function updateContent(update) {
     let temp = currentDirectory;
     currentDirectory = temp[currentKey];
   }
-  currentDirectory[`${desiredUserCommand}`] = update;
+  currentDirectory[`${savedFile}`] = update;
+  setingFileSys();
 }
 
 if (window.location.pathname.endsWith("viEditor.php")) {
