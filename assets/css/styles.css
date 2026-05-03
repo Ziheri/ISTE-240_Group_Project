@@ -183,6 +183,11 @@ a {
     color: #FFF200;
 }
 
+.navbar li a.active {
+    color: #f62c2c;
+    border-bottom: 3px solid #f62c2c;
+}
+
 
 .start-learning {
     background-color: #d9d9d9;
