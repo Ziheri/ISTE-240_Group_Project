@@ -6,7 +6,7 @@
     <div id="quiz_container">
         <h1>UNIX Quiz</h1>
 
-        <form id="quiz_form">
+        <form id="quiz_form" method='POST' action='ISTE-240_Group_Project/pages/quiz_score_submit.php'>
 
            
             <div id="q1_block">
