@@ -26,21 +26,28 @@ body {
     background: black;
     font-family: "Handjet", Arial, Helvetica, sans-serif;
     margin: 0;
-    padding: 20px;
+    padding-left: 10rem;
+    padding-right: 10rem;
 }
 
 h1 {
-    /**margin-top: 32rem;**/
+    justify-self: center;
     text-align: center;
     margin-left: 0;
     color: #009444;
     font-size: 4rem;
 }
 
-h2, h3 {
+h2 {
     color: #009444;
     font-family: "Workbench", Arial, Helvetica, sans-serif;
     font-size: 3rem;
+}
+
+h3 {
+    color: #009444;
+    font-family: "Workbench", Arial, Helvetica, sans-serif;
+    font-size: 2.5rem;
 }
 
 p{
@@ -213,7 +220,7 @@ a {
 .sidebar {
     font-family: "Handjet", Arial, Helvetica, sans-serif;
     position: sticky;
-    top: 2rem;
+    top: 40%;
     color: #ED1C24;
     font-size: 1.5rem;
     list-style-type: none;
@@ -492,10 +499,115 @@ a {
     text-align: center;
 }
 
+/**Start Terminal CSS**/
+/* Practice Terminal */
+#terminal-section .terminal-div {
+    height: 400px;
+    width: 100%;
+    min-width: 350px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    background-color: #2E2E2E;
+    background-image: linear-gradient(to right, #2E2E2E, #565656);
+    position: relative;
+    border-radius: 5px;
+    resize: both;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-family: monospace;
+    font-size: large;
+    border: 5px solid lightgray;
+}
 
+#terminal-section .terminal-header {
+    height: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#terminal-section .title {
+    margin-right: auto;
+    margin-left: 5px;
+    color: white;
+    font-family: monospace;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+}
+
+#terminal-section .terminal-chat {
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    padding-top: 10px;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    scrollbar-width: thin;
+    overflow-y: auto;
+}
+
+#terminal-section .comments {
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+#terminal-section .comment-div {
+    display: grid;
+    grid-template-columns: auto 8fr;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+#terminal-section .user-command {
+    width: 95%;
+    border: none;
+    font-family: monospace;
+    caret-color: white;
+    color: white;
+    background-color: black;
+    font-size: large;
+    outline: none;
+}
+
+#terminal-section .green { 
+    color: #adff2f; 
+}
+#terminal-section .yellow { 
+    color: #ffff00; 
+}
+#terminal-section .red { 
+    color: palevioletred; 
+}
+#terminal-section .white { 
+    color: white; 
+}
+#terminal-section span { 
+    white-space: nowrap; 
+}
+/**End Terminal CSS**/
 
 
 @media (max-width: 600px) {
+    body {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    h1, h2, h3, p {
+        text-align: center;
+    }
+
+    .grid_container {
+        display: block;
+    }
+
     #title_pc {
         display: none;
     }
@@ -571,5 +683,9 @@ a {
     /* Single column on mobile for tutorials */
     #tutorials_layout {
         grid-template-columns: auto;
+    }
+
+    #login_overgrid {
+        grid-template-columns: none;
     }
 }
