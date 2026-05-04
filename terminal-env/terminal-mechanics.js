@@ -10,7 +10,8 @@ import { updatedContented } from "./viEditor.js";
 
 // VARIABLES
 //let pastCommands = [];
-let pastCommands = JSON.parse(sessionStorage.getItem("terminalHistory")) || [];
+export let pastCommands =
+  JSON.parse(sessionStorage.getItem("terminalHistory")) || [];
 let timesPressedUp = 0;
 let desiredUserCommand = "";
 let currentFilePath = "/usr/unix";
