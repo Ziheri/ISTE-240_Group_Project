@@ -180,6 +180,9 @@ function changeDir() {
     //   currentFilePath = "/";
     //   directory.innerHTML += "/";
     // }
+  } else if (desiredUserCommand === "/") {
+    previousPath = "/";
+    directory.innerHTML = "/";
   }
 
   // else if (/^[A-Za-z]+$/.test(desiredUserCommand[0]) === true) {
@@ -568,10 +571,6 @@ function grepFunction() {
   // commentsDiv.innerHTML += `using grep`;
 }
 
-function pipeFunction() {
-  commentsDiv.innerHTML += `using pipe `;
-}
-
 function manFunction() {
   console.log("man hit");
   let currentCommand = desiredUserCommand;
@@ -581,10 +580,6 @@ function manFunction() {
   }
   console.log("man hit: " + currentCommand);
   commentsDiv.innerHTML += `<div class='white'>${generalCommnads[currentCommand]}</div>`;
-}
-
-function cdSlashFunction() {
-  commentsDiv.innerHTML += `cd / stufff`;
 }
 
 function viFunction() {
@@ -656,13 +651,8 @@ let rootCmds = {
   history: historyFunction,
   cat: catFunction,
   grep: grepFunction,
-  "|": pipeFunction,
   man: manFunction,
   vi: viFunction,
-  /*
-    different foms of comemon ones
-    asdfasdfasdf
-  */
 };
 let allCmds = [...Object.keys(rootCmds)];
 let currentlyIn = "root";
