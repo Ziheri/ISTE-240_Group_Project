@@ -448,34 +448,34 @@ function viFunction() {
 export let commentsDiv = document.querySelector(".comments");
 
 let generalFileSystem = {
-  bin: { hidden: false }, // stores key: {}
-  opt: { hidden: false },
-  boot: { hidden: false },
-  dev: { hidden: false },
-  sbin: { hidden: false },
-  etc: { hidden: false },
+  bin: { hidden: true }, // stores key: {}
+  opt: { hidden: true },
+  boot: { hidden: true },
+  dev: { hidden: true },
+  sbin: { hidden: true },
+  etc: { hidden: true },
   srv: { hidden: false },
   home: { hidden: false },
-  tmp: { hidden: false },
-  lib: { hidden: false },
+  tmp: { hidden: true },
+  lib: { hidden: true },
 
   usr: {
-    bin: { hidden: false },
-    include: { hidden: false },
-    lib: { hidden: false },
-    sbin: { hidden: false },
-    unix: { hidden: false },
-    hidden: false,
+    bin: { hidden: true },
+    include: { hidden: true },
+    lib: { hidden: true },
+    sbin: { hidden: true },
+    unix: { hidden: true },
+    hidden: true,
   }, //
 
   media: { hidden: false },
 
   var: {
-    cache: { hidden: false },
-    log: { hidden: false },
-    spool: { hidden: false },
-    tmp: { hidden: false },
-    hidden: false,
+    cache: { hidden: true },
+    log: { hidden: true },
+    spool: { hidden: true },
+    tmp: { hidden: true },
+    hidden: true,
   }, //
 
   mnt: { hidden: false },
