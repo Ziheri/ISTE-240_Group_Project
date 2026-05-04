@@ -135,9 +135,6 @@ function changeDir() {
   // "cd ~": homeFunct,
   //"cd /": cdSlashFunction,
 
-  // desiredUserCommand
-  // currentFilePath = "/usr/unix";
-  // currentFilePath
   let previousPath = currentFilePath;
 
   if (desiredUserCommand.includes("..") === true) {
@@ -152,59 +149,13 @@ function changeDir() {
   ) {
     previousPath = "/usr/unix";
     // directory.innerHTML += "~";
-  }
-
-  // else if (desiredUserCommand.includes("../") === true) {
-  //   let currentListing = previousPath.split("/");
-  //   let goingbackCount = desiredUserCommand.split("/");
-  //   for (let i = 0; i < goingbackCount.length; i += 1) {
-  //     let currentCommand = goingbackCount[i];
-  //     if (goingbackCount === "..") {
-  //       currentListing.pop();
-  //     } else {
-  //       currentFilePath += `/${goingbackCount[i]}`;
-  //     }
-  //   }
-  //   currentFilePath = currentListing.join("/");
-  // }
-  else if (String(desiredUserCommand).startsWith("/") === true) {
+  } else if (String(desiredUserCommand).startsWith("/") === true) {
     // previousPath
     previousPath = desiredUserCommand;
-    // if (desiredUserCommand.length > 1) {
-    //   // use the loop
-
-    //   let fileDirection = previousPath.split("/");
-    //   let newDirecotry = fileDirection.pop();
-    //   directory.innerHTML += `${newDirecotry}`;
-    // } else {
-    //   currentFilePath = "/";
-    //   directory.innerHTML += "/";
-    // }
   } else if (desiredUserCommand === "/") {
     previousPath = "/";
     directory.innerHTML = "/";
-  }
-
-  // else if (/^[A-Za-z]+$/.test(desiredUserCommand[0]) === true) {
-  //   if (desiredUserCommand.includes("/") === true) {
-  //     let givenPath = desiredUserCommand.split("/");
-  //     let fileDirection = previousPath.split("/");
-  //     let currentPart = 0;
-  //     for (let i = 0; i < givenPath.length; i += 1) {
-  //       if (fileDirection[currentPart] !== givenPath[i]) {
-  //         fileDirection.push(givenPath[i]);
-  //         currentPart += 1;
-  //       }
-  //     }
-  //     directory.innerHTML += "";
-  //     directory.innerHTML += `${fileDirection[fileDirection.length - 1]}`;
-  //     previousPath = fileDirection.join("/");
-  //   } else {
-  //     previousPath += "/" + desiredUserCommand;
-  //     directory.innerHTML += `${desiredUserCommand}`;
-  //   }
-  // }
-  else {
+  } else {
     // previousPath = "/usr/unix";
     // directory.innerHTML += "~";
     let slash = previousPath.endsWith("/") ? "" : "/";
@@ -305,48 +256,6 @@ function touchFunction() {
   setingFileSys();
 }
 
-// function cpFunction() {
-//   // cp sourcefile-path destination-path
-//   let paths = desiredUserCommand.split(" ");
-//   let sourceFile = paths[0];
-//   let destinationFile = paths[1];
-
-//   let currentPathSource = [];
-//   let currentPathDestination = [];
-
-//   let sourcePath = getAbsoluteFilePath(
-//     defaultJSONFileSys,
-//     sourceFile,
-//     currentPathSource,
-//   );
-//   if (!sourcePath) {
-//     return;
-//   }
-//   // let destinationPath = getAbsoluteFilePath(
-//   //   defaultJSONFileSys,
-//   //   destinationFile,
-//   //   currentPathDestination,
-//   // );
-//   // if (destinationPath === null) {
-//   //   return; // so da program don't crash.....
-//   // }
-//   let directionDestination = destinationFile.split("/").filter((p) => p !== "");
-//   let fileName = directionDestination.pop();
-//   let currentDirectory = defaultJSONFileSys;
-
-//   for (let place of directionDestination) {
-//     if (currentDirectory[place]) {
-//       currentDirectory = currentDirectory[place];
-//     } else {
-//       return;
-//     }
-//   }
-//   currentDirectory[`${sourceFile}`] = getFileContent(sourcePath);
-
-//   commentsDiv.innerHTML += `copy a file and directories`;
-//   setingFileSys();
-// }
-
 function cpFunction() {
   let paths = desiredUserCommand.split(" ");
   if (paths.length < 2) return;
@@ -381,56 +290,6 @@ function cpFunction() {
   setingFileSys();
   commentsDiv.innerHTML += `<div class='white'>copy a file and directories</div>`;
 }
-
-// function mvFunction() {
-//   // cp sourcefile-path destination-path
-//   let paths = desiredUserCommand.split(" ");
-//   if (paths.length < 2) {
-//     return;
-//   }
-//   let sourceFile = paths[0];
-//   let destinationFile = paths[1];
-//   let currentPathSource = [];
-//   let currentPathDestination = [];
-
-//   let sourcePath = getAbsoluteFilePath(
-//     defaultJSONFileSys,
-//     sourceFile,
-//     currentPathSource,
-//   );
-//   if (!sourcePath) {
-//     return;
-//   }
-
-//   // let destinationPath = getAbsoluteFilePath(
-//   //   defaultJSONFileSys,
-//   //   destinationFile,
-//   //   currentPathDestination,
-//   // );
-//   let directionDestination = destinationFile.split("/").filter((p) => p !== "");
-//   let targetFileName = directionDestination.pop();
-
-//   let currentDirectory = defaultJSONFileSys;
-//   for (let part of directionDestination) {
-//     if (currentDirectory[part] && typeof currentDirectory[part] === "object") {
-//       currentDirectory = currentDirectory[currentKey];
-//     } else {
-//       return;
-//     }
-//   }
-//   currentDirectory[targetFileName] = getFileContent(sourcePath);
-
-//   let sourceParts = sourcePath.split("/");
-//   let sourceName = sourceParts.pop();
-//   let sourceParent = defaultJSONFileSys;
-//   for (let part of sourceParts) {
-//     sourceParent = sourceParent[part];
-//   }
-//   delete sourceParent[sourceName];
-
-//   commentsDiv.innerHTML += `move a file and directories`;
-//   setingFileSys();
-// }
 
 function mvFunction() {
   let paths = desiredUserCommand.split(" ");
@@ -535,40 +394,6 @@ function grepFunction() {
   }
 
   setingFileSys();
-  // let paths = desiredUserCommand.split(" ");
-  // if (paths.length < 2) {
-  //   return;
-  // }
-
-  // let regexPattern = paths[0].replace(/['"]+/g, ""); // sourceFile
-  // let fileName = paths[1].replace(/['"]+/g, ""); // destinationFile
-
-  // let fileStuff = getFolderObject(fileName);
-
-  // if (!fileStuff || !fileStuff[fileName]) {
-  //   commentsDiv.innerHTML += `<div class='white'>grep: ${fileName}: No such file</div>`;
-  //   return;
-  // }
-
-  // let contentStuff = fileStuff[fileName];
-
-  // let textRegex =
-  //   typeof contentStuff === "string" ? contentStuff : contentStuff.content;
-
-  // if (typeof textRegex !== "string") {
-  //   commentsDiv.innerHTML += `<div class='white'>grep: ${fileName}: Is a directory or empty</div>`;
-  //   return;
-  // }
-
-  // let regex = new RegExp(`^.*${regexPattern}.*$`, "gm");
-  // let matchedStuff = textRegex.match(regex); // fileStuff.match is not a function
-  // if (matchedStuff) {
-  //   commentsDiv.innerHTML += `<div class="white">${matchedStuff.join("<br>")}</div>`;
-  // } else {
-  //   commentsDiv.innerHTML += `<div class='white'>grep: ${fileName}: No such file</div>`;
-  // }
-  // setingFileSys();
-  // commentsDiv.innerHTML += `using grep`;
 }
 
 function manFunction() {
