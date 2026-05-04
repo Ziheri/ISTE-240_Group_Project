@@ -30,12 +30,14 @@ if (window.location.pathname.endsWith("viEditor.php")) {
       viTypeArea.readOnly = true;
     }
     if (e.key === "i") {
-      e.preventDefault();
-      document.getElementById("modeLabel").style.display = "inline";
-      document.getElementById("mode-change").style.display = "none";
-      document.getElementById("modeLabel").innerHTML = "--INSERT--";
-      viTypeArea.readOnly = false;
-      viTypeArea.focus();
+      if (viTypeArea.readOnly) {
+        e.preventDefault();
+        document.getElementById("modeLabel").style.display = "inline";
+        document.getElementById("mode-change").style.display = "none";
+        document.getElementById("modeLabel").innerHTML = "--INSERT--";
+        viTypeArea.readOnly = false;
+        viTypeArea.focus();
+      }
     }
     if (
       (document.getElementById("mode-change").value === ":x" ||

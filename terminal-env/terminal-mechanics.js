@@ -10,7 +10,8 @@ import { updatedContented } from "./viEditor.js";
 
 // VARIABLES
 //let pastCommands = [];
-let pastCommands = JSON.parse(sessionStorage.getItem("terminalHistory")) || [];
+export let pastCommands =
+  JSON.parse(sessionStorage.getItem("terminalHistory")) || [];
 let timesPressedUp = 0;
 let desiredUserCommand = "";
 let currentFilePath = "/usr/unix";
@@ -121,7 +122,29 @@ function listingDirs() {
       }
     }
     if (desiredUserCommand.includes("-l")) {
-      //
+      while (findingDir === false) {
+        let direction = fileDirection[currentFile];
+        if (Object.keys(level).includes(direction)) {
+          let temp = level;
+          level = temp[direction];
+          chosenDirectory = level;
+          currentFile += 1;
+        }
+        if (currentFile > fileDirection.length - 1) {
+          Object.keys(level).forEach((key) => {
+            let item = level[key];
+            if (typeof item === "string") // file
+            {
+              commentsDiv.innerHTML += `<div class='white'>-rw-r--r-- ${key} unix</div>`;
+            }
+            if (typeof item === "object" && item !== null) // directory
+            {
+              commentsDiv.innerHTML += `<div class='white'>drwxr-xr-x ${key} unix</div>`;
+            }
+          });
+          findingDir = true;
+        }
+      }
     } else {
       while (findingDir === false) {
         let direction = fileDirection[currentFile];
